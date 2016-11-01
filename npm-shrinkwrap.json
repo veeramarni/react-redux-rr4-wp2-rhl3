@@ -1,135 +1,26 @@
 {
-  "name": "hot-loader-demo",
-  "version": "1.0.0",
+  "name": "react-redux-rr4-wp2-rhl3",
+  "version": "0.1.0",
   "dependencies": {
-    "amdefine": {
-      "version": "1.0.0",
-      "from": "amdefine@>=0.0.4",
-      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
-    },
-    "ansi-regex": {
-      "version": "2.0.0",
-      "from": "ansi-regex@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.0.0.tgz"
-    },
-    "ansi-styles": {
-      "version": "2.2.1",
-      "from": "ansi-styles@>=2.2.1 <3.0.0",
-      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-2.2.1.tgz"
-    },
     "asap": {
       "version": "2.0.5",
       "from": "asap@>=2.0.3 <2.1.0",
       "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.5.tgz"
-    },
-    "babel-code-frame": {
-      "version": "6.16.0",
-      "from": "babel-code-frame@>=6.16.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-code-frame/-/babel-code-frame-6.16.0.tgz",
-      "dependencies": {
-        "js-tokens": {
-          "version": "2.0.0",
-          "from": "js-tokens@>=2.0.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-2.0.0.tgz"
-        }
-      }
-    },
-    "babel-messages": {
-      "version": "6.8.0",
-      "from": "babel-messages@>=6.8.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-messages/-/babel-messages-6.8.0.tgz"
-    },
-    "babel-runtime": {
-      "version": "6.18.0",
-      "from": "babel-runtime@>=6.9.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.18.0.tgz",
-      "dependencies": {
-        "core-js": {
-          "version": "2.4.1",
-          "from": "core-js@>=2.4.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.4.1.tgz"
-        }
-      }
-    },
-    "babel-template": {
-      "version": "6.16.0",
-      "from": "babel-template@>=6.7.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-template/-/babel-template-6.16.0.tgz"
-    },
-    "babel-traverse": {
-      "version": "6.18.0",
-      "from": "babel-traverse@>=6.16.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-traverse/-/babel-traverse-6.18.0.tgz"
-    },
-    "babel-types": {
-      "version": "6.18.0",
-      "from": "babel-types@>=6.16.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-types/-/babel-types-6.18.0.tgz"
-    },
-    "babylon": {
-      "version": "6.13.1",
-      "from": "babylon@>=6.11.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.13.1.tgz"
-    },
-    "chalk": {
-      "version": "1.1.3",
-      "from": "chalk@>=1.1.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/chalk/-/chalk-1.1.3.tgz"
     },
     "core-js": {
       "version": "1.2.7",
       "from": "core-js@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
     },
-    "debug": {
-      "version": "2.2.0",
-      "from": "debug@>=2.2.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz"
-    },
-    "dom-walk": {
-      "version": "0.1.1",
-      "from": "dom-walk@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/dom-walk/-/dom-walk-0.1.1.tgz"
-    },
     "encoding": {
       "version": "0.1.12",
       "from": "encoding@>=0.1.11 <0.2.0",
       "resolved": "https://registry.npmjs.org/encoding/-/encoding-0.1.12.tgz"
     },
-    "error-stack-parser": {
-      "version": "1.3.6",
-      "from": "error-stack-parser@>=1.3.6 <2.0.0",
-      "resolved": "https://registry.npmjs.org/error-stack-parser/-/error-stack-parser-1.3.6.tgz"
-    },
-    "escape-string-regexp": {
-      "version": "1.0.5",
-      "from": "escape-string-regexp@>=1.0.2 <2.0.0",
-      "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"
-    },
-    "esutils": {
-      "version": "2.0.2",
-      "from": "esutils@>=2.0.2 <3.0.0",
-      "resolved": "https://registry.npmjs.org/esutils/-/esutils-2.0.2.tgz"
-    },
     "fbjs": {
       "version": "0.8.5",
       "from": "fbjs@>=0.8.4 <0.9.0",
       "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.5.tgz"
-    },
-    "global": {
-      "version": "4.3.1",
-      "from": "global@>=4.3.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/global/-/global-4.3.1.tgz"
-    },
-    "globals": {
-      "version": "9.12.0",
-      "from": "globals@>=9.0.0 <10.0.0",
-      "resolved": "https://registry.npmjs.org/globals/-/globals-9.12.0.tgz"
-    },
-    "has-ansi": {
-      "version": "2.0.0",
-      "from": "has-ansi@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/has-ansi/-/has-ansi-2.0.0.tgz"
     },
     "history": {
       "version": "4.3.0",
@@ -191,16 +82,6 @@
       "from": "loose-envify@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.2.0.tgz"
     },
-    "min-document": {
-      "version": "2.19.0",
-      "from": "min-document@>=2.19.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/min-document/-/min-document-2.19.0.tgz"
-    },
-    "ms": {
-      "version": "0.7.1",
-      "from": "ms@0.7.1",
-      "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz"
-    },
     "node-fetch": {
       "version": "1.6.3",
       "from": "node-fetch@>=1.0.1 <2.0.0",
@@ -215,11 +96,6 @@
       "version": "1.6.0",
       "from": "path-to-regexp@>=1.5.3 <2.0.0",
       "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-1.6.0.tgz"
-    },
-    "process": {
-      "version": "0.5.2",
-      "from": "process@>=0.5.1 <0.6.0",
-      "resolved": "https://registry.npmjs.org/process/-/process-0.5.2.tgz"
     },
     "promise": {
       "version": "7.1.1",
@@ -241,11 +117,6 @@
       "from": "react-broadcast@>=0.1.1 <0.2.0",
       "resolved": "https://registry.npmjs.org/react-broadcast/-/react-broadcast-0.1.2.tgz"
     },
-    "react-deep-force-update": {
-      "version": "2.0.1",
-      "from": "react-deep-force-update@>=2.0.1 <3.0.0",
-      "resolved": "https://registry.npmjs.org/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz"
-    },
     "react-dom": {
       "version": "15.3.2",
       "from": "react-dom@>=15.0.0 <16.0.0",
@@ -255,16 +126,6 @@
       "version": "0.15.1",
       "from": "react-history@>=0.15.0 <0.16.0",
       "resolved": "https://registry.npmjs.org/react-history/-/react-history-0.15.1.tgz"
-    },
-    "react-hot-loader": {
-      "version": "3.0.0-beta.6",
-      "from": "react-hot-loader@>=3.0.0-beta.6 <4.0.0",
-      "resolved": "https://registry.npmjs.org/react-hot-loader/-/react-hot-loader-3.0.0-beta.6.tgz"
-    },
-    "react-proxy": {
-      "version": "3.0.0-alpha.1",
-      "from": "react-proxy@>=3.0.0-alpha.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz"
     },
     "react-redux": {
       "version": "4.4.5",
@@ -276,60 +137,25 @@
       "from": "react-router@>=4.0.0-alpha.5 <5.0.0",
       "resolved": "https://registry.npmjs.org/react-router/-/react-router-4.0.0-alpha.5.tgz"
     },
-    "redbox-react": {
-      "version": "1.3.2",
-      "from": "redbox-react@>=1.2.5 <2.0.0",
-      "resolved": "https://registry.npmjs.org/redbox-react/-/redbox-react-1.3.2.tgz"
-    },
     "redux": {
       "version": "3.6.0",
       "from": "redux@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/redux/-/redux-3.6.0.tgz"
-    },
-    "regenerator-runtime": {
-      "version": "0.9.5",
-      "from": "regenerator-runtime@>=0.9.5 <0.10.0",
-      "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.9.5.tgz"
     },
     "resolve-pathname": {
       "version": "2.0.2",
       "from": "resolve-pathname@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/resolve-pathname/-/resolve-pathname-2.0.2.tgz"
     },
-    "source-map": {
-      "version": "0.4.4",
-      "from": "source-map@>=0.4.4 <0.5.0",
-      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz"
-    },
-    "stackframe": {
-      "version": "0.3.1",
-      "from": "stackframe@>=0.3.1 <0.4.0",
-      "resolved": "https://registry.npmjs.org/stackframe/-/stackframe-0.3.1.tgz"
-    },
     "strict-uri-encode": {
       "version": "1.1.0",
       "from": "strict-uri-encode@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz"
     },
-    "strip-ansi": {
-      "version": "3.0.1",
-      "from": "strip-ansi@>=3.0.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-3.0.1.tgz"
-    },
-    "supports-color": {
-      "version": "2.0.0",
-      "from": "supports-color@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-2.0.0.tgz"
-    },
     "symbol-observable": {
       "version": "1.0.4",
       "from": "symbol-observable@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.0.4.tgz"
-    },
-    "to-fast-properties": {
-      "version": "1.0.2",
-      "from": "to-fast-properties@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/to-fast-properties/-/to-fast-properties-1.0.2.tgz"
     },
     "ua-parser-js": {
       "version": "0.7.10",
