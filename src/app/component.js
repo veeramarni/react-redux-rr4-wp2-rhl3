@@ -21,6 +21,8 @@ import actions from '../actions';
 import Home from './home';
 import Counter from './counter';
 
+import styles from './styles.scss';
+
 /**
  * Create the component.
  */
@@ -29,10 +31,11 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+
   // Render the component.
   render() {
     return (
-      <div>
+      <div className={styles.root}>
         <h1>Helloo</h1>
         <Match exactly pattern="/" component={Home}/>
         <Match exactly pattern="/counter" component={Counter}/>

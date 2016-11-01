@@ -17,9 +17,9 @@
 export function store(state = 1, action) {
   switch (action.type) {
     case 'NEXT':
-      return state + 1;
+      return state + 2;
     case 'PREVIOUS':
-      return state - 1;
+      return state - 2;
     default:
       return state;
   }
