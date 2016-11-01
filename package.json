@@ -1,0 +1,31 @@
+{
+  "name": "react-redux-rr4-wp2-rhl3",
+  "version": "0.1.0",
+  "description": "react, redux, react-router 4, webpack 2, react hot loader 3",
+  "license": "MIT",
+  "author": "Bernd Wessels <wesselsbernd@gmail.com> (https://github.com/BerndWessels)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.dev"
+  },
+  "dependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
+    "react-history": "^0.15.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-redux": "^4.0.0",
+    "react-router": "^4.0.0-alpha.5",
+    "redux": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.0.0",
+    "babel-preset-react": "^6.0.0",
+    "connect-history-api-fallback": "^1.0.0",
+    "express": "^4.0.0",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-middleware": "^1.0.0",
+    "webpack-hot-middleware": "^2.0.0"
+  }
+}
