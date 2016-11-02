@@ -15,13 +15,36 @@ import {combineReducers} from 'redux';
 /**
  * Import local dependencies.
  */
-import {store as routerStore} from './app';
-import {store as counterStore} from './app/counter';
+import {appReducer} from './app';
+import {counterReducer} from './app/counter';
+import {LOCATION_CHANGE} from './actions';
+
+/**
+ * Default router state.
+ */
+const routerDefaultState = {
+  pathname: location.pathname,
+  search: location.search,
+  hash: location.hash
+};
+
+/**
+ * The router store.
+ */
+function routerReducer(state = routerDefaultState, action) {
+  switch (action.type) {
+    case LOCATION_CHANGE:
+      return {...state, ...action.router};
+    default:
+      return state;
+  }
+}
 
 /**
  * Export the application store.
  */
-export default combineReducers({
-  router: routerStore,
-  counter: counterStore
+export const rootReducer = combineReducers({
+  router: routerReducer,
+  app: appReducer,
+  counter: counterReducer
 });

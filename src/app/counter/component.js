@@ -16,7 +16,8 @@ import {connect} from 'react-redux';
 /**
  * Import local dependencies.
  */
-import actions from '../../actions';
+import {nextStepCreator, prevStepCreator} from './actions';
+import {setLocationCreator} from '../../actions';
 
 /**
  * Create the component.
@@ -35,11 +36,11 @@ class Counter extends Component {
         {counter}
         <hr />
 
-        <button onClick={() => dispatch(actions.nextStep())}>next</button>
-        <button onClick={() => dispatch(actions.prevStep())}>prev</button>
+        <button onClick={() => dispatch(nextStepCreator())}>next</button>
+        <button onClick={() => dispatch(prevStepCreator())}>prev</button>
         <hr />
 
-        <a href="javascript:;" onClick={() => dispatch(actions.setLocation({
+        <a href="javascript:;" onClick={() => dispatch(setLocationCreator({
           pathname: '/'
         }))}>
           Link back home using a Redux action

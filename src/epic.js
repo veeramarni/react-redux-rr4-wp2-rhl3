@@ -8,8 +8,18 @@
  */
 
 /**
- * Export proxies.
+ * Import dependencies.
  */
-export {default} from './component';
-export {appReducer} from './reducer';
-export {appEpic} from './epic';
+import { combineEpics } from 'redux-observable';
+
+/**
+ * Import local dependencies.
+ */
+import {appEpic} from './app';
+
+/**
+ * Export the root epics.
+ */
+export const rootEpic = combineEpics(
+  appEpic
+);

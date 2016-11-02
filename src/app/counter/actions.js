@@ -8,8 +8,13 @@
  */
 
 /**
- * Export proxies.
+ * Export action types.
  */
-export {default} from './component';
-export {appReducer} from './reducer';
-export {appEpic} from './epic';
+export const NEXT = 'NEXT';
+export const PREVIOUS = 'PREVIOUS';
+
+/**
+ * Export action creators.
+ */
+export const nextStepCreator = () => ({type: NEXT});
+export const prevStepCreator = () => ({type: PREVIOUS});

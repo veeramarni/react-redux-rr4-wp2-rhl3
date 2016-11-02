@@ -47,12 +47,12 @@ module.exports = function (mode) {
       //'babel-polyfill',
       'react-hot-loader/patch',
       'webpack-hot-middleware/client',
-      './src/client.js'
+      './src/root.client.js'
     ];
   } else if (buildProduction) {
     config.entry = [
       //'babel-polyfill',
-      './src/client.js'
+      './src/root.client.js'
     ];
   }
   // Externals prevent bundling of certain imported packages and instead retrieve these external packages at runtime.

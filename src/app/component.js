@@ -17,7 +17,7 @@ import {Match} from 'react-router';
 /**
  * Import local dependencies.
  */
-import actions from '../actions';
+import {pingCreator} from './actions';
 import Home from './home';
 import Counter from './counter';
 
@@ -36,7 +36,8 @@ class App extends Component {
   render() {
     return (
       <div className={styles.root}>
-        <h1>Helloo</h1>
+        <button onClick={() => this.props.ping()}>Helloo</button>
+        <h1>{JSON.stringify(this.props.app.isPinging)}</h1>
         <Match exactly pattern="/" component={Home}/>
         <Match exactly pattern="/counter" component={Counter}/>
       </div>
@@ -47,8 +48,8 @@ class App extends Component {
 /**
  * Map state to component properties.
  */
-const stateToProps = ({router}) => {
-  return {router};
+const stateToProps = ({app}) => {
+  return {app};
 };
 
 /**
@@ -56,7 +57,7 @@ const stateToProps = ({router}) => {
  */
 const dispatchToProps = (dispatch) => {
   return {
-    setLocation: (routerState) => dispatch(actions.setLocation(routerState))
+    ping: () => dispatch(pingCreator())
   }
 };
 

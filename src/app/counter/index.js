@@ -11,4 +11,4 @@
  * Export proxies.
  */
 export {default} from './component';
-export {store} from './reducer';
+export {counterReducer} from './reducer';

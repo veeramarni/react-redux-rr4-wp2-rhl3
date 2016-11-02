@@ -13,24 +13,39 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {createEpicMiddleware} from 'redux-observable';
 
 /**
  * Import local dependencies.
  */
 import Client from './component';
-import reducer from './reducer';
+import {rootReducer} from './reducer';
+import {rootEpic} from './epic';
+
+/**
+ * Create the epic middleware.
+ */
+const epicMiddleware = createEpicMiddleware(rootEpic);
 
 /**
  * Create the store. TODO: switch between dev and prod.
  */
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+let store;
+if (process.env.NODE_ENV === 'development') {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(epicMiddleware)
+  ));
+} else {
+  store = createStore(rootReducer, applyMiddleware(epicMiddleware));
+}
 
 /**
  * Render the application.
  */
-const rootEl = document.getElementById('root');
+const rootElement = document.getElementById('root');
 const renderApp = () => {
   ReactDOM.render(
     <AppContainer>
@@ -38,7 +53,7 @@ const renderApp = () => {
         <Client />
       </Provider>
     </AppContainer>,
-    rootEl
+    rootElement
   );
 };
 
@@ -49,10 +64,14 @@ if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
     // Handle updates to the reducer.
     module.hot.accept('./reducer', () => {
-      store.replaceReducer(reducer);
+      store.replaceReducer(rootReducer);
     });
     // Handle updates to the app.
     module.hot.accept('./component', renderApp);
+    // Handle updates to the epic.
+    module.hot.accept('./epic', () => {
+      epicMiddleware.replaceEpic(rootEpic);
+    });
   }
 }
 

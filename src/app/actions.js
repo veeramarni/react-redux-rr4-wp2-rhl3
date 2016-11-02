@@ -8,8 +8,13 @@
  */
 
 /**
- * Export proxies.
+ * Export action types.
  */
-export {default} from './component';
-export {appReducer} from './reducer';
-export {appEpic} from './epic';
+export const PING = 'PING';
+export const PONG = 'PONG';
+
+/**
+ * Export action creators.
+ */
+export const pingCreator = () => ({type: PING});
+export const pongCreator = () => ({type: PONG});

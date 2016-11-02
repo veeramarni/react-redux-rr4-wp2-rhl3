@@ -10,15 +10,16 @@
 /**
  * Import dependencies.
  */
+import {NEXT, PREVIOUS} from './actions';
 
 /**
  * Export the counter store.
  */
-export function store(state = 1, action) {
+export function counterReducer(state = 1, action) {
   switch (action.type) {
-    case 'NEXT':
+    case NEXT:
       return state + 2;
-    case 'PREVIOUS':
+    case PREVIOUS:
       return state - 2;
     default:
       return state;

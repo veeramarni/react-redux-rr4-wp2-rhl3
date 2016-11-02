@@ -10,23 +10,24 @@
 /**
  * Import dependencies.
  */
+import {PING, PONG} from './actions';
 
 /**
- * Default router state.
+ * Default app state.
  */
-const routerDefaultState = {
-  pathname: location.pathname,
-  search: location.search,
-  hash: location.hash
+const appDefaultState = {
+  isPinging: false
 };
 
 /**
  * Export the router store.
  */
-export function store(state = routerDefaultState, action) {
+export function appReducer(state = appDefaultState, action) {
   switch (action.type) {
-    case 'LOCATION_CHANGE':
-      return {...state, ...action.router};
+    case PING:
+      return {...state, isPinging: true};
+    case PONG:
+      return {...state, isPinging: false};
     default:
       return state;
   }
