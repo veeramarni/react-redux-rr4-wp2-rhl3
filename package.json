@@ -6,7 +6,8 @@
   "author": "Bernd Wessels <wesselsbernd@gmail.com> (https://github.com/BerndWessels)",
   "main": "index.js",
   "scripts": {
-    "start": "node server.dev"
+    "start": "node server.dev",
+    "build": "webpack --config webpack.config.prod.js -p --progress --colors"
   },
   "dependencies": {
     "react": "^15.0.0",
@@ -21,8 +22,12 @@
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.0.0",
+    "babel-polyfill": "^6.0.0",
+    "babel-preset-latest": "^6.0.0",
     "babel-preset-react": "^6.0.0",
+    "clean-webpack-plugin": "^0.1.0",
     "connect-history-api-fallback": "^1.0.0",
+    "copy-webpack-plugin": "^4.0.0",
     "css-loader": "^0.25.0",
     "express": "^4.0.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",

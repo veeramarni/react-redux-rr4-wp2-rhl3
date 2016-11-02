@@ -45,13 +45,15 @@ const renderApp = () => {
 /**
  * Enable hot module reloading in development mode.
  */
-if (module.hot) {
-  // Handle updates to the reducer.
-  module.hot.accept('./reducer', () => {
-    store.replaceReducer(reducer);
-  });
-  // Handle updates to the app.
-  module.hot.accept('./component', renderApp);
+if (process.env.NODE_ENV === 'development') {
+  if (module.hot) {
+    // Handle updates to the reducer.
+    module.hot.accept('./reducer', () => {
+      store.replaceReducer(reducer);
+    });
+    // Handle updates to the app.
+    module.hot.accept('./component', renderApp);
+  }
 }
 
 /**

@@ -23,9 +23,9 @@
       "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.5.tgz"
     },
     "history": {
-      "version": "4.3.0",
+      "version": "4.4.0",
       "from": "history@>=4.3.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/history/-/history-4.3.0.tgz"
+      "resolved": "https://registry.npmjs.org/history/-/history-4.4.0.tgz"
     },
     "hoist-non-react-statics": {
       "version": "1.2.0",
@@ -63,24 +63,24 @@
       "resolved": "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz"
     },
     "js-tokens": {
-      "version": "1.0.3",
-      "from": "js-tokens@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-1.0.3.tgz"
+      "version": "2.0.0",
+      "from": "js-tokens@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-2.0.0.tgz"
     },
     "lodash": {
-      "version": "4.16.4",
+      "version": "4.16.6",
       "from": "lodash@>=4.2.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.4.tgz"
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.6.tgz"
     },
     "lodash-es": {
-      "version": "4.16.4",
+      "version": "4.16.6",
       "from": "lodash-es@>=4.2.1 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.16.4.tgz"
+      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.16.6.tgz"
     },
     "loose-envify": {
-      "version": "1.2.0",
+      "version": "1.3.0",
       "from": "loose-envify@>=1.1.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.2.0.tgz"
+      "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.3.0.tgz"
     },
     "node-fetch": {
       "version": "1.6.3",
@@ -161,6 +161,11 @@
       "version": "0.7.10",
       "from": "ua-parser-js@>=0.7.9 <0.8.0",
       "resolved": "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.10.tgz"
+    },
+    "value-equal": {
+      "version": "0.1.1",
+      "from": "value-equal@>=0.1.1 <0.2.0",
+      "resolved": "https://registry.npmjs.org/value-equal/-/value-equal-0.1.1.tgz"
     },
     "warning": {
       "version": "3.0.0",

@@ -8,3 +8,7 @@ node_modules
 
 # ide
 .idea
+
+# build
+dist
+build

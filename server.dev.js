@@ -17,7 +17,7 @@ const historyMiddleware = require('connect-history-api-fallback');
 const devMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
 const webpack = require('webpack');
-const config = require('./webpack.config.js')('development');
+const config = require('./webpack.config.dev.js');
 
 /**
  * Serve the development version with hot module reloading support.

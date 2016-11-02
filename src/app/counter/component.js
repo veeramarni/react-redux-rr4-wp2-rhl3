@@ -31,7 +31,7 @@ class Counter extends Component {
     let {counter, dispatch} = this.props;
     return (
       <div>
-        <h1>Counter X</h1>
+        <h1>Counter</h1>
         {counter}
         <hr />
 
