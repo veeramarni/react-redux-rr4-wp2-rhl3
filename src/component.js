@@ -21,6 +21,11 @@ import ControlledRouter from './components/controlled-router';
 import App from './app';
 
 /**
+ * Import the icomoon icon font.
+ */
+import icomoon from "../public/assets/fonts/icomoon/style.css";
+
+/**
  * Create the component.
  */
 class Client extends Component {

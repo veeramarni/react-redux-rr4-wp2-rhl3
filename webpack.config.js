@@ -67,7 +67,7 @@ module.exports = function (mode) {
       // Output path from the view of the page.
       // Uses webpack-dev-server in development.
       // Reference: http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-      publicPath: '/', // 'https://frae-local.fraedom-dev.com:8087/'
+      publicPath: 'http://localhost:8080/',
       // Filename for entry points.
       // Only adds hash in build mode.
       filename: '[name].js',
@@ -106,7 +106,12 @@ module.exports = function (mode) {
       template: './src/index.ejs',
       inject: false,
       baseurl: '/'
-    })
+    }),
+    // Reference: https://github.com/kevlened/copy-webpack-plugin
+    // Copy the public folder to the dist folder
+    new CopyWebpackPlugin([
+      {from: 'public'}
+    ])
     // // Reference: http://mts.io/2015/04/08/webpack-shims-polyfills
     // // Inject a polyfill for the given key words
     // new webpack.ProvidePlugin({
@@ -135,11 +140,6 @@ module.exports = function (mode) {
     // Reference: https://github.com/johnagan/clean-webpack-plugin
     // Clean the output folders before building
     config.plugins.push(new CleanWebpackPlugin(['dist', 'build'], __dirname));
-    // Reference: https://github.com/kevlened/copy-webpack-plugin
-    // Copy the public folder to the dist folder
-    config.plugins.push(new CopyWebpackPlugin([
-      {from: 'public'}
-    ]));
     // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
     // Minify all javascript, switch loaders to minimizing mode
     config.plugins.push(new webpack.optimize.UglifyJsPlugin({
@@ -248,28 +248,61 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        // loader: 'style!css?sourceMap&modules&importLoaders=2!postcss!resolve-url!sass?sourceMap',
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: true,
-              importLoaders: 2
-            }
-          },
-          'postcss-loader',
-          'resolve-url-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
+        loader: 'style!css?sourceMap&modules&importLoaders=2!postcss!resolve-url!sass?sourceMap'
+        // use: [
+        //   'style-loader',
+        //   {
+        //     loader: 'css-loader',
+        //     options: {
+        //       sourceMap: true,
+        //       modules: true,
+        //       importLoaders: 2
+        //     }
+        //   },
+        //   'postcss-loader',
+        //   'resolve-url-loader',
+        //   {
+        //     loader: 'sass-loader',
+        //     options: {
+        //       sourceMap: true
+        //     }
+        //   }
+        // ]
       }
-    )
+    );
+    // GLOBAL SASS LOADER
+    // Reference: https://github.com/jtangelder/sass-loader
+    // Allow loading sass/css through js
+    config.module.rules.push(
+      {
+        test: /(\.scss|\.css)$/,
+        include: [/bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
+        // Reference: https://github.com/webpack/style-loader
+        // Use style-loader in development for hot-loading
+        // Reference: https://github.com/webpack/css-loader
+        // Reference: https://github.com/postcss/postcss-loader
+        // Reference: https://github.com/jtangelder/sass-loader
+        loader: 'style!css?sourceMap!postcss!resolve-url!sass?sourceMap'
+        //   use: [
+        //     'style-loader',
+        //     {
+        //       loader: 'css-loader',
+        //       options: {
+        //         sourceMap: true,
+        //         modules: false
+        //       }
+        //     },
+        //     'postcss-loader',
+        //     'resolve-url-loader',
+        //     {
+        //       loader: 'sass-loader',
+        //       options: {
+        //         sourceMap: true
+        //       }
+        //     }
+        //   ]
+      }
+    );
   } else if (buildProduction) {
     // JS LOADER
     // Reference: https://github.com/babel/babel-loader
@@ -309,6 +342,23 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/extract-text-webpack-plugin
         // Extract sass/css files in production builds
         loader: ExtractTextPlugin.extract('css?sourceMap&modules&importLoaders=2!postcss!resolve-url!sass?sourceMap')
+      }
+    );
+    // GLOBAL SASS LOADER
+    // Reference: https://github.com/jtangelder/sass-loader
+    // Allow loading sass/css through js
+    config.module.rules.push(
+      {
+        test: /(\.scss|\.css)$/,
+        include: [/bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
+        // Reference: https://github.com/webpack/style-loader
+        // Use style-loader in development for hot-loading
+        // Reference: https://github.com/webpack/css-loader
+        // Reference: https://github.com/postcss/postcss-loader
+        // Reference: https://github.com/jtangelder/sass-loader
+        // Reference: https://github.com/webpack/extract-text-webpack-plugin
+        // Extract sass/css files in production builds
+        loader: ExtractTextPlugin.extract('css?sourceMap!postcss!resolve-url!sass?sourceMap')
       }
     );
   }

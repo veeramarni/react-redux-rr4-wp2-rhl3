@@ -28,7 +28,7 @@ class Home extends Component {
     return (
       <div>
         <h1>Home</h1>
-
+        <span className="icon-bubble2"></span>
         <p>Link to a route using the &lt;Link ha ha ha ha&gt; component:</p>
 
         <Link to="/counter">
