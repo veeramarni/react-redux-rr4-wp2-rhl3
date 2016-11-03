@@ -18,6 +18,7 @@ import {Match} from 'react-router';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
+import {fetchGraphQLCreator} from '../actions';
 import Home from './home';
 import Counter from './counter';
 
@@ -34,10 +35,12 @@ class App extends Component {
 
   // Render the component.
   render() {
+    let {ping, isPinging, fetchGraphQL} = this.props;
     return (
       <div className={styles.root}>
-        <button onClick={() => this.props.ping()}>Helloo</button>
-        <h1>{JSON.stringify(this.props.app.isPinging)}</h1>
+        <button onClick={() => ping()}>Ping</button>
+        <button onClick={() => fetchGraphQL({query: `{ explorer(id: "0") { dimensions { key } } }`})}>Fetch</button>
+        <h1>{JSON.stringify(isPinging)}</h1>
         <Match exactly pattern="/" component={Home}/>
         <Match exactly pattern="/counter" component={Counter}/>
       </div>
@@ -49,7 +52,9 @@ class App extends Component {
  * Map state to component properties.
  */
 const stateToProps = ({app}) => {
-  return {app};
+  return {
+    isPinging: app.isPinging
+  };
 };
 
 /**
@@ -57,7 +62,8 @@ const stateToProps = ({app}) => {
  */
 const dispatchToProps = (dispatch) => {
   return {
-    ping: () => dispatch(pingCreator())
+    ping: () => dispatch(pingCreator()),
+    fetchGraphQL: (payload) => dispatch(fetchGraphQLCreator(payload))
   }
 };
 

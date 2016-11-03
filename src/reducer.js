@@ -17,7 +17,12 @@ import {combineReducers} from 'redux';
  */
 import {appReducer} from './app';
 import {counterReducer} from './app/counter';
-import {LOCATION_CHANGE} from './actions';
+import {
+  LOCATION_CHANGE,
+  ROOT_FETCH_GRAPHQL_SUCCEEDED,
+  ROOT_FETCH_GRAPHQL_FAILED,
+  ROOT_FETCH_GRAPHQL_PENDING
+} from './actions';
 
 /**
  * Default router state.
@@ -35,6 +40,15 @@ function routerReducer(state = routerDefaultState, action) {
   switch (action.type) {
     case LOCATION_CHANGE:
       return {...state, ...action.router};
+    case ROOT_FETCH_GRAPHQL_SUCCEEDED:
+      console.log('ROOT_FETCH_GRAPHQL_SUCCEEDED', action.payload);
+      return {...state, graphql: action.payload};
+    case ROOT_FETCH_GRAPHQL_FAILED:
+      console.log('ROOT_FETCH_GRAPHQL_FAILED', action.payload);
+      return {...state, graphql: action.payload};
+    case ROOT_FETCH_GRAPHQL_PENDING:
+      console.log('ROOT_FETCH_GRAPHQL_PENDING', action.payload);
+      return {...state, graphql: action.payload};
     default:
       return state;
   }

@@ -11,8 +11,16 @@
  * Export action types.
  */
 export const LOCATION_CHANGE = 'LOCATION_CHANGE';
+export const ROOT_FETCH_GRAPHQL = 'ROOT_FETCH_GRAPHQL';
+export const ROOT_FETCH_GRAPHQL_SUCCEEDED = 'ROOT_FETCH_GRAPHQL_SUCCEEDED';
+export const ROOT_FETCH_GRAPHQL_FAILED = 'ROOT_FETCH_GRAPHQL_FAILED';
+export const ROOT_FETCH_GRAPHQL_PENDING = 'ROOT_FETCH_GRAPHQL_PENDING';
 
 /**
  * Export action creators.
  */
 export const setLocationCreator = (router) => ({type: LOCATION_CHANGE, router});
+export const fetchGraphQLCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL, payload});
+export const fetchGraphQLSucceededCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_SUCCEEDED, payload});
+export const fetchGraphQLFailedCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_FAILED, payload});
+export const fetchGraphQLPendingCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_PENDING, payload});
