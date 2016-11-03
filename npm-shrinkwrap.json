@@ -39,7 +39,7 @@
     },
     "immutable": {
       "version": "3.8.1",
-      "from": "immutable@>=3.7.6 <4.0.0",
+      "from": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz",
       "resolved": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz"
     },
     "invariant": {
@@ -141,6 +141,11 @@
       "version": "3.6.0",
       "from": "redux@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/redux/-/redux-3.6.0.tgz"
+    },
+    "redux-immutable": {
+      "version": "3.0.8",
+      "from": "redux-immutable@latest",
+      "resolved": "https://registry.npmjs.org/redux-immutable/-/redux-immutable-3.0.8.tgz"
     },
     "redux-observable": {
       "version": "0.12.1",

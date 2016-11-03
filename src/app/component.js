@@ -51,9 +51,9 @@ class App extends Component {
 /**
  * Map state to component properties.
  */
-const stateToProps = ({app}) => {
+const stateToProps = (store) => {
   return {
-    isPinging: app.isPinging
+    isPinging: store.get('app').isPinging
   };
 };
 

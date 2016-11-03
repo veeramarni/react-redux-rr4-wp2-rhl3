@@ -35,7 +35,7 @@ module.exports = function (mode) {
   // Choose a style of source mapping to enhance the debugging process.
   if (buildDevelopment) {
     // Each module is executed with eval and //@ sourceURL
-    config.devtool = 'eval';
+    config.devtool = 'eval-source-map';
   } else if (buildProduction) {
     // use 'source-map' to "debug" the production version
     config.devtool = false;

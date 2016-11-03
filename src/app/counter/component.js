@@ -27,6 +27,7 @@ class Counter extends Component {
   constructor(props) {
     super(props);
   }
+
   // Render the component.
   render() {
     let {counter, dispatch} = this.props;
@@ -53,8 +54,10 @@ class Counter extends Component {
 /**
  * Map state to component properties.
  */
-const stateToProps = ({counter}) => {
-  return {counter};
+const stateToProps = (state) => {
+  return {
+    counter: state.get('counter')
+  };
 };
 
 /**

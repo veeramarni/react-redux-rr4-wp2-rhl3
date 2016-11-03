@@ -33,6 +33,7 @@ class Client extends Component {
   constructor(props) {
     super(props);
   }
+
   // Render the component.
   render() {
     let {router, setLocation} = this.props;
@@ -47,8 +48,10 @@ class Client extends Component {
 /**
  * Map state to component properties.
  */
-const stateToProps = ({router}) => {
-  return {router};
+const stateToProps = (store) => {
+  return {
+    router: store.get('router')
+  };
 };
 
 /**

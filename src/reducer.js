@@ -10,7 +10,7 @@
 /**
  * Import dependencies.
  */
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutable';
 
 /**
  * Import local dependencies.
@@ -42,13 +42,13 @@ function routerReducer(state = routerDefaultState, action) {
       return {...state, ...action.router};
     case ROOT_FETCH_GRAPHQL_SUCCEEDED:
       console.log('ROOT_FETCH_GRAPHQL_SUCCEEDED', action.payload);
-      return {...state, graphql: action.payload};
+      return state;
     case ROOT_FETCH_GRAPHQL_FAILED:
       console.log('ROOT_FETCH_GRAPHQL_FAILED', action.payload);
-      return {...state, graphql: action.payload};
+      return state;
     case ROOT_FETCH_GRAPHQL_PENDING:
-      console.log('ROOT_FETCH_GRAPHQL_PENDING', action.payload);
-      return {...state, graphql: action.payload};
+      console.log('ROOT_FETCH_GRAPHQL_PENDING');
+      return state;
     default:
       return state;
   }
