@@ -58,7 +58,7 @@ const fetchGraphQLSchemaEpic = action$ =>
     .mergeMap(action =>
       Observable.ajax.post
       (
-        'https://frae-local.fraedom-dev.com:8088/graphql',
+        'https://44nr8yzqx4.execute-api.us-east-1.amazonaws.com/prod/graphql',//'https://frae-local.fraedom-dev.com:8088/graphql',
         fetchGraphQLSchemaQuery(),
         {'Content-Type': 'application/json'}
       )
@@ -76,7 +76,7 @@ const fetchGraphQLQueryEpic = action$ =>
     .mergeMap(action =>
       Observable.ajax.post
       (
-        'https://frae-local.fraedom-dev.com:8088/graphql',
+        'https://44nr8yzqx4.execute-api.us-east-1.amazonaws.com/prod/graphql',//'https://frae-local.fraedom-dev.com:8088/graphql',
         action.payload,
         {'Content-Type': 'application/json'}
       )

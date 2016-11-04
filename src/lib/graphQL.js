@@ -24,8 +24,9 @@ let _types;
  *
  */
 export const initializeGraphQLSchema = (schema) => {
+
   return;
-  console.log('xxxxxxxxxx', schema, 'YYYYYYYY');
+
   _types = schema.reduce((prev, curr) => {
     if (curr.kind === 'OBJECT') {
       curr.fields = curr.fields.reduce((prev, curr) => {
@@ -43,6 +44,9 @@ export const initializeGraphQLSchema = (schema) => {
  *
  */
 export const normalizeGraphQLQueryResponse = (response) => {
+
+  return;
+
   // parse each node recursively.
   function processNode(entities, node, nodeTypeName) {
     // initialize empty nodes with null.

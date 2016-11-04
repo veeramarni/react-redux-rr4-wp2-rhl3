@@ -25,8 +25,8 @@ export const ROOT_FETCH_GRAPHQL_QUERY_PENDING = 'ROOT_FETCH_GRAPHQL_QUERY_PENDIN
  * Export action creators.
  */
 export const setLocationCreator = (router) => ({type: LOCATION_CHANGE, router});
-export const initializeClientCreator = () => {debugger; return {type: ROOT_INITIALIZE_CLIENT}};
-export const fetchGraphQLSchemaCreator = () => {debugger; return {type: ROOT_FETCH_GRAPHQL_SCHEMA}};
+export const initializeClientCreator = () => ({type: ROOT_INITIALIZE_CLIENT});
+export const fetchGraphQLSchemaCreator = () => ({type: ROOT_FETCH_GRAPHQL_SCHEMA});
 export const fetchGraphQLSchemaSucceededCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_SCHEMA_SUCCEEDED, payload});
 export const fetchGraphQLSchemaFailedCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_SCHEMA_FAILED, payload});
 export const fetchGraphQLSchemaPendingCreator = (payload) => ({type: ROOT_FETCH_GRAPHQL_SCHEMA_PENDING});
