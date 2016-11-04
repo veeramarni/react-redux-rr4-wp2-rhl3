@@ -32,8 +32,19 @@ class Client extends Component {
   // Initialize the component.
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount(){
     // Initialize the client.
+    console.log('MOUNT');
+    debugger;
     this.props.initializeClient();
+  }
+
+  componentWillUnmount(){
+    // Initialize the client.
+    // this.props.initializeClient();
+    console.log('UNMOUNT');
   }
 
   // Render the component.

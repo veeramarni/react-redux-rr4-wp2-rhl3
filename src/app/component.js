@@ -38,8 +38,8 @@ class App extends Component {
     let {ping, isPinging, fetchGraphQLQuery} = this.props;
     return (
       <div className={styles.root}>
-        <button onClick={() => ping()}>Ping</button>
-        <button onClick={() => fetchGraphQLQuery({query: `{ explorer(id: "0") { dimensions { key } } }`})}>Fetch
+        <button onClick={() => ping()}>Pingi</button>
+        <button onClick={() => fetchGraphQLQuery({query: `{ explorer(id: "0") { id dimensions { key } } }`})}>Fetch
         </button>
         <h1>{JSON.stringify(isPinging)}</h1>
         <Match exactly pattern="/" component={Home}/>

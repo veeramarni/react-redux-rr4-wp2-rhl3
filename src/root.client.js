@@ -70,7 +70,8 @@ if (process.env.NODE_ENV === 'development') {
     module.hot.accept('./component', renderApp);
     // Handle updates to the epic.
     module.hot.accept('./epic', () => {
-      epicMiddleware.replaceEpic(rootEpic);
+      const newRootEpic = require('./epic').rootEpic;
+      epicMiddleware.replaceEpic(newRootEpic);
     });
   }
 }

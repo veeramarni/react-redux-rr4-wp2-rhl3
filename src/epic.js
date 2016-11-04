@@ -48,7 +48,7 @@ import {fetchGraphQLSchemaQuery} from './queries';
  */
 const initializeClientEpic = action$ =>
   action$.ofType(ROOT_INITIALIZE_CLIENT)
-    .mapTo(fetchGraphQLSchemaCreator());
+    .map(fetchGraphQLSchemaCreator);
 
 /**
  * This epic fetches the graphql schema.
