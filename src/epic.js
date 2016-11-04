@@ -29,29 +29,69 @@ import 'rxjs/add/operator/retry';
  */
 import {appEpic} from './app';
 import {
-  ROOT_FETCH_GRAPHQL,
-  fetchGraphQLSucceededCreator,
-  fetchGraphQLFailedCreator,
-  fetchGraphQLPendingCreator
+  ROOT_INITIALIZE_CLIENT,
+  ROOT_FETCH_GRAPHQL_SCHEMA,
+  ROOT_FETCH_GRAPHQL_QUERY,
+  fetchGraphQLSchemaCreator,
+  fetchGraphQLSchemaSucceededCreator,
+  fetchGraphQLSchemaFailedCreator,
+  fetchGraphQLSchemaPendingCreator,
+  fetchGraphQLQuerySucceededCreator,
+  fetchGraphQLQueryFailedCreator,
+  fetchGraphQLQueryPendingCreator
 } from './actions';
+
+import {fetchGraphQLSchemaQuery} from './queries';
+
+/**
+ * This epic initializes the client.
+ */
+const initializeClientEpic = action$ =>
+  action$.ofType(ROOT_INITIALIZE_CLIENT)
+    .mapTo(fetchGraphQLSchemaCreator());
 
 /**
  * This epic fetches the graphql schema.
  */
-const fetchGraphQLEpic = action$ =>
-  action$.ofType(ROOT_FETCH_GRAPHQL)
+const fetchGraphQLSchemaEpic = action$ =>
+  action$.ofType(ROOT_FETCH_GRAPHQL_SCHEMA)
     .mergeMap(action =>
-      Observable.ajax.post('https://frae-local.fraedom-dev.com:8088/graphql', action.payload, {'Content-Type': 'application/json'})
-        .map(fetchGraphQLSucceededCreator)
+      Observable.ajax.post
+      (
+        'https://frae-local.fraedom-dev.com:8088/graphql',
+        fetchGraphQLSchemaQuery(),
+        {'Content-Type': 'application/json'}
+      )
+        .map(fetchGraphQLSchemaSucceededCreator)
         .retry(2)
-        .catch(({xhr}) => Observable.of(fetchGraphQLFailedCreator(xhr)))
-        .startWith(fetchGraphQLPendingCreator())
+        .catch(({xhr}) => Observable.of(fetchGraphQLSchemaFailedCreator(xhr)))
+        .startWith(fetchGraphQLSchemaPendingCreator())
+    );
+
+/**
+ * This epic fetches a graphql query.
+ */
+const fetchGraphQLQueryEpic = action$ =>
+  action$.ofType(ROOT_FETCH_GRAPHQL_QUERY)
+    .mergeMap(action =>
+      Observable.ajax.post
+      (
+        'https://frae-local.fraedom-dev.com:8088/graphql',
+        action.payload,
+        {'Content-Type': 'application/json'}
+      )
+        .map(fetchGraphQLQuerySucceededCreator)
+        .retry(2)
+        .catch(({xhr}) => Observable.of(fetchGraphQLQueryFailedCreator(xhr)))
+        .startWith(fetchGraphQLQueryPendingCreator())
     );
 
 /**
  * Export the root epics.
  */
 export const rootEpic = combineEpics(
-  appEpic,
-  fetchGraphQLEpic
+  initializeClientEpic,
+  fetchGraphQLSchemaEpic,
+  fetchGraphQLQueryEpic,
+  appEpic
 );

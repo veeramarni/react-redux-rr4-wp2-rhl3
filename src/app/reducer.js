@@ -11,13 +11,14 @@
  * Import dependencies.
  */
 import {PING, PONG} from './actions';
+import Immutable from 'immutable';
 
 /**
  * Default app state.
  */
-const appDefaultState = {
+const appDefaultState = Immutable.Map({
   isPinging: false
-};
+});
 
 /**
  * Export the router store.
@@ -25,9 +26,9 @@ const appDefaultState = {
 export function appReducer(state = appDefaultState, action) {
   switch (action.type) {
     case PING:
-      return {...state, isPinging: true};
+      return state.set('isPinging', true);
     case PONG:
-      return {...state, isPinging: false};
+      return state.set('isPinging', false);
     default:
       return state;
   }
