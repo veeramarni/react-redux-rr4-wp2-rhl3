@@ -16,8 +16,8 @@ import Immutable from 'immutable';
 /**
  * Import local dependencies.
  */
-import {appReducer} from './app';
-import {counterReducer} from './app/counter';
+import {appReducer} from './app/reducer';
+import {counterReducer} from './app/counter/reducer';
 import {
   LOCATION_CHANGE,
   ROOT_FETCH_GRAPHQL_SCHEMA,

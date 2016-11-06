@@ -13,7 +13,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore, compose} from 'redux';
 import {Provider} from 'react-redux';
 import {createEpicMiddleware} from 'redux-observable';
 
@@ -34,11 +34,17 @@ const epicMiddleware = createEpicMiddleware(rootEpic);
  */
 let store;
 if (process.env.NODE_ENV === 'development') {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  // Development mode with Redux DevTools support enabled.
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Prevents Redux DevTools from re-dispatching all previous actions.
+      shouldHotReload: false
+  }) || compose;
+  // Create the redux store.
   store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(epicMiddleware)
   ));
 } else {
+  // Production mode.
   store = createStore(rootReducer, applyMiddleware(epicMiddleware));
 }
 
@@ -62,16 +68,20 @@ const renderApp = () => {
  */
 if (process.env.NODE_ENV === 'development') {
   if (module.hot) {
-    // Handle updates to the reducer.
+    // Handle updates to the components.
+    module.hot.accept('./component', () => {
+      console.log('Updated components');
+      renderApp();
+    });
+    // Handle updates to the reducers.
     module.hot.accept('./reducer', () => {
+      console.log('Updated reducers');
       store.replaceReducer(rootReducer);
     });
-    // Handle updates to the app.
-    module.hot.accept('./component', renderApp);
-    // Handle updates to the epic.
+    // Handle updates to the epics.
     module.hot.accept('./epic', () => {
-      const newRootEpic = require('./epic').rootEpic;
-      epicMiddleware.replaceEpic(newRootEpic);
+      console.log('Updated epics');
+      epicMiddleware.replaceEpic(rootEpic);
     });
   }
 }

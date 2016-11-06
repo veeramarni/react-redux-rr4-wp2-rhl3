@@ -27,7 +27,7 @@ import 'rxjs/add/operator/retry';
 /**
  * Import local dependencies.
  */
-import {appEpic} from './app';
+import {appEpic} from './app/epic';
 import {
   ROOT_INITIALIZE_CLIENT,
   ROOT_FETCH_GRAPHQL_SCHEMA,

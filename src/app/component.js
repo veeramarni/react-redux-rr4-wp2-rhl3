@@ -19,8 +19,8 @@ import {Match} from 'react-router';
  */
 import {pingCreator} from './actions';
 import {fetchGraphQLQueryCreator} from '../actions';
-import Home from './home';
-import Counter from './counter';
+import Home from './home/component';
+import Counter from './counter/component';
 
 import styles from './styles.scss';
 
