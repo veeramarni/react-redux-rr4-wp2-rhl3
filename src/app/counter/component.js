@@ -12,6 +12,7 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Immutable from 'immutable';
 
 /**
  * Import local dependencies.
@@ -30,10 +31,14 @@ class Counter extends Component {
 
   // Render the component.
   render() {
-    let {counter, dispatch} = this.props;
+    let {counter, dimensions, dispatch} = this.props;
+    console.log(dimensions.toJS());
     return (
       <div>
         <h1>Counter</h1>
+        <ul>
+          {dimensions.map(dimension => <li key={dimension.get('key')}>{dimension.get('key')}</li>)}
+        </ul>
         {counter}
         <hr />
 
@@ -55,8 +60,10 @@ class Counter extends Component {
  * Map state to component properties.
  */
 const stateToProps = (state) => {
+  console.log('XXXXXXXY', state.toJS());
   return {
-    counter: state.get('counter')
+    counter: state.get('counter'),
+    dimensions: state.hasIn(['entities', 'Explorer', '0', 'dimensions']) ? state.getIn(['entities', 'Explorer', '0', 'dimensions']) : Immutable.List()
   };
 };
 

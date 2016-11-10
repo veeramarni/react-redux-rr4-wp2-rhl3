@@ -1,0 +1,1101 @@
+{
+  "Query": {
+    "name": "Query",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "explorer": {
+        "name": "explorer",
+        "type": {
+          "name": "Explorer",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "chart": {
+        "name": "chart",
+        "type": {
+          "name": "Chart",
+          "kind": "UNION",
+          "ofType": null
+        }
+      },
+      "dataSet": {
+        "name": "dataSet",
+        "type": {
+          "name": "DataSet",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "String": {
+    "name": "String",
+    "kind": "SCALAR",
+    "ofType": null,
+    "fields": null
+  },
+  "Explorer": {
+    "name": "Explorer",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "id": {
+        "name": "id",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "dimensions": {
+        "name": "dimensions",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "Dimension",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "facts": {
+        "name": "facts",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "Fact",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "filters": {
+        "name": "filters",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "Filter",
+            "kind": "UNION",
+            "ofType": null
+          }
+        }
+      },
+      "chart": {
+        "name": "chart",
+        "type": {
+          "name": "Chart",
+          "kind": "UNION",
+          "ofType": null
+        }
+      },
+      "currencies": {
+        "name": "currencies",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "Currency",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "userDefaults": {
+        "name": "userDefaults",
+        "type": {
+          "name": "UserDefaults",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Dimension": {
+    "name": "Dimension",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Fact": {
+    "name": "Fact",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Filter": {
+    "name": "Filter",
+    "kind": "UNION",
+    "ofType": null,
+    "fields": null
+  },
+  "StringFilter": {
+    "name": "StringFilter",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "like": {
+        "name": "like",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "NumberFilter": {
+    "name": "NumberFilter",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "min": {
+        "name": "min",
+        "type": {
+          "name": "Int",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "max": {
+        "name": "max",
+        "type": {
+          "name": "Int",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "equals": {
+        "name": "equals",
+        "type": {
+          "name": "Int",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Int": {
+    "name": "Int",
+    "kind": "SCALAR",
+    "ofType": null,
+    "fields": null
+  },
+  "DateTimeFilter": {
+    "name": "DateTimeFilter",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "start": {
+        "name": "start",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "end": {
+        "name": "end",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Chart": {
+    "name": "Chart",
+    "kind": "UNION",
+    "ofType": null,
+    "fields": null
+  },
+  "DonutChart": {
+    "name": "DonutChart",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "dimension": {
+        "name": "dimension",
+        "type": {
+          "name": "Dimension",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "measure": {
+        "name": "measure",
+        "type": {
+          "name": "Measure",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "dataSet": {
+        "name": "dataSet",
+        "type": {
+          "name": "DataSet",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Measure": {
+    "name": "Measure",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "aggregation": {
+        "name": "aggregation",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "DataSet": {
+    "name": "DataSet",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "id": {
+        "name": "id",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "columns": {
+        "name": "columns",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "Column",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "rows": {
+        "name": "rows",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": "String",
+              "kind": "SCALAR"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Column": {
+    "name": "Column",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "BarChart": {
+    "name": "BarChart",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "dimension": {
+        "name": "dimension",
+        "type": {
+          "name": "Dimension",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "measure": {
+        "name": "measure",
+        "type": {
+          "name": "Measure",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "dataSet": {
+        "name": "dataSet",
+        "type": {
+          "name": "DataSet",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "LineChart": {
+    "name": "LineChart",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "group": {
+        "name": "group",
+        "type": {
+          "name": "Dimension",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "series": {
+        "name": "series",
+        "type": {
+          "name": "Dimension",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "measure": {
+        "name": "measure",
+        "type": {
+          "name": "Measure",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "dataSet": {
+        "name": "dataSet",
+        "type": {
+          "name": "DataSet",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "Currency": {
+    "name": "Currency",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "key": {
+        "name": "key",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "UserDefaults": {
+    "name": "UserDefaults",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "companyId": {
+        "name": "companyId",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "currencyId": {
+        "name": "currencyId",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "currencyCode": {
+        "name": "currencyCode",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "startDate": {
+        "name": "startDate",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "endDate": {
+        "name": "endDate",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "companyAccess": {
+        "name": "companyAccess",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": "CompanyAccess",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      }
+    }
+  },
+  "CompanyAccess": {
+    "name": "CompanyAccess",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "id": {
+        "name": "id",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "DimensionArgs": {
+    "name": "DimensionArgs",
+    "kind": "INPUT_OBJECT",
+    "ofType": null,
+    "fields": null
+  },
+  "MeasureArgs": {
+    "name": "MeasureArgs",
+    "kind": "INPUT_OBJECT",
+    "ofType": null,
+    "fields": null
+  },
+  "FilterArgs": {
+    "name": "FilterArgs",
+    "kind": "SCALAR",
+    "ofType": null,
+    "fields": null
+  },
+  "__Schema": {
+    "name": "__Schema",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "types": {
+        "name": "types",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": null,
+              "kind": "NON_NULL"
+            }
+          }
+        }
+      },
+      "queryType": {
+        "name": "queryType",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "__Type",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "mutationType": {
+        "name": "mutationType",
+        "type": {
+          "name": "__Type",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "subscriptionType": {
+        "name": "subscriptionType",
+        "type": {
+          "name": "__Type",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      },
+      "directives": {
+        "name": "directives",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": null,
+              "kind": "NON_NULL"
+            }
+          }
+        }
+      }
+    }
+  },
+  "__Type": {
+    "name": "__Type",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "kind": {
+        "name": "kind",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "__TypeKind",
+            "kind": "ENUM",
+            "ofType": null
+          }
+        }
+      },
+      "name": {
+        "name": "name",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "description": {
+        "name": "description",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "fields": {
+        "name": "fields",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "__Field",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      },
+      "interfaces": {
+        "name": "interfaces",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "__Type",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      },
+      "possibleTypes": {
+        "name": "possibleTypes",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "__Type",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      },
+      "enumValues": {
+        "name": "enumValues",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "__EnumValue",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      },
+      "inputFields": {
+        "name": "inputFields",
+        "type": {
+          "name": null,
+          "kind": "LIST",
+          "ofType": {
+            "name": null,
+            "kind": "NON_NULL",
+            "ofType": {
+              "name": "__InputValue",
+              "kind": "OBJECT"
+            }
+          }
+        }
+      },
+      "ofType": {
+        "name": "ofType",
+        "type": {
+          "name": "__Type",
+          "kind": "OBJECT",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "__TypeKind": {
+    "name": "__TypeKind",
+    "kind": "ENUM",
+    "ofType": null,
+    "fields": null
+  },
+  "Boolean": {
+    "name": "Boolean",
+    "kind": "SCALAR",
+    "ofType": null,
+    "fields": null
+  },
+  "__Field": {
+    "name": "__Field",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "name": {
+        "name": "name",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "String",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "description": {
+        "name": "description",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "args": {
+        "name": "args",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": null,
+              "kind": "NON_NULL"
+            }
+          }
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "__Type",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "isDeprecated": {
+        "name": "isDeprecated",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "Boolean",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "deprecationReason": {
+        "name": "deprecationReason",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "__InputValue": {
+    "name": "__InputValue",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "name": {
+        "name": "name",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "String",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "description": {
+        "name": "description",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "type": {
+        "name": "type",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "__Type",
+            "kind": "OBJECT",
+            "ofType": null
+          }
+        }
+      },
+      "defaultValue": {
+        "name": "defaultValue",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "__EnumValue": {
+    "name": "__EnumValue",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "name": {
+        "name": "name",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "String",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "description": {
+        "name": "description",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "isDeprecated": {
+        "name": "isDeprecated",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "Boolean",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "deprecationReason": {
+        "name": "deprecationReason",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      }
+    }
+  },
+  "__Directive": {
+    "name": "__Directive",
+    "kind": "OBJECT",
+    "ofType": null,
+    "fields": {
+      "name": {
+        "name": "name",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": "String",
+            "kind": "SCALAR",
+            "ofType": null
+          }
+        }
+      },
+      "description": {
+        "name": "description",
+        "type": {
+          "name": "String",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
+      "locations": {
+        "name": "locations",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": null,
+              "kind": "NON_NULL"
+            }
+          }
+        }
+      },
+      "args": {
+        "name": "args",
+        "type": {
+          "name": null,
+          "kind": "NON_NULL",
+          "ofType": {
+            "name": null,
+            "kind": "LIST",
+            "ofType": {
+              "name": null,
+              "kind": "NON_NULL"
+            }
+          }
+        }
+      }
+    }
+  },
+  "__DirectiveLocation": {
+    "name": "__DirectiveLocation",
+    "kind": "ENUM",
+    "ofType": null,
+    "fields": null
+  }
+}
