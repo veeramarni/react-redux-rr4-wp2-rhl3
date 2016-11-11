@@ -44,15 +44,32 @@ export const normalizeGraphQLQueryResponse = (entities, response) => {
   const t = entities.withMutations((entities) => {
     normalizeGraphQLQueryResponseNode(entities, response, 'Query');
   });
-  console.log('t', t.toJS());
-  console.log('X', t.getIn(['Explorer', '0']).toJS());
-  let explorer = Explorer('0', t);
-  console.log('Y', explorer.chart.__typename, explorer.chart.dataSet.columns.toJS());
 
-  // TODO t.setIn(['Explorer', '0', 'chart', 'measure'], null) Will not work!
-  // BUT lets make this work:
+  var path = Explorer('0', t).chart.dataSet.columns.__path;
+  console.log(path.toJS());//, t.getIn(path).toJS());
+  const u = t.updateIn(path.push(0), (val) => {
+    console.log(val.toJS());
+    return val.set('key', 'bernd');
+  });
+  console.log(path.toJS(), u.getIn(path).toJS(), t === u);
+
+  //t.hasIn('Explorer', '0', 'chart', 'dataSet', 'column')
+  // t.setIn(Explorer(t, 0).chart.dataSet.columns(5), null);
+  // t.setIn(['DataSet', '10', 'columns', '5'], null);
+  // t.setIn(['Explorer', '0', 'chart', 'dataSet', 'columns', '5'], null);
+
+  // console.log('t', t.toJS());
+  // console.log('X', t.getIn(['Explorer', '0']).toJS());
+  // let explorer = Explorer('0', t); // better make it small letter: explorer('0', t).chart.__typename
+  // console.log('Y', explorer.chart.__typename, explorer.chart.dataSet.columns.toJS());
+  //
+  // // TODO t.setIn(['Explorer', '0', 'chart', 'measure'], null) Will not work!
+  // // BUT lets make this work:
+  // console.log('dd', explorer.chart.dataSet.__path);
   // explorer.chart.dataSet.columns = Immutable.List([1,2,3]);
-  // hopefully easy by just adding setters in the wrapper that call this._map.set(value);
+  // // hopefully easy by just adding setters in the wrapper that call this._map.set(value);
+  // console.log(explorer.chart.dataSet.columns.toJS());
+  // console.log('t', t.toJS());
 
   return t;
 };
