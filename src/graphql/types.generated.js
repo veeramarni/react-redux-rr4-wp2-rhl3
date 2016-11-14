@@ -149,6 +149,7 @@ export class ColumnEntity {
   }
   get __typename() { return 'Column'; }
   get __path() { return this._path; }
+  get id() { console.log('id', this._path.toJS()); return new EntityLeaf(this._map.get('id'), this._path.push('id')); }
   get key() { console.log('key', this._path.toJS()); return new EntityLeaf(this._map.get('key'), this._path.push('key')); }
   get name() { console.log('name', this._path.toJS()); return new EntityLeaf(this._map.get('name'), this._path.push('name')); }
   get type() { console.log('type', this._path.toJS()); return new EntityLeaf(this._map.get('type'), this._path.push('type')); }

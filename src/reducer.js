@@ -16,18 +16,12 @@ import Immutable from 'immutable';
 /**
  * Import local dependencies.
  */
+import {entitiesReducer} from './entities/reducer';
 import {appReducer} from './app/reducer';
 import {counterReducer} from './app/counter/reducer';
 import {
-  LOCATION_CHANGE,
-  ROOT_FETCH_GRAPHQL_SCHEMA,
-  ROOT_FETCH_GRAPHQL_SCHEMA_SUCCEEDED,
-  ROOT_FETCH_GRAPHQL_SCHEMA_FAILED,
-  ROOT_FETCH_GRAPHQL_SCHEMA_PENDING,
-  ROOT_FETCH_GRAPHQL_QUERY_SUCCEEDED
+  LOCATION_CHANGE
 } from './actions';
-
-import {initializeGraphQLSchema, normalizeGraphQLQueryResponse} from './lib/graphQL';
 
 /**
  * Default router state.
@@ -53,38 +47,14 @@ function routerReducer(state = routerDefaultState, action) {
 /**
  * Default client state.
  */
-const clientDefaultState = Immutable.Map({
-  isSchemaLoaded: false
-});
+const clientDefaultState = Immutable.Map({});
 
 /**
  * The client store.
  */
 function clientReducer(state = clientDefaultState, action) {
-  console.log(action.type);
+  console.log(action.type, action.payload);
   switch (action.type) {
-    case ROOT_FETCH_GRAPHQL_SCHEMA_SUCCEEDED:
-      return state.set('isSchemaLoaded', true);
-    default:
-      return state;
-  }
-}
-
-/**
- * Default client state.
- */
-const entitiesDefaultState = Immutable.Map({});
-
-/**
- * The entities store.
- */
-function entitiesReducer(state = entitiesDefaultState, action) {
-  console.log(action.type);
-  switch (action.type) {
-    case ROOT_FETCH_GRAPHQL_SCHEMA_SUCCEEDED:
-      return initializeGraphQLSchema(state, action.payload.response.data.__schema.types);
-    case ROOT_FETCH_GRAPHQL_QUERY_SUCCEEDED:
-      return normalizeGraphQLQueryResponse(state, action.payload.response.data);
     default:
       return state;
   }

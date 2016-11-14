@@ -16,66 +16,19 @@ import Immutable from 'immutable';
  * Import local dependencies.
  */
 import types from './types.generated.json';
-import {Explorer} from './types.generated';
 
 /**
- *
+ * Export the GraphQL response normalizer helper function.
  */
-export const initializeGraphQLSchema = (state) => {
-  // Create an entity store for each GraphQL entity type.
-  const s = state.withMutations((state) => {
-    for (let typeName in types) {
-      if (types.hasOwnProperty(typeName)) {
-        if (types[typeName].kind === 'OBJECT') {
-          state.set(typeName, Immutable.Map({}));
-        }
-      }
-    }
-  });
-  console.log('s', s.toJS());
-  return s;
-};
-
-/**
- *
- */
-export const normalizeGraphQLQueryResponse = (entities, response) => {
+export const normalizeGraphQLQueryResponse = (response) => {
   // start processing the query response.
-  const t = entities.withMutations((entities) => {
-    normalizeGraphQLQueryResponseNode(entities, response, 'Query');
+  return Immutable.Map().withMutations((entities) => {
+    normalizeGraphQLQueryResponseNode(entities, response, 'Query', 'Query');
   });
-
-  var path = Explorer('0', t).chart.dataSet.columns.__path;
-  console.log(path.toJS());//, t.getIn(path).toJS());
-  const u = t.updateIn(path.push(0), (val) => {
-    console.log(val.toJS());
-    return val.set('key', 'bernd');
-  });
-  console.log(path.toJS(), u.getIn(path).toJS(), t === u);
-
-  //t.hasIn('Explorer', '0', 'chart', 'dataSet', 'column')
-  // t.setIn(Explorer(t, 0).chart.dataSet.columns(5), null);
-  // t.setIn(['DataSet', '10', 'columns', '5'], null);
-  // t.setIn(['Explorer', '0', 'chart', 'dataSet', 'columns', '5'], null);
-
-  // console.log('t', t.toJS());
-  // console.log('X', t.getIn(['Explorer', '0']).toJS());
-  // let explorer = Explorer('0', t); // better make it small letter: explorer('0', t).chart.__typename
-  // console.log('Y', explorer.chart.__typename, explorer.chart.dataSet.columns.toJS());
-  //
-  // // TODO t.setIn(['Explorer', '0', 'chart', 'measure'], null) Will not work!
-  // // BUT lets make this work:
-  // console.log('dd', explorer.chart.dataSet.__path);
-  // explorer.chart.dataSet.columns = Immutable.List([1,2,3]);
-  // // hopefully easy by just adding setters in the wrapper that call this._map.set(value);
-  // console.log(explorer.chart.dataSet.columns.toJS());
-  // console.log('t', t.toJS());
-
-  return t;
 };
 
 // parse each node recursively.
-function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
+function normalizeGraphQLQueryResponseNode(entities, node, path, nodeTypeName) {
   // initialize empty nodes with null.
   if (!node) {
     return null;
@@ -84,10 +37,25 @@ function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
   let nodeType = node.hasOwnProperty('__typename') ? types[node.__typename] : types[nodeTypeName];
   // start building the entity for the node.
   let entity = Immutable.Map().withMutations(entity => {
+    // Compute identifier for nodes without id.
+    if (node.hasOwnProperty('id') && node.id !== null) {
+      // Apply the valid id to the entity.
+      entity.set('id', node.id);
+      // Calculate the base path for the child properties.
+      path = nodeType.name + '.' + node.id;
+    }
+    else {
+      // Apply the path as the identifier for this entity.
+      entity.set('id', path);
+    }
     // iterate through each property of the node.
     for (let nodePropName in node) {
       // Be nice.
       if (node.hasOwnProperty(nodePropName)) {
+        // id is handled already.
+        if (nodePropName === 'id') {
+          continue;
+        }
         // simply copy the __typename property if available.
         if (nodePropName === '__typename') {
           entity.set(nodePropName, node[nodePropName]);
@@ -103,11 +71,11 @@ function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
             entity.set(nodePropName, nodePropValue);
             break;
           case 'OBJECT':
-            entity.set(nodePropName, normalizeGraphQLQueryResponseNode(entities, nodePropValue, nodePropType.name));
+            entity.set(nodePropName, normalizeGraphQLQueryResponseNode(entities, nodePropValue, `${path}.${nodePropName}`, nodePropType.name));
             break;
           case 'UNION':
             // TODO make sure there is a __typename and handle more than just UNIONs of OBJECTs here
-            entity.set(nodePropName, normalizeGraphQLQueryResponseNode(entities, nodePropValue));
+            entity.set(nodePropName, normalizeGraphQLQueryResponseNode(entities, nodePropValue, `${path}.${nodePropName}`));
             break;
           case 'LIST':
             switch (nodePropType.ofType.kind) {
@@ -117,8 +85,8 @@ function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
                 break;
               case 'OBJECT': {
                 let list = Immutable.List().withMutations(list => {
-                  nodePropValue.forEach(listItem => {
-                    list.push(normalizeGraphQLQueryResponseNode(entities, listItem, nodePropType.ofType.name));
+                  nodePropValue.forEach((listItem, i) => {
+                    list.push(normalizeGraphQLQueryResponseNode(entities, listItem, `${path}.${nodePropName}.${i}`, nodePropType.ofType.name));
                   });
                 });
                 entity.set(nodePropName, list);
@@ -128,7 +96,7 @@ function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
                 let list = Immutable.List().withMutations(list => {
                   nodePropValue.forEach(listItem => {
                     // TODO include the type here, id is not enough
-                    list.push(normalizeGraphQLQueryResponseNode(entities, listItem));
+                    list.push(normalizeGraphQLQueryResponseNode(entities, listItem, `${path}.${nodePropName}`));
                   });
                 });
                 entity.set(nodePropName, list);
@@ -155,16 +123,18 @@ function normalizeGraphQLQueryResponseNode(entities, node, nodeTypeName) {
       }
     }
   });
-
-  //
+  // Entities always have to have an id, even if they are local properties only.
   if (!entity.has('id')) {
-    return entity;
+    throw `Entity of type ${nodeType.name} has neither a natural nor a computed id! This should never happen!`;
   }
-
-  //
+  // Create the entity type store if it doesn't exist yet.
+  if (!entities.has(nodeType.name)) {
+    entities.set(nodeType.name, Immutable.Map());
+  }
+  // Get the entity's id.
   const id = entity.get('id');
-  console.log(nodeType.name, id);
-  console.log(entities.hasIn([nodeType.name, id]));
-  entities = entities.hasIn([nodeType.name, id]) ? entities.mergeIn([nodeType.name, id], entity) : entities.setIn([nodeType.name, id], entity);
+  // Add the entity to the response store. Note: entities is processed "withMutations".
+  entities.setIn([nodeType.name, id], entity);
+  // Return a reference to the entity.
   return {id, __typename: nodeType.name};
 }

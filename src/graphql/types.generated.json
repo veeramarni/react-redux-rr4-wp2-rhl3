@@ -453,6 +453,14 @@
     "kind": "OBJECT",
     "ofType": null,
     "fields": {
+      "id": {
+        "name": "id",
+        "type": {
+          "name": "Int",
+          "kind": "SCALAR",
+          "ofType": null
+        }
+      },
       "key": {
         "name": "key",
         "type": {

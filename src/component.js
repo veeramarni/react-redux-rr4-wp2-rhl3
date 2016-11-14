@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 /**
  * Import local dependencies.
  */
-import {initializeClientCreator, setLocationCreator} from './actions';
+import {setLocationCreator} from './actions';
 import ControlledRouter from './components/controlled-router';
 import App from './app/component';
 
@@ -34,26 +34,14 @@ class Client extends Component {
     super(props);
   }
 
-  componentDidMount(){
-    // Initialize the client.
-    console.log('Call initializeClient only once when client starts!');
-    this.props.initializeClient();
-  }
-
   // Render the component.
   render() {
-    let {router, isSchemaLoaded, setLocation} = this.props;
-    if (isSchemaLoaded === true) {
-      return (
-        <ControlledRouter location={router} setLocation={setLocation}>
-          <App/>
-        </ControlledRouter>
-      );
-    } else {
-      return (
-        <h1>LOADING SCHEMA</h1>
-      )
-    }
+    let {router, setLocation} = this.props;
+    return (
+      <ControlledRouter location={router} setLocation={setLocation}>
+        <App/>
+      </ControlledRouter>
+    );
   }
 }
 
@@ -62,8 +50,7 @@ class Client extends Component {
  */
 const stateToProps = (store) => {
   return {
-    router: store.get('router').toObject(),
-    isSchemaLoaded: store.getIn(['client', 'isSchemaLoaded'])
+    router: store.get('router').toObject()
   };
 };
 
@@ -72,7 +59,6 @@ const stateToProps = (store) => {
  */
 const dispatchToProps = (dispatch) => {
   return {
-    initializeClient: () => dispatch(initializeClientCreator()),
     setLocation: (routerState) => dispatch(setLocationCreator(routerState))
   }
 };

@@ -29,47 +29,15 @@ import 'rxjs/add/operator/retry';
  */
 import {appEpic} from './app/epic';
 import {
-  ROOT_INITIALIZE_CLIENT,
-  ROOT_FETCH_GRAPHQL_SCHEMA,
   ROOT_FETCH_GRAPHQL_QUERY,
-  fetchGraphQLSchemaCreator,
-  fetchGraphQLSchemaSucceededCreator,
-  fetchGraphQLSchemaFailedCreator,
-  fetchGraphQLSchemaPendingCreator,
   fetchGraphQLQuerySucceededCreator,
   fetchGraphQLQueryFailedCreator,
   fetchGraphQLQueryPendingCreator
 } from './actions';
-
-import {fetchGraphQLSchemaQuery} from './queries';
-
-/**
- * This epic initializes the client.
- */
-const initializeClientEpic = action$ =>
-  action$.ofType(ROOT_INITIALIZE_CLIENT)
-    .map(fetchGraphQLSchemaCreator);
+import {normalizeGraphQLQueryResponse} from './graphql';
 
 /**
- * This epic fetches the graphql schema.
- */
-const fetchGraphQLSchemaEpic = action$ =>
-  action$.ofType(ROOT_FETCH_GRAPHQL_SCHEMA)
-    .mergeMap(action =>
-      Observable.ajax.post
-      (
-        'https://frae-local.fraedom-dev.com:8088/graphql',
-        fetchGraphQLSchemaQuery(),
-        {'Content-Type': 'application/json'}
-      )
-        .map(fetchGraphQLSchemaSucceededCreator)
-        .retry(2)
-        .catch(({xhr}) => Observable.of(fetchGraphQLSchemaFailedCreator(xhr)))
-        .startWith(fetchGraphQLSchemaPendingCreator())
-    );
-
-/**
- * This epic fetches a graphql query.
+ * This epic fetches a GraphQL query.
  */
 const fetchGraphQLQueryEpic = action$ =>
   action$.ofType(ROOT_FETCH_GRAPHQL_QUERY)
@@ -80,6 +48,7 @@ const fetchGraphQLQueryEpic = action$ =>
         action.payload,
         {'Content-Type': 'application/json'}
       )
+        .map((payload)=> normalizeGraphQLQueryResponse(payload.response.data))
         .map(fetchGraphQLQuerySucceededCreator)
         .retry(2)
         .catch(({xhr}) => Observable.of(fetchGraphQLQueryFailedCreator(xhr)))
@@ -90,8 +59,6 @@ const fetchGraphQLQueryEpic = action$ =>
  * Export the root epics.
  */
 export const rootEpic = combineEpics(
-  initializeClientEpic,
-  fetchGraphQLSchemaEpic,
   fetchGraphQLQueryEpic,
   appEpic
 );

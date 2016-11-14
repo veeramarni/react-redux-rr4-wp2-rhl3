@@ -31,14 +31,14 @@ class Counter extends Component {
 
   // Render the component.
   render() {
-    let {counter, dimensions, dispatch} = this.props;
-    console.log(dimensions.toJS());
+    let {counter, explorer, dispatch} = this.props;
     return (
       <div>
         <h1>Counter</h1>
-        <ul>
-          {dimensions.map(dimension => <li key={dimension.get('key')}>{dimension.get('key')}</li>)}
-        </ul>
+        <pre>-{JSON.stringify(explorer.toJS())}-</pre>
+        {/*<ul>*/}
+          {/*{dimensions.map(dimension => <li key={dimension.get('key')}>{dimension.get('key')}</li>)}*/}
+        {/*</ul>*/}
         {counter}
         <hr />
 
@@ -63,7 +63,7 @@ const stateToProps = (state) => {
   console.log('XXXXXXXY', state.toJS());
   return {
     counter: state.get('counter'),
-    dimensions: state.hasIn(['entities', 'Explorer', '0', 'dimensions']) ? state.getIn(['entities', 'Explorer', '0', 'dimensions']) : Immutable.List()
+    explorer: state.hasIn(['entities', 'Explorer', '0']) ? state.getIn(['entities', 'Explorer', '0']) : Immutable.Map()
   };
 };
 
