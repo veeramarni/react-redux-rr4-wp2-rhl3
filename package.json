@@ -7,7 +7,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.dev",
-    "build": "webpack --config webpack.config.prod.js -p --progress --colors"
+    "build": "webpack --config webpack.config.prod.js -p --progress --colors",
+    "graphql": "node ./tools/graphql"
   },
   "dependencies": {
     "immutable": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz",
@@ -33,6 +34,7 @@
     "connect-history-api-fallback": "^1.0.0",
     "copy-webpack-plugin": "^4.0.0",
     "css-loader": "^0.25.0",
+    "ejs": "^2.0.0",
     "express": "^4.0.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
@@ -44,6 +46,7 @@
     "postcss-loader": "^1.0.0",
     "raw-loader": "^0.5.0",
     "react-hot-loader": "^3.0.0-beta.6",
+    "request": "^2.0.0",
     "resolve-url-loader": "^1.0.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.0",

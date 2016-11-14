@@ -11,37 +11,44 @@
  * Import dependencies.
  */
 import {combineReducers} from 'redux-immutable';
-import Immutable from 'immutable';
 
 /**
  * Import local dependencies.
  */
-import {
-  ROOT_FETCH_GRAPHQL_QUERY_SUCCEEDED
-} from '../actions';
+import {explorerReducer} from './explorerReducer';
+import {dimensionReducer} from './dimensionReducer';
+import {factReducer} from './factReducer';
+import {stringFilterReducer} from './stringFilterReducer';
+import {numberFilterReducer} from './numberFilterReducer';
+import {dateTimeFilterReducer} from './dateTimeFilterReducer';
+import {donutChartReducer} from './donutChartReducer';
+import {measureReducer} from './measureReducer';
+import {dataSetReducer} from './dataSetReducer';
+import {columnReducer} from './columnReducer';
+import {barChartReducer} from './barChartReducer';
+import {lineChartReducer} from './lineChartReducer';
+import {currencyReducer} from './currencyReducer';
+import {userDefaultsReducer} from './userDefaultsReducer';
+import {companyAccessReducer} from './companyAccessReducer';
 
-/**
- * Default Explorer entities state.
- */
-const explorerDefaultState = Immutable.Map({});
-
-/**
- * The Explorer entities store.
- */
-function explorerReducer(state = explorerDefaultState, action) {
-  switch (action.type) {
-    case ROOT_FETCH_GRAPHQL_QUERY_SUCCEEDED:
-      return state.merge(action.payload.get('Explorer'));
-    default:
-      return state;
-  }
-}
-
-// TODO: add reducers for each entity type. Maybe in their own files.
 
 /**
  * Export the application store.
  */
 export const entitiesReducer = combineReducers({
-  Explorer: explorerReducer
+  Explorer: explorerReducer,
+  Dimension: dimensionReducer,
+  Fact: factReducer,
+  StringFilter: stringFilterReducer,
+  NumberFilter: numberFilterReducer,
+  DateTimeFilter: dateTimeFilterReducer,
+  DonutChart: donutChartReducer,
+  Measure: measureReducer,
+  DataSet: dataSetReducer,
+  Column: columnReducer,
+  BarChart: barChartReducer,
+  LineChart: lineChartReducer,
+  Currency: currencyReducer,
+  UserDefaults: userDefaultsReducer,
+  CompanyAccess: companyAccessReducer
 });
