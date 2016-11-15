@@ -42,6 +42,9 @@ class App extends Component {
         <button onClick={() => fetchGraphQLQuery({query: `{
   explorer(id:"0") {
      id
+     dimensions {
+       key
+     }
      chart {
       __typename
       ... on DonutChart {

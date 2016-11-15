@@ -12,6 +12,7 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { createSelector } from 'reselect';
 import Immutable from 'immutable';
 
 /**
@@ -19,6 +20,7 @@ import Immutable from 'immutable';
  */
 import {nextStepCreator, prevStepCreator} from './actions';
 import {setLocationCreator} from '../../actions';
+import {entities} from '../../graphql/types.generated';
 
 /**
  * Create the component.
@@ -35,7 +37,7 @@ class Counter extends Component {
     return (
       <div>
         <h1>Counter</h1>
-        <pre>-{JSON.stringify(explorer.toJS())}-</pre>
+        {/*<pre>-{JSON.stringify(explorer.toJS())}-</pre>*/}
         {/*<ul>*/}
           {/*{dimensions.map(dimension => <li key={dimension.get('key')}>{dimension.get('key')}</li>)}*/}
         {/*</ul>*/}
@@ -60,12 +62,28 @@ class Counter extends Component {
  * Map state to component properties.
  */
 const stateToProps = (state) => {
-  console.log('XXXXXXXY', state.toJS());
   return {
     counter: state.get('counter'),
-    explorer: state.hasIn(['entities', 'Explorer', '0']) ? state.getIn(['entities', 'Explorer', '0']) : Immutable.Map()
+    explorer: test(state)//getSelectedDimensions(state, '0')//state.hasIn(['entities', 'Explorer', '0']) ? state.getIn(['entities', 'Explorer', '0']) : Immutable.Map()
   };
 };
+
+const test = (state) => {
+  console.log('WOW', entities(state).Explorer('0').chart.dataSet.__value('nothing').toJS());
+  //debugger;
+  //var path = Explorer('0', state.get('entities')).chart;//.dataSet.columns.__path;
+  return Immutable.Map();
+}
+// const getDimensions = (state, explorerId) => {
+//   console.log(Explorer('0', state.get('entities')));
+//   return Immutable.Map();// state.hasIn(['entities', 'Explorer', explorerId, 'dimensions']) ? state.getIn(['entities', 'Explorer', explorerId, 'dimensions']) : Immutable.List();
+// };
+// const getSelectedDimensionIds = (state, explorerId) => Immutable.List(['transaction_date', 'merchant_category']);
+// const getSelectedDimensions = createSelector([getDimensions, getSelectedDimensionIds],(dimensions, selectedDimensionIds) => {
+//   return dimensions;
+//   // console.log(dimensions.toJS(), selectedDimensionIds.toJS());
+//   // return dimensions.filter(x => selectedDimensionIds.includes(x.key));
+// });
 
 /**
  * Export the container component.

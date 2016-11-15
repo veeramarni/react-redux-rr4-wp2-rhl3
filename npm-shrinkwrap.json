@@ -152,6 +152,11 @@
       "from": "redux-observable@latest",
       "resolved": "https://registry.npmjs.org/redux-observable/-/redux-observable-0.12.1.tgz"
     },
+    "reselect": {
+      "version": "2.5.4",
+      "from": "reselect@latest",
+      "resolved": "https://registry.npmjs.org/reselect/-/reselect-2.5.4.tgz"
+    },
     "resolve-pathname": {
       "version": "2.0.2",
       "from": "resolve-pathname@>=2.0.0 <3.0.0",
