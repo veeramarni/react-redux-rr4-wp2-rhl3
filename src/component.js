@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
  * Import local dependencies.
  */
 import {setLocationCreator} from './actions';
-import ControlledRouter from './components/controlled-router';
+import ControlledRouter from './components/controlled-router/component';
 import App from './app/component';
 
 /**

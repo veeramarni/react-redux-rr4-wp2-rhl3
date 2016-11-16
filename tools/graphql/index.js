@@ -128,7 +128,7 @@ request({
   /**
    * Create the types.generated.js file.
    */
-  ejs.renderFile(path.join(__dirname, './templates/types.js'), {types: types.filter(t => (t.kind === 'OBJECT' || t.kind === 'UNION') && t.name.charAt(0) !== '_' && t.name !== 'Query')}, (err, compiled) => {
+  ejs.renderFile(path.join(__dirname, './templates/types.ejs'), {types: types.filter(t => (t.kind === 'OBJECT' || t.kind === 'UNION') && t.name.charAt(0) !== '_' && t.name !== 'Query')}, (err, compiled) => {
     if (err) {
       console.log(err);
     } else {
