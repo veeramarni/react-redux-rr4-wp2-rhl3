@@ -1,736 +1,369 @@
-import {Map, List} from 'immutable';
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+/**
+ * Import dependencies.
+ */
+import {List} from 'immutable';
+
+/**
+ * Import local dependencies.
+ */
 import types from './types.generated.json';
 
-export class Entities {
-  constructor(state) {
-    this.state = state.get('entities');
-    this.chain = [];
-  }
+/**
+ * Factory to create easy entity access.
+ */
+export function entities(state) {
+  return new Entities(state);
+}
 
-  Explorer(id) {
-    this.chain.push('Explorer');
-    this.chain.push(id);
-    return this;
+/**
+ * Helper class for easy entity access.
+ */
+class EntitiesBase {
+  constructor(state, chain) {
+    this.state = state;
+    this.chain = chain;
   }
-
-  Chart(id) {
-    this.chain.push('Chart').push(id);
-    return this;
-  }
-
-  get chart() {
-    this.chain.push('chart');
-    return this;
-  }
-
-  DataSet(id) {
-    this.chain.push('DataSet').push(id);
-    return this;
-  }
-
-  get dataSet() {
-    this.chain.push('dataSet');
-    return this;
-  }
-
   __value(undefinedValue) {
+    // Chain iterator.
     let i = 0;
+    // Get the initial entity type.
     let entityType = types[this.chain[i++]];
+    // Get the initial entity id.
     let entityId = this.chain[i++];
-    if(!this.state.hasIn([entityType.name, entityId])){
+    // Make sure the requested entity exists.
+    if (!this.state.hasIn([entityType.name, entityId])) {
+      console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
       return undefinedValue;
     }
-    let entityValue =  this.state.getIn([entityType.name, entityId]);
+    // Get the initial entity value.
+    let entityValue = this.state.getIn([entityType.name, entityId]);
+    // Now follow along the chain to resolve the requested property path.
     while (i < this.chain.length) {
+      // Get the name of the current property.
       let propName = this.chain[i++];
+      console.log(propName);
+      // Get the type of the current property.
       let propType = entityType.fields[propName].type;
+      // Get the value of the current property.
       let propValue = entityValue.get(propName);
-      console.log('XXXXXXX', propName, propType, propValue, entityValue.toJS());
+      console.log('XXXXXXXXXXXXX', propName, propType, propValue);
+      // Handle the property based on its type.
       switch (propType.kind) {
         case 'OBJECT':
         case 'UNION':
+          // Get the entity type of the property.
           entityType = types[propValue.__typename];
+          // Get the entity id of the property.
           entityId = propValue.id;
-          if(!this.state.hasIn([entityType.name, entityId])){
+          // Make sure the requested entity exists.
+          if (!this.state.hasIn([entityType.name, entityId])) {
+            console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
             return undefinedValue;
           }
+          // Get the properties entity value.
           entityValue = this.state.getIn([entityType.name, entityId]);
           break;
+        case 'LIST':
+          // Make sure the property value is a List.
+          if (!List.isList(propValue)) {
+            return undefinedValue;
+          }
+          // Handle indexed access to the List.
+          if (i < this.chain.length) {
+            if (isNaN(this.chain[i])) {
+              console.warn(`Indexer must be an int at index ${i}: ${this.chain.join(', ')}!`);
+              return undefinedValue;
+            }
+            // Get the item at the requested index.
+            let itemValue = propValue.get(this.chain[i++]);
+            // Make sure it is valid.
+            if (!itemValue) {
+              return undefinedValue;
+            }
+            // Handle scalar List items.
+            switch(propType.ofType.kind) {
+              case 'OBJECT':
+              case 'UNION':
+                // Get the entity type of the property.
+                entityType = types[itemValue.__typename];
+                // Get the entity id of the property.
+                entityId = itemValue.id;
+                // Make sure the requested entity exists.
+                if (!this.state.hasIn([entityType.name, entityId])) {
+                  console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
+                  return undefinedValue;
+                }
+                // Get the properties entity value.
+                entityValue = this.state.getIn([entityType.name, entityId]);
+                break;
+              case 'SCALAR':
+              case 'LIST':
+                // Warn if the chain has not ended yet.
+                if (i < this.chain.length) {
+                  console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
+                }
+                return itemValue;
+            }
+          } else {
+            // Warn if the chain has not ended yet.
+            if (i < this.chain.length) {
+              console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
+            }
+            return propValue;
+          }
+          break;
+        case 'SCALAR':
+          // Warn if the chain has not ended yet.
+          if (i < this.chain.length) {
+            console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
+          }
+          return propValue;
+        default:
+          // Impossible.
+          console.warn(`Unknown property type ${propType.kind}!`);
+          return undefinedValue;
       }
     }
     return entityValue;
   }
 }
 
-export function entities(id) {
-  return new Entities(id);
+class Entities extends EntitiesBase {
+  constructor(state) {
+    super(state.get('entities'), []);
+  }
+  Query(id) {
+    this.chain.push('Query');
+    this.chain.push(id);
+    return new Query(this.state, this.chain);
+  }
+  Explorer(id) {
+    this.chain.push('Explorer');
+    this.chain.push(id);
+    return new Explorer(this.state, this.chain);
+  }
+  Dimension(id) {
+    this.chain.push('Dimension');
+    this.chain.push(id);
+    return new Dimension(this.state, this.chain);
+  }
+  Fact(id) {
+    this.chain.push('Fact');
+    this.chain.push(id);
+    return new Fact(this.state, this.chain);
+  }
+  StringFilter(id) {
+    this.chain.push('StringFilter');
+    this.chain.push(id);
+    return new StringFilter(this.state, this.chain);
+  }
+  NumberFilter(id) {
+    this.chain.push('NumberFilter');
+    this.chain.push(id);
+    return new NumberFilter(this.state, this.chain);
+  }
+  DateTimeFilter(id) {
+    this.chain.push('DateTimeFilter');
+    this.chain.push(id);
+    return new DateTimeFilter(this.state, this.chain);
+  }
+  DonutChart(id) {
+    this.chain.push('DonutChart');
+    this.chain.push(id);
+    return new DonutChart(this.state, this.chain);
+  }
+  Measure(id) {
+    this.chain.push('Measure');
+    this.chain.push(id);
+    return new Measure(this.state, this.chain);
+  }
+  DataSet(id) {
+    this.chain.push('DataSet');
+    this.chain.push(id);
+    return new DataSet(this.state, this.chain);
+  }
+  Column(id) {
+    this.chain.push('Column');
+    this.chain.push(id);
+    return new Column(this.state, this.chain);
+  }
+  BarChart(id) {
+    this.chain.push('BarChart');
+    this.chain.push(id);
+    return new BarChart(this.state, this.chain);
+  }
+  LineChart(id) {
+    this.chain.push('LineChart');
+    this.chain.push(id);
+    return new LineChart(this.state, this.chain);
+  }
+  Currency(id) {
+    this.chain.push('Currency');
+    this.chain.push(id);
+    return new Currency(this.state, this.chain);
+  }
+  UserDefaults(id) {
+    this.chain.push('UserDefaults');
+    this.chain.push(id);
+    return new UserDefaults(this.state, this.chain);
+  }
+  CompanyAccess(id) {
+    this.chain.push('CompanyAccess');
+    this.chain.push(id);
+    return new CompanyAccess(this.state, this.chain);
+  }
+
 }
 
-//entities(Immutable.Map({entities: Immutable.Map({Explorer: Immutable.Map({}), Chart: Immutable.Map()})})).Explorer(0).chart.__value;
+class Query extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get explorer() { this.chain.push('explorer'); return new Explorer(this.state, this.chain); }
+  chart(type) { this.chain.push('chart'); switch(type) {
+    case 'DonutChart': return new DonutChart(this.state, this.chain);
+    case 'BarChart': return new BarChart(this.state, this.chain);
+    case 'LineChart': return new LineChart(this.state, this.chain);
+  }}
+  get dataSet() { this.chain.push('dataSet'); return new DataSet(this.state, this.chain); }
+
+}
+class Explorer extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get id() { this.chain.push('id'); return this; }
+  dimensions(index) { this.chain.push('dimensions'); if (isNaN(index)) return this; this.chain.push(index); return new Dimension(this.state, this.chain); }
+  facts(index) { this.chain.push('facts'); if (isNaN(index)) return this; this.chain.push(index); return new Fact(this.state, this.chain); }
+  filters(index) { this.chain.push('filters'); if (isNaN(index)) return this; this.chain.push(index); return new Filter(this.state, this.chain); }
+  chart(type) { this.chain.push('chart'); switch(type) {
+    case 'DonutChart': return new DonutChart(this.state, this.chain);
+    case 'BarChart': return new BarChart(this.state, this.chain);
+    case 'LineChart': return new LineChart(this.state, this.chain);
+  }}
+  currencies(index) { this.chain.push('currencies'); if (isNaN(index)) return this; this.chain.push(index); return new Currency(this.state, this.chain); }
+  get userDefaults() { this.chain.push('userDefaults'); return new UserDefaults(this.state, this.chain); }
+
+}
+class Dimension extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+
+}
+class Fact extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+
+}
+class Filter extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+
+}
+class StringFilter extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+  get like() { this.chain.push('like'); return this; }
+
+}
+class NumberFilter extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+  get min() { this.chain.push('min'); return this; }
+  get max() { this.chain.push('max'); return this; }
+  get equals() { this.chain.push('equals'); return this; }
+
+}
+class DateTimeFilter extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+  get start() { this.chain.push('start'); return this; }
+  get end() { this.chain.push('end'); return this; }
+
+}
+class Chart extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+
+}
+class DonutChart extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get dimension() { this.chain.push('dimension'); return new Dimension(this.state, this.chain); }
+  get measure() { this.chain.push('measure'); return new Measure(this.state, this.chain); }
+  get dataSet() { this.chain.push('dataSet'); return new DataSet(this.state, this.chain); }
+
+}
+class Measure extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+  get aggregation() { this.chain.push('aggregation'); return this; }
+
+}
+class DataSet extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get id() { this.chain.push('id'); return this; }
+  columns(index) { this.chain.push('columns'); if (isNaN(index)) return this; this.chain.push(index); return new Column(this.state, this.chain); }
+  rows(index) { this.chain.push('rows'); if (isNaN(index)) return this; this.chain.push(index); return new (this.state, this.chain); }
+
+}
+class Column extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get id() { this.chain.push('id'); return this; }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+  get type() { this.chain.push('type'); return this; }
+
+}
+class BarChart extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get dimension() { this.chain.push('dimension'); return new Dimension(this.state, this.chain); }
+  get measure() { this.chain.push('measure'); return new Measure(this.state, this.chain); }
+  get dataSet() { this.chain.push('dataSet'); return new DataSet(this.state, this.chain); }
+
+}
+class LineChart extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get group() { this.chain.push('group'); return new Dimension(this.state, this.chain); }
+  get series() { this.chain.push('series'); return new Dimension(this.state, this.chain); }
+  get measure() { this.chain.push('measure'); return new Measure(this.state, this.chain); }
+  get dataSet() { this.chain.push('dataSet'); return new DataSet(this.state, this.chain); }
+
+}
+class Currency extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get key() { this.chain.push('key'); return this; }
+  get name() { this.chain.push('name'); return this; }
+
+}
+class UserDefaults extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get companyId() { this.chain.push('companyId'); return this; }
+  get currencyId() { this.chain.push('currencyId'); return this; }
+  get currencyCode() { this.chain.push('currencyCode'); return this; }
+  get startDate() { this.chain.push('startDate'); return this; }
+  get endDate() { this.chain.push('endDate'); return this; }
+  companyAccess(index) { this.chain.push('companyAccess'); if (isNaN(index)) return this; this.chain.push(index); return new CompanyAccess(this.state, this.chain); }
+
+}
+class CompanyAccess extends EntitiesBase {
+  constructor(state, chain) { super(state, chain); }
+  get id() { this.chain.push('id'); return this; }
+  get name() { this.chain.push('name'); return this; }
+
+}
 
-/*
- export class QueryEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Query', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Query';
- }
-
- get __path() {
- return this._path;
- }
-
- get explorer() {
- console.log('explorer', this._path.toJS());
- const val = this._map.get('explorer');
- if (!val) return wrap('Explorer', Map(), this._state, this._path.push('!explorer!'));
- return Map.isMap(val) ? wrap('Explorer', val, this._state, this._path.push('explorer')) : wrap('Explorer', this._state.getIn(['Explorer', val.id]), this._state);
- }
-
- get chart() {
- console.log('chart', this._path.toJS());
- const val = this._map.get('chart');
- if (!val) return wrap('Chart', Map(), this._state, this._path.push('!chart!'));
- return Map.isMap(val) ? wrap(val.get('__typename'), val, this._state, this._path.push('chart')) : wrap(val.__typename, this._state.getIn([val.__typename, val.id]), this._state);
- }
-
- get dataSet() {
- console.log('dataSet', this._path.toJS());
- const val = this._map.get('dataSet');
- if (!val) return wrap('DataSet', Map(), this._state, this._path.push('!dataSet!'));
- return Map.isMap(val) ? wrap('DataSet', val, this._state, this._path.push('dataSet')) : wrap('DataSet', this._state.getIn(['DataSet', val.id]), this._state);
- }
- }
-
- export class ExplorerEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Explorer', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Explorer';
- }
-
- get __path() {
- return this._path;
- }
-
- get id() {
- console.log('id', this._path.toJS());
- return new EntityLeaf(this._map.get('id'), this._path.push('id'));
- }
-
- get dimensions() {
- console.log('dimensions', this._path.toJS());
- return new EntityLeaf(this._map.get('dimensions'), this._path.push('dimensions'));
- }
-
- get facts() {
- console.log('facts', this._path.toJS());
- return new EntityLeaf(this._map.get('facts'), this._path.push('facts'));
- }
-
- get filters() {
- console.log('filters', this._path.toJS());
- return new EntityLeaf(this._map.get('filters'), this._path.push('filters'));
- }
-
- get chart() {
- console.log('chart', this._path.toJS());
- const val = this._map.get('chart');
- if (!val) return wrap('Chart', Map(), this._state, this._path.push('!chart!'));
- return Map.isMap(val) ? wrap(val.get('__typename'), val, this._state, this._path.push('chart')) : wrap(val.__typename, this._state.getIn([val.__typename, val.id]), this._state);
- }
-
- get currencies() {
- console.log('currencies', this._path.toJS());
- return new EntityLeaf(this._map.get('currencies'), this._path.push('currencies'));
- }
-
- get userDefaults() {
- console.log('userDefaults', this._path.toJS());
- const val = this._map.get('userDefaults');
- if (!val) return wrap('UserDefaults', Map(), this._state, this._path.push('!userDefaults!'));
- return Map.isMap(val) ? wrap('UserDefaults', val, this._state, this._path.push('userDefaults')) : wrap('UserDefaults', this._state.getIn(['UserDefaults', val.id]), this._state);
- }
- }
-
- export class DimensionEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Dimension', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Dimension';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
- }
-
- export class FactEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Fact', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Fact';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
- }
-
- export class StringFilterEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['StringFilter', this._map.get('id')]);
- }
-
- get __typename() {
- return 'StringFilter';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
-
- get like() {
- console.log('like', this._path.toJS());
- return new EntityLeaf(this._map.get('like'), this._path.push('like'));
- }
- }
-
- export class NumberFilterEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['NumberFilter', this._map.get('id')]);
- }
-
- get __typename() {
- return 'NumberFilter';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
-
- get min() {
- console.log('min', this._path.toJS());
- return new EntityLeaf(this._map.get('min'), this._path.push('min'));
- }
-
- get max() {
- console.log('max', this._path.toJS());
- return new EntityLeaf(this._map.get('max'), this._path.push('max'));
- }
-
- get equals() {
- console.log('equals', this._path.toJS());
- return new EntityLeaf(this._map.get('equals'), this._path.push('equals'));
- }
- }
-
- export class DateTimeFilterEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['DateTimeFilter', this._map.get('id')]);
- }
-
- get __typename() {
- return 'DateTimeFilter';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
-
- get start() {
- console.log('start', this._path.toJS());
- return new EntityLeaf(this._map.get('start'), this._path.push('start'));
- }
-
- get end() {
- console.log('end', this._path.toJS());
- return new EntityLeaf(this._map.get('end'), this._path.push('end'));
- }
- }
-
- export class DonutChartEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['DonutChart', this._map.get('id')]);
- }
-
- get __typename() {
- return 'DonutChart';
- }
-
- get __path() {
- return this._path;
- }
-
- get dimension() {
- console.log('dimension', this._path.toJS());
- const val = this._map.get('dimension');
- if (!val) return wrap('Dimension', Map(), this._state, this._path.push('!dimension!'));
- return Map.isMap(val) ? wrap('Dimension', val, this._state, this._path.push('dimension')) : wrap('Dimension', this._state.getIn(['Dimension', val.id]), this._state);
- }
-
- get measure() {
- console.log('measure', this._path.toJS());
- const val = this._map.get('measure');
- if (!val) return wrap('Measure', Map(), this._state, this._path.push('!measure!'));
- return Map.isMap(val) ? wrap('Measure', val, this._state, this._path.push('measure')) : wrap('Measure', this._state.getIn(['Measure', val.id]), this._state);
- }
-
- get dataSet() {
- console.log('dataSet', this._path.toJS());
- const val = this._map.get('dataSet');
- if (!val) return wrap('DataSet', Map(), this._state, this._path.push('!dataSet!'));
- return Map.isMap(val) ? wrap('DataSet', val, this._state, this._path.push('dataSet')) : wrap('DataSet', this._state.getIn(['DataSet', val.id]), this._state);
- }
- }
-
- export class MeasureEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Measure', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Measure';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
-
- get aggregation() {
- console.log('aggregation', this._path.toJS());
- return new EntityLeaf(this._map.get('aggregation'), this._path.push('aggregation'));
- }
- }
-
- export class DataSetEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['DataSet', this._map.get('id')]);
- }
-
- get __typename() {
- return 'DataSet';
- }
-
- get __path() {
- return this._path;
- }
-
- get id() {
- console.log('id', this._path.toJS());
- return new EntityLeaf(this._map.get('id'), this._path.push('id'));
- }
-
- get columns() {
- console.log('columns', this._path.toJS());
- return new EntityLeaf(this._map.get('columns'), this._path.push('columns'));
- }
-
- get rows() {
- console.log('rows', this._path.toJS());
- return new EntityLeaf(this._map.get('rows'), this._path.push('rows'));
- }
- }
-
- export class ColumnEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Column', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Column';
- }
-
- get __path() {
- return this._path;
- }
-
- get id() {
- console.log('id', this._path.toJS());
- return new EntityLeaf(this._map.get('id'), this._path.push('id'));
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
-
- get type() {
- console.log('type', this._path.toJS());
- return new EntityLeaf(this._map.get('type'), this._path.push('type'));
- }
- }
-
- export class BarChartEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['BarChart', this._map.get('id')]);
- }
-
- get __typename() {
- return 'BarChart';
- }
-
- get __path() {
- return this._path;
- }
-
- get dimension() {
- console.log('dimension', this._path.toJS());
- const val = this._map.get('dimension');
- if (!val) return wrap('Dimension', Map(), this._state, this._path.push('!dimension!'));
- return Map.isMap(val) ? wrap('Dimension', val, this._state, this._path.push('dimension')) : wrap('Dimension', this._state.getIn(['Dimension', val.id]), this._state);
- }
-
- get measure() {
- console.log('measure', this._path.toJS());
- const val = this._map.get('measure');
- if (!val) return wrap('Measure', Map(), this._state, this._path.push('!measure!'));
- return Map.isMap(val) ? wrap('Measure', val, this._state, this._path.push('measure')) : wrap('Measure', this._state.getIn(['Measure', val.id]), this._state);
- }
-
- get dataSet() {
- console.log('dataSet', this._path.toJS());
- const val = this._map.get('dataSet');
- if (!val) return wrap('DataSet', Map(), this._state, this._path.push('!dataSet!'));
- return Map.isMap(val) ? wrap('DataSet', val, this._state, this._path.push('dataSet')) : wrap('DataSet', this._state.getIn(['DataSet', val.id]), this._state);
- }
- }
-
- export class LineChartEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['LineChart', this._map.get('id')]);
- }
-
- get __typename() {
- return 'LineChart';
- }
-
- get __path() {
- return this._path;
- }
-
- get group() {
- console.log('group', this._path.toJS());
- const val = this._map.get('group');
- if (!val) return wrap('Dimension', Map(), this._state, this._path.push('!group!'));
- return Map.isMap(val) ? wrap('Dimension', val, this._state, this._path.push('group')) : wrap('Dimension', this._state.getIn(['Dimension', val.id]), this._state);
- }
-
- get series() {
- console.log('series', this._path.toJS());
- const val = this._map.get('series');
- if (!val) return wrap('Dimension', Map(), this._state, this._path.push('!series!'));
- return Map.isMap(val) ? wrap('Dimension', val, this._state, this._path.push('series')) : wrap('Dimension', this._state.getIn(['Dimension', val.id]), this._state);
- }
-
- get measure() {
- console.log('measure', this._path.toJS());
- const val = this._map.get('measure');
- if (!val) return wrap('Measure', Map(), this._state, this._path.push('!measure!'));
- return Map.isMap(val) ? wrap('Measure', val, this._state, this._path.push('measure')) : wrap('Measure', this._state.getIn(['Measure', val.id]), this._state);
- }
-
- get dataSet() {
- console.log('dataSet', this._path.toJS());
- const val = this._map.get('dataSet');
- if (!val) return wrap('DataSet', Map(), this._state, this._path.push('!dataSet!'));
- return Map.isMap(val) ? wrap('DataSet', val, this._state, this._path.push('dataSet')) : wrap('DataSet', this._state.getIn(['DataSet', val.id]), this._state);
- }
- }
-
- export class CurrencyEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['Currency', this._map.get('id')]);
- }
-
- get __typename() {
- return 'Currency';
- }
-
- get __path() {
- return this._path;
- }
-
- get key() {
- console.log('key', this._path.toJS());
- return new EntityLeaf(this._map.get('key'), this._path.push('key'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
- }
-
- export class UserDefaultsEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['UserDefaults', this._map.get('id')]);
- }
-
- get __typename() {
- return 'UserDefaults';
- }
-
- get __path() {
- return this._path;
- }
-
- get companyId() {
- console.log('companyId', this._path.toJS());
- return new EntityLeaf(this._map.get('companyId'), this._path.push('companyId'));
- }
-
- get currencyId() {
- console.log('currencyId', this._path.toJS());
- return new EntityLeaf(this._map.get('currencyId'), this._path.push('currencyId'));
- }
-
- get currencyCode() {
- console.log('currencyCode', this._path.toJS());
- return new EntityLeaf(this._map.get('currencyCode'), this._path.push('currencyCode'));
- }
-
- get startDate() {
- console.log('startDate', this._path.toJS());
- return new EntityLeaf(this._map.get('startDate'), this._path.push('startDate'));
- }
-
- get endDate() {
- console.log('endDate', this._path.toJS());
- return new EntityLeaf(this._map.get('endDate'), this._path.push('endDate'));
- }
-
- get companyAccess() {
- console.log('companyAccess', this._path.toJS());
- return new EntityLeaf(this._map.get('companyAccess'), this._path.push('companyAccess'));
- }
- }
-
- export class CompanyAccessEntity {
- constructor(map, state, path) {
- this._map = map;
- this._state = state;
- this._path = path ? path : List(['CompanyAccess', this._map.get('id')]);
- }
-
- get __typename() {
- return 'CompanyAccess';
- }
-
- get __path() {
- return this._path;
- }
-
- get id() {
- console.log('id', this._path.toJS());
- return new EntityLeaf(this._map.get('id'), this._path.push('id'));
- }
-
- get name() {
- console.log('name', this._path.toJS());
- return new EntityLeaf(this._map.get('name'), this._path.push('name'));
- }
- }
-
- class EntityLeaf {
- constructor(value, path) {
- this._value = value;
- this._path = path;
- }
-
- get __value() {
- return this._value;
- }
-
- get __path() {
- return this._path;
- }
- }
-
- const wrap = (type, map, state, path) => {
- switch (type) {
- case 'Query':
- return new QueryEntity(map, state, path);
- case 'Explorer':
- return new ExplorerEntity(map, state, path);
- case 'Dimension':
- return new DimensionEntity(map, state, path);
- case 'Fact':
- return new FactEntity(map, state, path);
- case 'StringFilter':
- return new StringFilterEntity(map, state, path);
- case 'NumberFilter':
- return new NumberFilterEntity(map, state, path);
- case 'DateTimeFilter':
- return new DateTimeFilterEntity(map, state, path);
- case 'DonutChart':
- return new DonutChartEntity(map, state, path);
- case 'Measure':
- return new MeasureEntity(map, state, path);
- case 'DataSet':
- return new DataSetEntity(map, state, path);
- case 'Column':
- return new ColumnEntity(map, state, path);
- case 'BarChart':
- return new BarChartEntity(map, state, path);
- case 'LineChart':
- return new LineChartEntity(map, state, path);
- case 'Currency':
- return new CurrencyEntity(map, state, path);
- case 'UserDefaults':
- return new UserDefaultsEntity(map, state, path);
- case 'CompanyAccess':
- return new CompanyAccessEntity(map, state, path);
- }
- };
-
- export const Query = (id, state) => new QueryEntity(state.getIn(['Query', id]), state);
- export const Explorer = (id, state) => new ExplorerEntity(state.getIn(['Explorer', id]), state);
- export const Dimension = (id, state) => new DimensionEntity(state.getIn(['Dimension', id]), state);
- export const Fact = (id, state) => new FactEntity(state.getIn(['Fact', id]), state);
- export const StringFilter = (id, state) => new StringFilterEntity(state.getIn(['StringFilter', id]), state);
- export const NumberFilter = (id, state) => new NumberFilterEntity(state.getIn(['NumberFilter', id]), state);
- export const DateTimeFilter = (id, state) => new DateTimeFilterEntity(state.getIn(['DateTimeFilter', id]), state);
- export const DonutChart = (id, state) => new DonutChartEntity(state.getIn(['DonutChart', id]), state);
- export const Measure = (id, state) => new MeasureEntity(state.getIn(['Measure', id]), state);
- export const DataSet = (id, state) => new DataSetEntity(state.getIn(['DataSet', id]), state);
- export const Column = (id, state) => new ColumnEntity(state.getIn(['Column', id]), state);
- export const BarChart = (id, state) => new BarChartEntity(state.getIn(['BarChart', id]), state);
- export const LineChart = (id, state) => new LineChartEntity(state.getIn(['LineChart', id]), state);
- export const Currency = (id, state) => new CurrencyEntity(state.getIn(['Currency', id]), state);
- export const UserDefaults = (id, state) => new UserDefaultsEntity(state.getIn(['UserDefaults', id]), state);
- export const CompanyAccess = (id, state) => new CompanyAccessEntity(state.getIn(['CompanyAccess', id]), state);
- */

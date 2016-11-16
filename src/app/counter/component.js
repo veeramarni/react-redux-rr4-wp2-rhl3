@@ -69,14 +69,26 @@ const stateToProps = (state) => {
 };
 
 const test = (state) => {
-  console.log('WOW', entities(state).Explorer('0').chart.dataSet.__value('nothing').toJS());
+  // entities(state).Explorer('0').chart.dataSet.__value('nothing')
+  // state.Explorer['0'].chart.dataSet.__value('nothing')
+
+  //console.log('WOW', entities(state).Explorer('0').chart.dataSet.columns(1).key.__value(Immutable.Map()));//.toJS());
+
+
+  //console.log('WOW',
+    //entities(state).Explorer('0').dimensions(0).__value(Immutable.Map()).toJS());
+
+
+  //entities(state).Explorer('0').chart.__type
+
+    console.log('WOW', entities(state).Explorer('0').chart('DonutChart').dataSet.columns(1).key.__value());//.key.__value(Immutable.Map()));
+
   //debugger;
   //var path = Explorer('0', state.get('entities')).chart;//.dataSet.columns.__path;
   return Immutable.Map();
-}
-// const getDimensions = (state, explorerId) => {
-//   console.log(Explorer('0', state.get('entities')));
-//   return Immutable.Map();// state.hasIn(['entities', 'Explorer', explorerId, 'dimensions']) ? state.getIn(['entities', 'Explorer', explorerId, 'dimensions']) : Immutable.List();
+};
+// const getExplorerDimensions = (state, explorerId) => {
+//   return entities(state).Explorer('0').dimensions()._value(Immutable.List());
 // };
 // const getSelectedDimensionIds = (state, explorerId) => Immutable.List(['transaction_date', 'merchant_category']);
 // const getSelectedDimensions = createSelector([getDimensions, getSelectedDimensionIds],(dimensions, selectedDimensionIds) => {

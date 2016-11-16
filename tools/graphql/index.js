@@ -46,6 +46,10 @@ request({
                     kind
                   }
                 }
+                possibleTypes {
+                  name
+                  kind
+                }
               }
             }
           }
@@ -80,13 +84,19 @@ request({
   });
 
   /**
-   * Create the [entity]Reducer.js files.
+   * Extend the schema.
    */
   let types = Object.keys(typesObject).map((k) => typesObject[k]);
 
-  types.filter(t => t.kind === 'OBJECT' && t.name.charAt(0) !== '_' && t.name !== 'Query').forEach(type => {
+  types.forEach(type => {
     type.Name = type.name;
     type.name = type.name.charAt(0).toLowerCase() + type.name.slice(1);
+  });
+
+  /**
+   * Create the [entity]Reducer.js files.
+   */
+  types.filter(t => t.kind === 'OBJECT' && t.name.charAt(0) !== '_' && t.name !== 'Query').forEach(type => {
     ejs.renderFile(path.join(__dirname, './templates/entityReducer.ejs'), type, (err, compiled) => {
       if (err) {
         console.log(err);
@@ -114,4 +124,20 @@ request({
       });
     }
   });
+
+  /**
+   * Create the types.generated.js file.
+   */
+  ejs.renderFile(path.join(__dirname, './templates/types.js'), {types: types.filter(t => (t.kind === 'OBJECT' || t.kind === 'UNION') && t.name.charAt(0) !== '_' && t.name !== 'Query')}, (err, compiled) => {
+    if (err) {
+      console.log(err);
+    } else {
+      fs.writeFile(path.join(__dirname, `./generated/types.generated.js`), compiled, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+  });
+
 });
