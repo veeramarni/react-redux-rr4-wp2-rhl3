@@ -32,108 +32,117 @@ class EntitiesBase {
     this.state = state;
     this.chain = chain;
   }
+
   __value(undefinedValue) {
-    // Chain iterator.
-    let i = 0;
-    // Get the initial entity type.
-    let entityType = types[this.chain[i++]];
-    // Get the initial entity id.
-    let entityId = this.chain[i++];
-    // Make sure the requested entity exists.
-    if (!this.state.hasIn([entityType.name, entityId])) {
-      console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
-      return undefinedValue;
-    }
-    // Get the initial entity value.
-    let entityValue = this.state.getIn([entityType.name, entityId]);
-    // Now follow along the chain to resolve the requested property path.
-    while (i < this.chain.length) {
-      // Get the name of the current property.
-      let propName = this.chain[i++];
-      console.log(propName);
-      // Get the type of the current property.
-      let propType = entityType.fields[propName].type;
-      // Get the value of the current property.
-      let propValue = entityValue.get(propName);
-      // Handle the property based on its type.
-      switch (propType.kind) {
-        case 'OBJECT':
-        case 'UNION':
-          // Get the entity type of the property.
-          entityType = types[propValue.__typename];
-          // Get the entity id of the property.
-          entityId = propValue.id;
-          // Make sure the requested entity exists.
-          if (!this.state.hasIn([entityType.name, entityId])) {
-            console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
-            return undefinedValue;
-          }
-          // Get the properties entity value.
-          entityValue = this.state.getIn([entityType.name, entityId]);
-          break;
-        case 'LIST':
-          // Make sure the property value is a List.
-          if (!List.isList(propValue)) {
-            return undefinedValue;
-          }
-          // Handle indexed access to the List.
-          if (i < this.chain.length) {
-            if (isNaN(this.chain[i])) {
-              console.warn(`Indexer must be an int at index ${i}: ${this.chain.join(', ')}!`);
-              return undefinedValue;
-            }
-            // Get the item at the requested index.
-            let itemValue = propValue.get(this.chain[i++]);
-            // Make sure it is valid.
-            if (!itemValue) {
-              return undefinedValue;
-            }
-            // Handle scalar List items.
-            switch(propType.ofType.kind) {
-              case 'OBJECT':
-              case 'UNION':
-                // Get the entity type of the property.
-                entityType = types[itemValue.__typename];
-                // Get the entity id of the property.
-                entityId = itemValue.id;
-                // Make sure the requested entity exists.
-                if (!this.state.hasIn([entityType.name, entityId])) {
-                  console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
-                  return undefinedValue;
-                }
-                // Get the properties entity value.
-                entityValue = this.state.getIn([entityType.name, entityId]);
-                break;
-              case 'SCALAR':
-              case 'LIST':
-                // Warn if the chain has not ended yet.
-                if (i < this.chain.length) {
-                  console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
-                }
-                return itemValue;
-            }
-          } else {
-            // Warn if the chain has not ended yet.
-            if (i < this.chain.length) {
-              console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
-            }
-            return propValue;
-          }
-          break;
-        case 'SCALAR':
-          // Warn if the chain has not ended yet.
-          if (i < this.chain.length) {
-            console.warn(`Requested entity chain is invalid at index ${i}: ${this.chain.join(', ')}!`);
-          }
-          return propValue;
-        default:
-          // Impossible.
-          console.warn(`Unknown property type ${propType.kind}!`);
-          return undefinedValue;
-      }
-    }
-    return entityValue;
+    return resolve(this.state, this.chain, undefinedValue).value;
   }
+
+  __type(undefinedValue) {
+    return resolve(this.state, this.chain, undefinedValue).type;
+  }
+}
+
+function resolve(state, chain, undefinedValue) {
+  // Chain iterator.
+  let i = 0;
+  // Get the initial entity type.
+  let entityType = types[chain[i++]];
+  // Get the initial entity id.
+  let entityId = chain[i++];
+  // Make sure the requested entity exists.
+  if (!state.hasIn([entityType.name, entityId])) {
+    console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
+    return {value: undefinedValue, type: entityType.name};
+  }
+  // Get the initial entity value.
+  let entityValue = state.getIn([entityType.name, entityId]);
+  // Now follow along the chain to resolve the requested property path.
+  while (i < chain.length) {
+    // Get the name of the current property.
+    let propName = chain[i++];
+    console.log(propName);
+    // Get the type of the current property.
+    let propType = entityType.fields[propName].type;
+    // Get the value of the current property.
+    let propValue = entityValue.get(propName);
+    // Handle the property based on its type.
+    switch (propType.kind) {
+      case 'OBJECT':
+      case 'UNION':
+        // Get the entity type of the property.
+        entityType = types[propValue.__typename];
+        // Get the entity id of the property.
+        entityId = propValue.id;
+        // Make sure the requested entity exists.
+        if (!state.hasIn([entityType.name, entityId])) {
+          console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
+          return {value: undefinedValue, type: entityType.name};
+        }
+        // Get the properties entity value.
+        entityValue = state.getIn([entityType.name, entityId]);
+        break;
+      case 'LIST':
+        // Make sure the property value is a List.
+        if (!List.isList(propValue)) {
+          return {value: undefinedValue, type: propType.ofType.name};
+        }
+        // Handle indexed access to the List.
+        if (i < chain.length) {
+          if (isNaN(chain[i])) {
+            console.warn(`Indexer must be an int at index ${i}: ${chain.join(', ')}!`);
+            return {value: undefinedValue, type: propType.ofType.name};
+          }
+          // Get the item at the requested index.
+          let itemValue = propValue.get(chain[i++]);
+          // Make sure it is valid.
+          if (!itemValue) {
+            return {value: undefinedValue, type: propType.ofType.name};
+          }
+          // Handle scalar List items.
+          switch (propType.ofType.kind) {
+            case 'OBJECT':
+            case 'UNION':
+              // Get the entity type of the property.
+              entityType = types[itemValue.__typename];
+              // Get the entity id of the property.
+              entityId = itemValue.id;
+              // Make sure the requested entity exists.
+              if (!state.hasIn([entityType.name, entityId])) {
+                console.warn(`Entity of type ${entityType.name} with id ${entityId} does not exist!`);
+                return {value: undefinedValue, type: itemValue.__typename};
+              }
+              // Get the properties entity value.
+              entityValue = state.getIn([entityType.name, entityId]);
+              break;
+            case 'SCALAR':
+            case 'LIST':
+              // Warn if the chain has not ended yet.
+              if (i < chain.length) {
+                console.warn(`Requested entity chain is invalid at index ${i}: ${chain.join(', ')}!`);
+              }
+              return {value: itemValue, type: propType.ofType.kind};
+          }
+        } else {
+          // Warn if the chain has not ended yet.
+          if (i < chain.length) {
+            console.warn(`Requested entity chain is invalid at index ${i}: ${chain.join(', ')}!`);
+          }
+          return {value: propValue, type: propType.ofType.name};
+        }
+        break;
+      case 'SCALAR':
+        // Warn if the chain has not ended yet.
+        if (i < chain.length) {
+          console.warn(`Requested entity chain is invalid at index ${i}: ${chain.join(', ')}!`);
+        }
+        return {value: propValue, type: propType.name};
+      default:
+        // Impossible.
+        console.warn(`Unknown property type ${propType.kind}!`);
+        return {value: undefinedValue, type: undefinedValue};
+    }
+  }
+  return {value: entityValue, type: entityType.name};
 }
 
 class Entities extends EntitiesBase {
@@ -162,7 +171,8 @@ class Entities extends EntitiesBase {
 <%       break;
          case 'UNION':%>  <%= fieldName %>(type) { this.chain.push('<%= fieldName %>'); switch(type) {
 <%       for(var j=0; j<field.type.possibleTypes.length; j++){%>    case '<%= field.type.possibleTypes[j].name %>': return new <%= field.type.possibleTypes[j].name %>(this.state, this.chain);
-<%       }%>  }}
+<%       }%>  default: return new EntitiesBase(this.state, this.chain);
+  }}
 <%       break;
        }
      }%>

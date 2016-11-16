@@ -81,7 +81,9 @@ const test = (state) => {
 
   //entities(state).Explorer('0').chart.__type
 
-    console.log('WOW', entities(state).Explorer('0').chart('DonutChart').dataSet.columns(1).key.__value());//.key.__value(Immutable.Map()));
+//  console.log('WOW', entities(state).Explorer('0').chart('DonutChart').dataSet.columns(1).key.__value());//.key.__value(Immutable.Map()));
+//  console.log('WOW', entities(state).Explorer('0').__type());//.key.__value(Immutable.Map()));
+  console.log('WOW', entities(state).Explorer('0').chart('DonutChart').dataSet.columns().__type());//.key.__value(Immutable.Map()));
 
   //debugger;
   //var path = Explorer('0', state.get('entities')).chart;//.dataSet.columns.__path;
