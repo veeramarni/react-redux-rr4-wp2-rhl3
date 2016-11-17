@@ -27,7 +27,7 @@ import 'rxjs/add/operator/retry';
 /**
  * Import local dependencies.
  */
-import {appEpic} from './app/epic';
+import {demoPageEpic} from './components/pages/demo-page/epic';
 import {
   ROOT_FETCH_GRAPHQL_QUERY,
   fetchGraphQLQuerySucceededCreator,
@@ -60,5 +60,5 @@ const fetchGraphQLQueryEpic = action$ =>
  */
 export const rootEpic = combineEpics(
   fetchGraphQLQueryEpic,
-  appEpic
+  demoPageEpic
 );

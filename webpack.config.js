@@ -242,7 +242,7 @@ module.exports = function (mode) {
     config.module.rules.push(
       {
         test: /(\.scss|\.css)$/,
-        exclude: [/node_modules/, /bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
+        exclude: [/node_modules/, /normalize.css/, /icomoon/],
         // Reference: https://github.com/webpack/style-loader
         // Use style-loader in development for hot-loading
         // Reference: https://github.com/webpack/css-loader
@@ -276,7 +276,7 @@ module.exports = function (mode) {
     config.module.rules.push(
       {
         test: /(\.scss|\.css)$/,
-        include: [/bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
+        include: [/normalize.css/, /icomoon/],
         // Reference: https://github.com/webpack/style-loader
         // Use style-loader in development for hot-loading
         // Reference: https://github.com/webpack/css-loader
@@ -313,7 +313,7 @@ module.exports = function (mode) {
         // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
         test: /\.jsx?$/,
         include: path.resolve('./src'),
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /normalize.css/, /icomoon/],
         // The loader to be used by this rule.
         loader: 'babel',
         // The loader options to be used by this rule.
@@ -350,7 +350,7 @@ module.exports = function (mode) {
     config.module.rules.push(
       {
         test: /(\.scss|\.css)$/,
-        include: [/bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
+        include: [/normalize.css/, /icomoon/],
         // Reference: https://github.com/webpack/style-loader
         // Use style-loader in development for hot-loading
         // Reference: https://github.com/webpack/css-loader

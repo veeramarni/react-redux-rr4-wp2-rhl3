@@ -18,11 +18,14 @@ import {connect} from 'react-redux';
  */
 import {setLocationCreator} from './actions';
 import ControlledRouter from './components/controlled-router/component';
-import App from './app/component';
+import DemoPage from './components/pages/demo-page/component';
 
 /**
  * Import the icomoon icon font.
  */
+// Normalize all the things first.
+import 'normalize.css/normalize.css';
+// Import the icon font.
 import '../public/assets/fonts/icomoon/style.css';
 
 /**
@@ -39,7 +42,7 @@ class Client extends Component {
     let {router, setLocation} = this.props;
     return (
       <ControlledRouter location={router} setLocation={setLocation}>
-        <App/>
+        <DemoPage/>
       </ControlledRouter>
     );
   }

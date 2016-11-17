@@ -11,14 +11,13 @@
  * Import dependencies.
  */
 import {combineReducers} from 'redux-immutable';
-import Immutable from 'immutable';
+import {Map} from 'immutable';
 
 /**
  * Import local dependencies.
  */
 import {entitiesReducer} from './entities/reducer';
-import {appReducer} from './app/reducer';
-import {counterReducer} from './app/counter/reducer';
+import {demoPageReducer} from './components/pages/demo-page/reducer';
 import {
   LOCATION_CHANGE
 } from './actions';
@@ -26,7 +25,7 @@ import {
 /**
  * Default router state.
  */
-const routerDefaultState = Immutable.Map({
+const routerDefaultState = Map({
   pathname: location.pathname,
   search: location.search,
   hash: location.hash
@@ -47,13 +46,13 @@ function routerReducer(state = routerDefaultState, action) {
 /**
  * Default client state.
  */
-const clientDefaultState = Immutable.Map({});
+const clientDefaultState = Map({});
 
 /**
  * The client store.
  */
 function clientReducer(state = clientDefaultState, action) {
-  console.log(action.type, action.payload);
+  console.log(action.type, action.payload ? action.payload : '');
   switch (action.type) {
     default:
       return state;
@@ -67,6 +66,5 @@ export const rootReducer = combineReducers({
   router: routerReducer,
   client: clientReducer,
   entities: entitiesReducer,
-  app: appReducer,
-  counter: counterReducer
+  demoPage: demoPageReducer
 });

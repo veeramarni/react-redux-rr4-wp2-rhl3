@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "immutable": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz",
+    "normalize.css": "^5.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-history": "^0.15.0",
