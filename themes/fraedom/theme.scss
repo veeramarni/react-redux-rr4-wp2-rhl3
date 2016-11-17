@@ -1,0 +1,20 @@
+$browser-context: 16px;
+@function toRem($pixels, $context: $browser-context) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+:global {
+  html {
+    font-size: 16px;
+  }
+}
+
+$input-box-padding: 1rem;

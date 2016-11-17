@@ -32,6 +32,8 @@ module.exports = function (mode) {
   let config = {
     target: 'web'
   };
+  // TODO Themes
+  let themePath = path.resolve(__dirname, './themes/fraedom').replace('\\', '/');
   // Choose a style of source mapping to enhance the debugging process.
   if (buildDevelopment) {
     // Each module is executed with eval and //@ sourceURL
@@ -248,7 +250,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: 'style!css?sourceMap&modules&importLoaders=2!postcss!resolve-url!sass?sourceMap'
+        loader: `style!css?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss!resolve-url!sass?{"sourceMap":true,"includePaths":["${themePath}"]}`
         // use: [
         //   'style-loader',
         //   {
@@ -282,7 +284,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: 'style!css?sourceMap!postcss!resolve-url!sass?sourceMap'
+        loader: `style!css?{"sourceMap":true,"modules":false}!postcss!resolve-url!sass?{"sourceMap":true,"includePaths":["${themePath}"]}`
         //   use: [
         //     'style-loader',
         //     {
@@ -313,7 +315,7 @@ module.exports = function (mode) {
         // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
         test: /\.jsx?$/,
         include: path.resolve('./src'),
-        exclude: [/node_modules/, /normalize.css/, /icomoon/],
+        exclude: /node_modules/,
         // The loader to be used by this rule.
         loader: 'babel',
         // The loader options to be used by this rule.
@@ -330,37 +332,33 @@ module.exports = function (mode) {
     // SASS LOADER
     // Reference: https://github.com/jtangelder/sass-loader
     // Allow loading sass/css through js
-    config.module.rules.push(
-      {
-        test: /(\.scss|\.css)$/,
-        exclude: [/node_modules/, /bootstrap/, /icomoon/, /awesome-bootstrap-checkbox/],
-        // Reference: https://github.com/webpack/style-loader
-        // Use style-loader in development for hot-loading
-        // Reference: https://github.com/webpack/css-loader
-        // Reference: https://github.com/postcss/postcss-loader
-        // Reference: https://github.com/jtangelder/sass-loader
-        // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        // Extract sass/css files in production builds
-        loader: ExtractTextPlugin.extract('css?sourceMap&modules&importLoaders=2!postcss!resolve-url!sass?sourceMap')
-      }
-    );
+    config.module.rules.push({
+      test: /(\.scss|\.css)$/,
+      exclude: [/node_modules/, /normalize.css/, /icomoon/],
+      // Reference: https://github.com/webpack/style-loader
+      // Use style-loader in development for hot-loading
+      // Reference: https://github.com/webpack/css-loader
+      // Reference: https://github.com/postcss/postcss-loader
+      // Reference: https://github.com/jtangelder/sass-loader
+      // Reference: https://github.com/webpack/extract-text-webpack-plugin
+      // Extract sass/css files in production builds
+      loader: ExtractTextPlugin.extract(`css?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss!resolve-url!sass?sourceMap&includePaths[]=${themePath}`)
+    });
     // GLOBAL SASS LOADER
     // Reference: https://github.com/jtangelder/sass-loader
     // Allow loading sass/css through js
-    config.module.rules.push(
-      {
-        test: /(\.scss|\.css)$/,
-        include: [/normalize.css/, /icomoon/],
-        // Reference: https://github.com/webpack/style-loader
-        // Use style-loader in development for hot-loading
-        // Reference: https://github.com/webpack/css-loader
-        // Reference: https://github.com/postcss/postcss-loader
-        // Reference: https://github.com/jtangelder/sass-loader
-        // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        // Extract sass/css files in production builds
-        loader: ExtractTextPlugin.extract('css?sourceMap!postcss!resolve-url!sass?sourceMap')
-      }
-    );
+    config.module.rules.push({
+      test: /(\.scss|\.css)$/,
+      include: [/normalize.css/, /icomoon/],
+      // Reference: https://github.com/webpack/style-loader
+      // Use style-loader in development for hot-loading
+      // Reference: https://github.com/webpack/css-loader
+      // Reference: https://github.com/postcss/postcss-loader
+      // Reference: https://github.com/jtangelder/sass-loader
+      // Reference: https://github.com/webpack/extract-text-webpack-plugin
+      // Extract sass/css files in production builds
+      loader: ExtractTextPlugin.extract(`css?{"sourceMap":true,"modules":false}!postcss!resolve-url!sass?sourceMap&includePaths[]=${themePath}`)
+    });
   }
 
   // Return the config.
