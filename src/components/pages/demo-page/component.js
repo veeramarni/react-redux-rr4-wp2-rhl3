@@ -17,6 +17,7 @@ import {Match} from 'react-router';
 /**
  * Import local dependencies.
  */
+import {pingCreator} from './actions';
 import TextBox from '../../inputs/text-box/component';
 
 /**

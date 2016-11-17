@@ -179,7 +179,7 @@ module.exports = function (mode) {
       // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
       test: /\.(svg|woff|woff2|ttf|eot)$/,
       // The loader to be used by this rule.
-      loader: 'file?name=assets/fonts/[name].[hash].[ext]'
+      loader: 'file-loader?name=assets/fonts/[name].[hash].[ext]'
     },
     // ASSET IMAGE LOADER
     // Reference: https://github.com/webpack/file-loader
@@ -191,7 +191,7 @@ module.exports = function (mode) {
       // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
       test: /\.(png|jpg|jpeg|gif)$/,
       // The loader to be used by this rule.
-      loader: 'file?name=assets/images/[name].[hash].[ext]'
+      loader: 'file-loader?name=assets/images/[name].[hash].[ext]'
     },
     // HTML LOADER
     // Reference: https://github.com/webpack/raw-loader
@@ -200,7 +200,7 @@ module.exports = function (mode) {
       // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
       test: /\.html$/,
       // The loader to be used by this rule.
-      loader: 'html'
+      loader: 'html-loader'
     },
     // JSON LOADER
     // Reference: https://github.com/webpack/json-loader
@@ -209,7 +209,7 @@ module.exports = function (mode) {
       // Apply rule to files matching the Regular Expression or an array of Regular Expressions.
       test: /\.json$/,
       // The loader to be used by this rule.
-      loader: 'json'
+      loader: 'json-loader'
     }
   ];
   if (buildDevelopment) {
@@ -224,7 +224,7 @@ module.exports = function (mode) {
         include: path.resolve('./src'),
         exclude: /node_modules/,
         // The loader to be used by this rule.
-        loader: 'babel',
+        loader: 'babel-loader',
         // The loader options to be used by this rule.
         query: {
           presets: [
@@ -250,7 +250,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: `style!css?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss!resolve-url!sass?{"sourceMap":true,"includePaths":["${themePath}"]}`
+        loader: `style-loader!css-loader?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
         // use: [
         //   'style-loader',
         //   {
@@ -284,7 +284,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: `style!css?{"sourceMap":true,"modules":false}!postcss!resolve-url!sass?{"sourceMap":true,"includePaths":["${themePath}"]}`
+        loader: `style-loader!css-loader?{"sourceMap":true,"modules":false}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
         //   use: [
         //     'style-loader',
         //     {
@@ -317,7 +317,7 @@ module.exports = function (mode) {
         include: path.resolve('./src'),
         exclude: /node_modules/,
         // The loader to be used by this rule.
-        loader: 'babel',
+        loader: 'babel-loader',
         // The loader options to be used by this rule.
         query: {
           presets: [
@@ -342,7 +342,7 @@ module.exports = function (mode) {
       // Reference: https://github.com/jtangelder/sass-loader
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract sass/css files in production builds
-      loader: ExtractTextPlugin.extract(`css?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss!resolve-url!sass?sourceMap&includePaths[]=${themePath}`)
+      loader: ExtractTextPlugin.extract(`css-loader?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss-loader!resolve-url-loader!sass-loader?sourceMap&includePaths[]=${themePath}`)
     });
     // GLOBAL SASS LOADER
     // Reference: https://github.com/jtangelder/sass-loader
@@ -357,7 +357,7 @@ module.exports = function (mode) {
       // Reference: https://github.com/jtangelder/sass-loader
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract sass/css files in production builds
-      loader: ExtractTextPlugin.extract(`css?{"sourceMap":true,"modules":false}!postcss!resolve-url!sass?sourceMap&includePaths[]=${themePath}`)
+      loader: ExtractTextPlugin.extract(`css-loader?{"sourceMap":true,"modules":false}!postcss-loader!resolve-url-loader!sass-loader?sourceMap&includePaths[]=${themePath}`)
     });
   }
 
