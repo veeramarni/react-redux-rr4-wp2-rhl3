@@ -8,13 +8,11 @@
  */
 
 /**
- * Component styles.
+ * Import mixins and functions.
  */
-.root {
-  box-sizing: border-box;
-  display: block;
-  height: 100%;
-  width: 100%;
-  background-color: lightcyan;
-  padding: 10px;
-}
+@import '../../src/components/sass-mixins/mixins'; // TODO: will become '~sass-mixins' later.
+
+/**
+ * TextBox variables.
+ */
+$input-box-padding: 1rem;

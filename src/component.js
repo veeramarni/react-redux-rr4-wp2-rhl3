@@ -29,6 +29,11 @@ import 'normalize.css/normalize.css';
 import '../public/assets/fonts/icomoon/style.css';
 
 /**
+ * Import the client styles.
+ */
+import './styles.scss';
+
+/**
  * Create the component.
  */
 class Client extends Component {

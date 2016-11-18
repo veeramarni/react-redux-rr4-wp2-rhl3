@@ -51,8 +51,8 @@ export default connect(stateToProps, dispatchToProps)(
     // Initialize the component.
     constructor(props) {
       super(props);
+      this.displayName = 'Whaaat';
     }
-
     // Render the component.
     render() {
       let {ping, isPinging} = this.props;
@@ -60,9 +60,7 @@ export default connect(stateToProps, dispatchToProps)(
         <div className={styles.root}>
           <button onClick={() => ping()}>Ping</button>
           <h1>{JSON.stringify(isPinging)}</h1>
-          <TextBox></TextBox>
-          {/*<span className="icon-bubble2"></span>*/}
-          <h1>bla</h1>
+          <TextBox/>
         </div>
       );
     }

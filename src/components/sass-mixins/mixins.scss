@@ -8,13 +8,18 @@
  */
 
 /**
- * Component styles.
+  * TODO: this should be a npm package.
  */
-.root {
-  box-sizing: border-box;
-  display: block;
-  height: 100%;
-  width: 100%;
-  background-color: lightcyan;
-  padding: 10px;
+
+/**
+  *
+  */
+@function toRem($pixels, $context: 16px) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1rem;
 }

@@ -250,7 +250,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: `style-loader!css-loader?{"sourceMap":true,"modules":true, "importLoaders":2}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
+        loader: `style-loader!css-loader?{"sourceMap":true,"modules":true, "importLoaders":2, "localIdentName": "[path]---[name]---[local]---[hash:base64:5]"}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
         // use: [
         //   'style-loader',
         //   {
@@ -284,7 +284,7 @@ module.exports = function (mode) {
         // Reference: https://github.com/webpack/css-loader
         // Reference: https://github.com/postcss/postcss-loader
         // Reference: https://github.com/jtangelder/sass-loader
-        loader: `style-loader!css-loader?{"sourceMap":true,"modules":false}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
+        loader: `style-loader!css-loader?{"sourceMap":true,"modules":false, "localIdentName": "[path]---[name]---[local]---[hash:base64:5]"}!postcss-loader!resolve-url-loader!sass-loader?{"sourceMap":true,"includePaths":["${themePath}"]}`
         //   use: [
         //     'style-loader',
         //     {
