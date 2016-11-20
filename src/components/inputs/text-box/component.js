@@ -24,7 +24,7 @@ import styles from './styles.scss';
 /**
  * Export the component.
  */
-export default class extends Component {
+export default class TextBox extends Component {
   // Initialize the component.
   constructor(props) {
     super(props);

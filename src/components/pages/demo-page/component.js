@@ -26,6 +26,27 @@ import TextBox from '../../inputs/text-box/component';
 import styles from './styles.scss';
 
 /**
+ * Create the component.
+ */
+class DemoPage extends Component {
+  // Initialize the component.
+  constructor(props) {
+    super(props);
+  }
+  // Render the component.
+  render() {
+    let {ping, isPinging} = this.props;
+    return (
+      <div className={styles.root}>
+        <button onClick={() => ping()}>Ping</button>
+        <h1>{JSON.stringify(isPinging)}</h1>
+        <TextBox/>
+      </div>
+    );
+  }
+}
+
+/**
  * Map state to component properties.
  */
 const stateToProps = (store) => {
@@ -46,23 +67,4 @@ const dispatchToProps = (dispatch) => {
 /**
  * Export the container component.
  */
-export default connect(stateToProps, dispatchToProps)(
-  class extends Component {
-    // Initialize the component.
-    constructor(props) {
-      super(props);
-      this.displayName = 'Whaaat';
-    }
-    // Render the component.
-    render() {
-      let {ping, isPinging} = this.props;
-      return (
-        <div className={styles.root}>
-          <button onClick={() => ping()}>Ping</button>
-          <h1>{JSON.stringify(isPinging)}</h1>
-          <TextBox/>
-        </div>
-      );
-    }
-  }
-);
+export default connect(stateToProps, dispatchToProps)(DemoPage);
