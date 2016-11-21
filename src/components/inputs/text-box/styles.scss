@@ -22,21 +22,30 @@ $input-box-padding: 1rem !default;
  */
 .root {
   position: relative;
+  background-color: white;
   height: 2rem + (3 * $input-box-padding);
   border: 1px solid gray;
   border-radius: 0.25rem;
   padding-left: (2 * $input-box-padding);
   padding-right: 2rem;
+  &.valid {
+    border-color: green;
+  }
+  &.invalid {
+    border-color: red;
+  }
   input {
     box-sizing: border-box;
     border: none;
     background-color: transparent;
     width: 100%;
     height: 100%;
-    &:focus {
-      margin-top: 0.75rem + (2 * $input-box-padding);
-      height: auto;
+    &:focus, &.float {
       outline: none;
+      &.canFloat {
+        margin-top: 0.75rem + (2 * $input-box-padding);
+        height: auto;
+      }
     }
   }
   label {
@@ -45,13 +54,12 @@ $input-box-padding: 1rem !default;
     margin-top: -.5rem;
     left: (2 * $input-box-padding);
     transition: 0.2s ease all;
-    color: green;
+    color: blue;
   }
-  input:focus ~ label {
+  input:focus ~ label, input.float ~ label {
     top: $input-box-padding;
     margin-top: 0;
     font-size: 0.75rem;
-    color: red;
   }
   i {
     position: absolute;

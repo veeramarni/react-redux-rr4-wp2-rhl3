@@ -11,6 +11,7 @@
     "graphql": "node ./tools/graphql"
   },
   "dependencies": {
+    "classnames": "^2.0.0",
     "immutable": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz",
     "normalize.css": "^5.0.0",
     "react": "^15.0.0",
@@ -28,6 +29,7 @@
     "autoprefixer": "^6.0.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
+    "babel-plugin-transform-class-properties": "^6.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.0.0",
     "babel-polyfill": "^6.0.0",
     "babel-preset-latest": "^6.0.0",

@@ -228,12 +228,13 @@ module.exports = function (mode) {
         // The loader options to be used by this rule.
         query: {
           presets: [
-            'react'
+            'react',
             // TODO: investigate why this will break hot reloading: ['latest', {modules: false}], 'react'
           ],
           plugins: [
             'react-hot-loader/babel',
-            'transform-object-rest-spread'
+            'transform-object-rest-spread',
+            'transform-class-properties'
           ]
         }
       }
@@ -324,7 +325,8 @@ module.exports = function (mode) {
             ['latest', {modules: false}], 'react'
           ],
           plugins: [
-            'transform-object-rest-spread'
+            'transform-object-rest-spread',
+            'transform-class-properties'
           ]
         }
       }
