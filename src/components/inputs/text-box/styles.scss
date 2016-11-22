@@ -6,28 +6,107 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 /**
  * Import the theme variables.
  */
-@import 'variables'; // this imports the whitelabel and mixins. To use without whitelabel import "~sass-mixins" only.
+@import 'variables';
 
 /**
- * TextBox default variables.
+ * InputBox variables.
  */
-$input-box-padding: 1rem !default;
+$input-box-border-default-style: $form-controls-border-default-style !default;
+$input-box-border-radius: $form-controls-border-radius !default;
+$input-box-border-default-color: $form-controls-border-default-color !default;
+$input-box-border-active-color: $form-controls-border-active-color !default;
+$input-box-border-valid-color: $form-controls-border-valid-color !default;
+$input-box-border-invalid-color: $form-controls-border-invalid-color !default;
+$input-box-font-size: $font-size-medium !default;
+$input-box-margin-bottom: $gap-medium !default;
+$input-box-floating-label-font-size: $font-size-tiny !default;
+$input-box-floating-label-margin-top: $gap-tiny !default;
+$input-box-floating-label-margin-bottom: $gap-tiny !default;
 
 /**
- * TextBox styles.
+ * InputBox styles.
  */
+.root {
+  border: $input-box-border-default-style $input-box-border-default-color;
+  border-radius: $input-box-border-radius;
+  border-spacing: 0;
+  &.invalid {
+    border-color: $input-box-border-invalid-color;
+  }
+  &.valid {
+    border-color: $input-box-border-valid-color;
+  }
+  &.active {
+    border-color: $input-box-border-active-color;
+    &.invalid {
+      border-color: lighten($input-box-border-invalid-color, 30);
+    }
+    &.valid {
+      border-color: lighten($input-box-border-valid-color, 30);
+    }
+  }
+  tbody {
+    tr {
+      td {
+        position: relative;
+        &.left {
+          padding-left: $gap-medium;
+        }
+        &.right {
+          padding-right: $gap-medium;
+        }
+        &.center {
+          padding-left: $gap-medium;
+          padding-right: $gap-medium;
+        }
+        div {
+          position: relative;
+          height: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom + $input-box-font-size + $input-box-margin-bottom;
+          width: 100%;
+          input {
+            border: none;
+            height: 100%;
+            background-color: transparent;
+            &:focus, &.float {
+              position: relative;
+              top: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom;
+              height: auto;
+              outline: none;
+            }
+          }
+          input:focus ~ label, input.float ~ label {
+            top: $input-box-floating-label-margin-top;
+            margin-top: 0;
+            width: 100%;
+            font-size: $input-box-floating-label-font-size;
+          }
+          label {
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -($input-box-font-size / 2);
+            left: 0;
+            transition: 0.2s ease all;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
 .root {
   position: relative;
   background-color: white;
+  margin-bottom: 1rem;
   height: 2rem + (3 * $input-box-padding);
   border: 1px solid gray;
   border-radius: 0.25rem;
   padding-left: (2 * $input-box-padding);
-  padding-right: 2rem;
+  padding-right: 8rem;
   &.valid {
     border-color: green;
   }
@@ -50,7 +129,7 @@ $input-box-padding: 1rem !default;
   }
   label {
     position: absolute;
-    top: 50%;//0.5rem + (1.5 * $input-box-padding);
+    top: 50%;
     margin-top: -.5rem;
     left: (2 * $input-box-padding);
     transition: 0.2s ease all;
@@ -61,10 +140,22 @@ $input-box-padding: 1rem !default;
     margin-top: 0;
     font-size: 0.75rem;
   }
-  i {
+  span {
     position: absolute;
-    right: (2 * $input-box-padding);
     top: 50%;
     margin-top: -.5rem;
+    &.left {
+      left: 0;
+      i {
+        margin-left: (2 * $input-box-padding);
+      }
+    }
+    &.right {
+      right: 0;
+      i {
+        margin-right: (2 * $input-box-padding);
+      }
+    }
   }
 }
+*/

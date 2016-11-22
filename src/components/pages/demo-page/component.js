@@ -39,7 +39,27 @@ class DemoPage extends Component {
           id: null,
           invalid: false,
           disabled: false,
-          placeholder: 'Bernd',
+          leftIcons: [{
+            className: 'icon-bubble'
+          }, {
+            className: 'icon-bubble2'
+          }],
+          placeholder: 'Vorname',
+          valid: false,
+          value: '',
+          readOnly: false,
+          rightIcons: [{
+            className: 'icon-bubble'
+          }, {
+            className: 'icon-bubble2'
+          }],
+          type: 'text',
+        },
+        lastName: {
+          id: null,
+          invalid: false,
+          disabled: false,
+          placeholder: 'Nachname',
           valid: false,
           value: '',
           readOnly: false,
@@ -51,9 +71,17 @@ class DemoPage extends Component {
 
   handleInputChange(event) {
     console.log(event.target.value); // TODO use object assign!
+    let input = this.state.inputs[event.target.name];
     switch (event.target.name) {
       case 'firstName':
-        this.setState({inputs: {firstName: {value: event.target.value, valid: event.target.value === 'Bumm', invalid: event.target.value !== 'Bumm'}}});
+      case 'lastName':
+        input = {
+          ...input,
+          value: event.target.value,
+          valid: event.target.value === 'Bumm',
+          invalid: event.target.value !== 'Bumm'
+        };
+        this.setState({inputs: {...this.state.inputs, [`${event.target.name}`]: {...input}}});
         break;
     }
   }
@@ -62,21 +90,13 @@ class DemoPage extends Component {
   render() {
     let {ping, isPinging} = this.props;
     let {inputs} = this.state;
-    let {firstName} = inputs;
+    let {firstName, lastName} = inputs;
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
         <h1>{JSON.stringify(isPinging)}</h1>
-        <h1>{JSON.stringify(firstName)}</h1>
-        <TextBox name="firstName" onChange={(e) => this.handleInputChange(e)}
-                 id={firstName.id}
-                 invalid={firstName.invalid}
-                 disabled={firstName.disabled}
-                 placeholder={firstName.placeholder}
-                 valid={firstName.valid}
-                 value={firstName.value}
-                 readOnly={firstName.readOnly}
-                 type="text"/>
+        <TextBox name="firstName" onChange={(e) => this.handleInputChange(e)} {...firstName} type="text"/>
+        <TextBox name="lastName" onChange={(e) => this.handleInputChange(e)} {...lastName} type="text"/>
       </div>
     );
   }

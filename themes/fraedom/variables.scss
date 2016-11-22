@@ -13,6 +13,34 @@
 @import '../../src/components/sass-mixins/mixins'; // TODO: will become '~sass-mixins' later.
 
 /**
- * TextBox variables.
+ * Base variables.
  */
-$input-box-padding: 1rem;
+//$gap-tiny: 4px !default;
+//$gap-small: 6px !default;
+//$gap-medium: 8px !default;
+//
+//$font-size-tiny: 12px !default;
+//$font-size-small: 14px !default;
+//$font-size-medium: 16px !default;
+
+/**
+ * Base colors.
+ */
+$brand-color: darken(blue, 20) !default;
+//$valid-color: green !default;
+//$invalid-color: red !default;
+
+/**
+ * Form controls variables.
+ */
+//$form-controls-border-default-style: 1px solid !default;
+//$form-controls-border-radius: 5px !default;
+//$form-controls-border-default-color: $brand-color !default;
+//$form-controls-border-active-color: lighten($brand-color, 20) !default;
+//$form-controls-border-valid-color: $valid-color !default;
+//$form-controls-border-invalid-color: $invalid-color !default;
+
+/**
+ * Import mixins and functions.
+ */
+@import '../variables';

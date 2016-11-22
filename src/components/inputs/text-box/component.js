@@ -32,7 +32,9 @@ export default class TextBox extends Component {
     // Initialize the local component state.
     this.state = {
       // Generate a random id for the input field.
-      id: new Date().getTime() + Math.random()
+      id: new Date().getTime() + Math.random(),
+      // Indicate if the input is focused.
+      active: false
     }
   }
 
@@ -41,12 +43,14 @@ export default class TextBox extends Component {
     id: React.PropTypes.string,
     invalid: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
+    leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     valid: React.PropTypes.bool,
     value: React.PropTypes.string.isRequired,
     readOnly: React.PropTypes.bool,
+    rightIcons: React.PropTypes.array,
     type: React.PropTypes.string.isRequired
   };
 
@@ -62,19 +66,30 @@ export default class TextBox extends Component {
 
   // Render the component.
   render() {
-    let {invalid, disabled, name, onChange, placeholder, value, valid, readOnly, type} = this.props;
-    let {id} = this.state;
-    let rootStyles = classNames(styles.root, {[`${styles.invalid}`]: invalid, [`${styles.valid}`]: valid});
-    let inputStyles = classNames({[`${styles.canFloat}`]: placeholder, [`${styles.float}`]: value && value.length});
+    let {invalid, disabled, name, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
+    let {id, active} = this.state;
+    let rootStyles = classNames(styles.root, {[`${styles.active}`]: active, [`${styles.invalid}`]: invalid, [`${styles.valid}`]: valid});
+    let inputStyles = classNames({[`${styles.float}`]: value && value.length});
+    console.log(JSON.stringify(styles, null, 2));
     return (
-      <div className={rootStyles}>
-        <input className={inputStyles} disabled={disabled} id={id} name={name} onChange={onChange} value={value}
-               readOnly={readOnly} type={type}/>
-        {(() => {
-          if (placeholder) return (<label htmlFor={id}>{placeholder}</label>);
-        })()}
-        <i className="icon-bubble2"/>
-      </div>
+      <table className={rootStyles}>
+        <tbody>
+        <tr>
+          {leftIcons.map((icon, i) => <td key={i} className={styles.left}><i className={icon.className}/></td>)}
+          <td className={styles.center}>
+            <div>
+              <input className={inputStyles} disabled={disabled} id={id} name={name} onChange={onChange}
+                     onFocus={() => this.setState({active: true})} onBlur={() => this.setState({active: false})}
+                     value={value} readOnly={readOnly} type={type}/>
+              {(() => {
+                if (placeholder) return (<label htmlFor={id}>{placeholder}</label>);
+              })()}
+            </div>
+          </td>
+          {rightIcons.map((icon, i) => <td key={i} className={styles.right}><i className={icon.className}/></td>)}
+        </tr>
+        </tbody>
+      </table>
     );
   }
 }
