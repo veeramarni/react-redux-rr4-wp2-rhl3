@@ -15,13 +15,20 @@
 /**
  * Base variables.
  */
-$gap-tiny: 4px !default;
-$gap-small: 6px !default;
-$gap-medium: 8px !default;
+$gap-tiny: 5px !default;
+$gap-small: 10px !default;
+$gap-medium: 15px !default;
+$gap-big: 20px !default;
+$gap-huge: 25px !default;
+$gap-gigantic: 30px !default;
 
-$font-size-tiny: 12px !default;
-$font-size-small: 14px !default;
-$font-size-medium: 16px !default;
+$font-size-tiny: 10px !default;
+$font-size-small: 12px !default;
+$font-size-medium: 14px !default;
+$font-size-big: 16px !default;
+$font-size-huge: 18px !default;
+$font-size-giant: 24px !default;
+$font-size-header: 36px !default;
 
 /**
  * Base colors.
@@ -30,12 +37,27 @@ $brand-color: blue !default;
 $valid-color: green !default;
 $invalid-color: red !default;
 
+$dark-color: #333333 !default;
+$titanium-color: #686868 !default;
+$crimson-color: #a23f3d !default;
+$fresh-rose-color: #eed3d7 !default;
+$faint-rose-color: #f2dede !default;
+
 /**
  * Form controls variables.
  */
+$form-controls-input-font-size: $font-size-small !default;
+$form-controls-floating-label-font-size: $font-size-tiny !default;
+$form-controls-background-color: #ffffff !default;
 $form-controls-border-default-style: 1px solid !default;
-$form-controls-border-radius: 5px !default;
-$form-controls-border-default-color: $brand-color !default;
+$form-controls-border-radius: 3px !default;
+$form-controls-border-default-color: $titanium-color !default;
 $form-controls-border-active-color: lighten($brand-color, 20) !default;
+$form-controls-border-active-valid-color: lighten($valid-color, 20) !default;
+$form-controls-border-active-invalid-color: lighten($invalid-color, 30) !default;
 $form-controls-border-valid-color: $valid-color !default;
 $form-controls-border-invalid-color: $invalid-color !default;
+$form-controls-floating-label-color: $titanium-color !default;
+$form-controls-transition: .2s ease;
+// placeholder color
+// input text color

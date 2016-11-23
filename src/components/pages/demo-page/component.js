@@ -96,6 +96,7 @@ class DemoPage extends Component {
         <button onClick={() => ping()}>Ping</button>
         <h1>{JSON.stringify(isPinging)}</h1>
         <TextBox name="firstName" onChange={(e) => this.handleInputChange(e)} {...firstName} type="text"/>
+        <br/>
         <TextBox name="lastName" onChange={(e) => this.handleInputChange(e)} {...lastName} type="text"/>
       </div>
     );

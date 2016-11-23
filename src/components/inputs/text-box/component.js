@@ -80,7 +80,7 @@ export default class TextBox extends Component {
             <div>
               <input className={inputStyles} disabled={disabled} id={id} name={name} onChange={onChange}
                      onFocus={() => this.setState({active: true})} onBlur={() => this.setState({active: false})}
-                     value={value} readOnly={readOnly} type={type}/>
+                     value={value} readOnly={readOnly} type={type} placeholder="blablabla"/>
               {(() => {
                 if (placeholder) return (<label htmlFor={id}>{placeholder}</label>);
               })()}

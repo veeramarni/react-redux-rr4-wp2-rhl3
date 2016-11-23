@@ -14,17 +14,24 @@
 /**
  * InputBox variables.
  */
+$input-box-background-color: $form-controls-background-color !default;
 $input-box-border-default-style: $form-controls-border-default-style !default;
 $input-box-border-radius: $form-controls-border-radius !default;
+$input-box-border-color-transition: $form-controls-transition !default;
 $input-box-border-default-color: $form-controls-border-default-color !default;
 $input-box-border-active-color: $form-controls-border-active-color !default;
+$input-box-border-active-valid-color: $form-controls-border-active-valid-color !default;
+$input-box-border-active-invalid-color: $form-controls-border-active-invalid-color !default;
 $input-box-border-valid-color: $form-controls-border-valid-color !default;
 $input-box-border-invalid-color: $form-controls-border-invalid-color !default;
-$input-box-font-size: $font-size-medium !default;
-$input-box-margin-bottom: $gap-medium !default;
-$input-box-floating-label-font-size: $font-size-tiny !default;
-$input-box-floating-label-margin-top: $gap-tiny !default;
+$input-box-font-size: $form-controls-input-font-size !default;
+$input-box-margin-bottom: $gap-small !default;
+$input-box-floating-label-transition: $form-controls-transition !default;
+$input-box-floating-label-color: $form-controls-floating-label-color !default;
+$input-box-floating-label-font-size: $form-controls-floating-label-font-size !default;
+$input-box-floating-label-margin-top: $gap-small !default;
 $input-box-floating-label-margin-bottom: $gap-tiny !default;
+$input-box-placeholder-transition: $form-controls-transition !default;
 
 /**
  * InputBox styles.
@@ -33,6 +40,7 @@ $input-box-floating-label-margin-bottom: $gap-tiny !default;
   border: $input-box-border-default-style $input-box-border-default-color;
   border-radius: $input-box-border-radius;
   border-spacing: 0;
+  background-color: $input-box-background-color;
   &.invalid {
     border-color: $input-box-border-invalid-color;
   }
@@ -42,12 +50,13 @@ $input-box-floating-label-margin-bottom: $gap-tiny !default;
   &.active {
     border-color: $input-box-border-active-color;
     &.invalid {
-      border-color: lighten($input-box-border-invalid-color, 30);
+      border-color: $input-box-border-active-invalid-color;
     }
     &.valid {
-      border-color: lighten($input-box-border-valid-color, 30);
+      border-color: $input-box-border-active-valid-color;
     }
   }
+  transition: $input-box-border-color-transition border-color;
   tbody {
     tr {
       td {
@@ -70,11 +79,20 @@ $input-box-floating-label-margin-bottom: $gap-tiny !default;
             border: none;
             height: 100%;
             background-color: transparent;
+            //noinspection CssInvalidPseudoSelector
+            &::placeholder {
+              opacity: 0;
+              transition: $input-box-placeholder-transition opacity;
+            }
             &:focus, &.float {
               position: relative;
               top: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom;
               height: auto;
               outline: none;
+              //noinspection CssInvalidPseudoSelector
+              &::placeholder {
+                opacity: 1;
+              }
             }
           }
           input:focus ~ label, input.float ~ label {
@@ -89,73 +107,11 @@ $input-box-floating-label-margin-bottom: $gap-tiny !default;
             top: 50%;
             margin-top: -($input-box-font-size / 2);
             left: 0;
-            transition: 0.2s ease all;
+            transition: $input-box-floating-label-transition all;
+            color: $input-box-floating-label-color;
           }
         }
       }
     }
   }
 }
-
-/*
-.root {
-  position: relative;
-  background-color: white;
-  margin-bottom: 1rem;
-  height: 2rem + (3 * $input-box-padding);
-  border: 1px solid gray;
-  border-radius: 0.25rem;
-  padding-left: (2 * $input-box-padding);
-  padding-right: 8rem;
-  &.valid {
-    border-color: green;
-  }
-  &.invalid {
-    border-color: red;
-  }
-  input {
-    box-sizing: border-box;
-    border: none;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    &:focus, &.float {
-      outline: none;
-      &.canFloat {
-        margin-top: 0.75rem + (2 * $input-box-padding);
-        height: auto;
-      }
-    }
-  }
-  label {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-    left: (2 * $input-box-padding);
-    transition: 0.2s ease all;
-    color: blue;
-  }
-  input:focus ~ label, input.float ~ label {
-    top: $input-box-padding;
-    margin-top: 0;
-    font-size: 0.75rem;
-  }
-  span {
-    position: absolute;
-    top: 50%;
-    margin-top: -.5rem;
-    &.left {
-      left: 0;
-      i {
-        margin-left: (2 * $input-box-padding);
-      }
-    }
-    &.right {
-      right: 0;
-      i {
-        margin-right: (2 * $input-box-padding);
-      }
-    }
-  }
-}
-*/
