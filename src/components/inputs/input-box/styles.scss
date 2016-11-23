@@ -14,6 +14,9 @@
 /**
  * InputBox variables.
  */
+$input-box-font-size: $form-controls-input-font-size !default;
+$input-box-margin-bottom: $gap-small !default;
+$input-box-color: $form-controls-color !default;
 $input-box-background-color: $form-controls-background-color !default;
 $input-box-border-default-style: $form-controls-border-default-style !default;
 $input-box-border-radius: $form-controls-border-radius !default;
@@ -24,13 +27,13 @@ $input-box-border-active-valid-color: $form-controls-border-active-valid-color !
 $input-box-border-active-invalid-color: $form-controls-border-active-invalid-color !default;
 $input-box-border-valid-color: $form-controls-border-valid-color !default;
 $input-box-border-invalid-color: $form-controls-border-invalid-color !default;
-$input-box-font-size: $form-controls-input-font-size !default;
-$input-box-margin-bottom: $gap-small !default;
-$input-box-floating-label-transition: $form-controls-transition !default;
+$input-box-label-color: $form-controls-label-color !default;
 $input-box-floating-label-color: $form-controls-floating-label-color !default;
 $input-box-floating-label-font-size: $form-controls-floating-label-font-size !default;
 $input-box-floating-label-margin-top: $gap-small !default;
 $input-box-floating-label-margin-bottom: $gap-tiny !default;
+$input-box-floating-label-transition: $form-controls-transition !default;
+$input-box-placeholder-color: $form-controls-placeholder-color !default;
 $input-box-placeholder-transition: $form-controls-transition !default;
 
 /**
@@ -41,6 +44,9 @@ $input-box-placeholder-transition: $form-controls-transition !default;
   border-radius: $input-box-border-radius;
   border-spacing: 0;
   background-color: $input-box-background-color;
+  &.disabled {
+    opacity: 0.5;
+  }
   &.invalid {
     border-color: $input-box-border-invalid-color;
   }
@@ -61,28 +67,34 @@ $input-box-placeholder-transition: $form-controls-transition !default;
     tr {
       td {
         position: relative;
+        padding: 0;
         &.left {
-          padding-left: $gap-medium;
+          padding-left: $gap-small;
         }
         &.right {
-          padding-right: $gap-medium;
+          padding-right: $gap-small;
         }
         &.center {
-          padding-left: $gap-medium;
-          padding-right: $gap-medium;
+          padding-left: $gap-small;
+          padding-right: $gap-small;
         }
         div {
           position: relative;
           height: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom + $input-box-font-size + $input-box-margin-bottom;
           width: 100%;
           input {
+            display: block;
             border: none;
             height: 100%;
+            padding: 0;
             background-color: transparent;
+            font-size: $input-box-font-size;
+            color: $input-box-color;
             //noinspection CssInvalidPseudoSelector
             &::placeholder {
               opacity: 0;
               transition: $input-box-placeholder-transition opacity;
+              color: $input-box-placeholder-color;
             }
             &:focus, &.float {
               position: relative;
@@ -100,6 +112,7 @@ $input-box-placeholder-transition: $form-controls-transition !default;
             margin-top: 0;
             width: 100%;
             font-size: $input-box-floating-label-font-size;
+            color: $input-box-label-color;
           }
           label {
             display: block;
@@ -107,6 +120,7 @@ $input-box-placeholder-transition: $form-controls-transition !default;
             top: 50%;
             margin-top: -($input-box-font-size / 2);
             left: 0;
+            font-size: $input-box-font-size;
             transition: $input-box-floating-label-transition all;
             color: $input-box-floating-label-color;
           }

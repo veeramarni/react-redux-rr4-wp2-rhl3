@@ -37,6 +37,7 @@ $brand-color: blue !default;
 $valid-color: green !default;
 $invalid-color: red !default;
 
+$white-color: #ffffff !default;
 $dark-color: #333333 !default;
 $titanium-color: #686868 !default;
 $crimson-color: #a23f3d !default;
@@ -48,7 +49,8 @@ $faint-rose-color: #f2dede !default;
  */
 $form-controls-input-font-size: $font-size-small !default;
 $form-controls-floating-label-font-size: $font-size-tiny !default;
-$form-controls-background-color: #ffffff !default;
+$form-controls-color: $dark-color !default;
+$form-controls-background-color: $white-color !default;
 $form-controls-border-default-style: 1px solid !default;
 $form-controls-border-radius: 3px !default;
 $form-controls-border-default-color: $titanium-color !default;
@@ -57,7 +59,9 @@ $form-controls-border-active-valid-color: lighten($valid-color, 20) !default;
 $form-controls-border-active-invalid-color: lighten($invalid-color, 30) !default;
 $form-controls-border-valid-color: $valid-color !default;
 $form-controls-border-invalid-color: $invalid-color !default;
+$form-controls-label-color: $titanium-color !default;
 $form-controls-floating-label-color: $titanium-color !default;
 $form-controls-transition: .2s ease;
+$form-controls-placeholder-color: $titanium-color !default;
 // placeholder color
 // input text color

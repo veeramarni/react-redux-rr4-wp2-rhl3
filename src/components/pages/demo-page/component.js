@@ -18,7 +18,7 @@ import {Match} from 'react-router';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
-import TextBox from '../../inputs/text-box/component';
+import InputBox from '../../inputs/input-box/component';
 
 /**
  * Import styles.
@@ -39,29 +39,43 @@ class DemoPage extends Component {
           id: null,
           invalid: false,
           disabled: false,
+          label: 'Vorname',
           leftIcons: [{
-            className: 'icon-bubble'
-          }, {
-            className: 'icon-bubble2'
+            className: 'icon-user'
           }],
-          placeholder: 'Vorname',
+          placeholder: 'Please be honest!',
           valid: false,
           value: '',
           readOnly: false,
           rightIcons: [{
-            className: 'icon-bubble'
+            className: 'icon-user-plus'
           }, {
-            className: 'icon-bubble2'
+            className: 'icon-user-minus'
           }],
+          type: 'text',
+        },
+        middleName: {
+          id: null,
+          invalid: false,
+          disabled: true,
+          label: 'Mittelnamen',
+          leftIcons: [{
+            className: 'icon-user-tie'
+          }],
+          placeholder: 'Please be honest!',
+          valid: false,
+          value: 'Horst Walter',
+          readOnly: false,
+          rightIcons: [],
           type: 'text',
         },
         lastName: {
           id: null,
           invalid: false,
           disabled: false,
-          placeholder: 'Nachname',
+          label: 'Nachname',
           valid: false,
-          value: '',
+          value: 'Windlhammelsbach',
           readOnly: false,
           type: 'text',
         }
@@ -90,14 +104,16 @@ class DemoPage extends Component {
   render() {
     let {ping, isPinging} = this.props;
     let {inputs} = this.state;
-    let {firstName, lastName} = inputs;
+    let {firstName, middleName, lastName} = inputs;
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
         <h1>{JSON.stringify(isPinging)}</h1>
-        <TextBox name="firstName" onChange={(e) => this.handleInputChange(e)} {...firstName} type="text"/>
+        <InputBox name="firstName" onChange={(e) => this.handleInputChange(e)} {...firstName} type="text"/>
         <br/>
-        <TextBox name="lastName" onChange={(e) => this.handleInputChange(e)} {...lastName} type="text"/>
+        <InputBox name="middleName" onChange={(e) => this.handleInputChange(e)} {...middleName} type="text"/>
+        <br/>
+        <InputBox name="lastName" onChange={(e) => this.handleInputChange(e)} {...lastName} type="text"/>
       </div>
     );
   }

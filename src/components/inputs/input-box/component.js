@@ -25,7 +25,7 @@ import styles from './styles.scss';
 /**
  * Export the component.
  */
-export default class TextBox extends Component {
+export default class InputBox extends Component {
   // Initialize the component.
   constructor(props) {
     super(props);
@@ -43,6 +43,7 @@ export default class TextBox extends Component {
     id: React.PropTypes.string,
     invalid: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
+    label: React.PropTypes.string,
     leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
@@ -66,9 +67,14 @@ export default class TextBox extends Component {
 
   // Render the component.
   render() {
-    let {invalid, disabled, name, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
+    let {invalid, disabled, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
     let {id, active} = this.state;
-    let rootStyles = classNames(styles.root, {[`${styles.active}`]: active, [`${styles.invalid}`]: invalid, [`${styles.valid}`]: valid});
+    let rootStyles = classNames(styles.root, {
+      [`${styles.disabled}`]: disabled,
+      [`${styles.active}`]: active,
+      [`${styles.invalid}`]: invalid,
+      [`${styles.valid}`]: valid
+    });
     let inputStyles = classNames({[`${styles.float}`]: value && value.length});
     console.log(JSON.stringify(styles, null, 2));
     return (
@@ -80,9 +86,9 @@ export default class TextBox extends Component {
             <div>
               <input className={inputStyles} disabled={disabled} id={id} name={name} onChange={onChange}
                      onFocus={() => this.setState({active: true})} onBlur={() => this.setState({active: false})}
-                     value={value} readOnly={readOnly} type={type} placeholder="blablabla"/>
+                     value={value} readOnly={readOnly} type={type} placeholder={placeholder}/>
               {(() => {
-                if (placeholder) return (<label htmlFor={id}>{placeholder}</label>);
+                if (label) return (<label htmlFor={id}>{label}</label>);
               })()}
             </div>
           </td>
