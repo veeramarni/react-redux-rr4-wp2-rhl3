@@ -32,7 +32,7 @@ export default class InputBox extends Component {
     // Initialize the local component state.
     this.state = {
       // Generate a random id for the input field.
-      id: new Date().getTime() + Math.random(),
+      inputId: new Date().getTime() + Math.random(),
       // Indicate if the input is focused.
       active: false
     }
@@ -41,6 +41,7 @@ export default class InputBox extends Component {
   // Expected properties.
   static propTypes = {
     id: React.PropTypes.string,
+    inputId: React.PropTypes.string,
     invalid: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     label: React.PropTypes.string,
@@ -60,15 +61,15 @@ export default class InputBox extends Component {
   // render() will see the updated state and will be executed only once despite the state change.
   componentWillMount() {
     // Set the id for the input field if given.
-    if (this.props.id) {
-      this.setState({id: this.props.id});
+    if (this.props.inputId) {
+      this.setState({inputId: this.props.inputId});
     }
   }
 
   // Render the component.
   render() {
-    let {invalid, disabled, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
-    let {id, active} = this.state;
+    let {invalid, disabled, id, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
+    let {inputId, active} = this.state;
     let rootStyles = classNames(styles.root, {
       [`${styles.disabled}`]: disabled,
       [`${styles.active}`]: active,
@@ -76,19 +77,18 @@ export default class InputBox extends Component {
       [`${styles.valid}`]: valid
     });
     let inputStyles = classNames({[`${styles.float}`]: value && value.length});
-    console.log(JSON.stringify(styles, null, 2));
     return (
-      <table className={rootStyles}>
+      <table className={rootStyles} id={id}>
         <tbody>
         <tr>
           {leftIcons.map((icon, i) => <td key={i} className={styles.left}><i className={icon.className}/></td>)}
           <td className={styles.center}>
             <div>
-              <input className={inputStyles} disabled={disabled} id={id} name={name} onChange={onChange}
+              <input className={inputStyles} disabled={disabled} id={inputId} name={name} onChange={onChange}
                      onFocus={() => this.setState({active: true})} onBlur={() => this.setState({active: false})}
                      value={value} readOnly={readOnly} type={type} placeholder={placeholder}/>
               {(() => {
-                if (label) return (<label htmlFor={id}>{label}</label>);
+                if (label) return (<label htmlFor={inputId}>{label}</label>);
               })()}
             </div>
           </td>

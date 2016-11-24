@@ -19,6 +19,7 @@ import {Match} from 'react-router';
  */
 import {pingCreator} from './actions';
 import InputBox from '../../inputs/input-box/component';
+import Popover from '../../popover/component';
 
 /**
  * Import styles.
@@ -34,6 +35,8 @@ class DemoPage extends Component {
     super(props);
     // Initialize the local component state. TODO: better use redux!
     this.state = {
+      popoverOpen: false,
+      popoverTargetId: 'xxxxx',// + new Date().getTime() + Math.random(),
       inputs: {
         firstName: {
           id: null,
@@ -83,8 +86,7 @@ class DemoPage extends Component {
     }
   }
 
-  handleInputChange(event) {
-    console.log(event.target.value); // TODO use object assign!
+  handleInputChange = (event) => {
     let input = this.state.inputs[event.target.name];
     switch (event.target.name) {
       case 'firstName':
@@ -98,7 +100,11 @@ class DemoPage extends Component {
         this.setState({inputs: {...this.state.inputs, [`${event.target.name}`]: {...input}}});
         break;
     }
-  }
+  };
+
+  togglePopover = () => {
+    this.setState({popoverOpen: !this.state.popoverOpen});
+  };
 
   // Render the component.
   render() {
@@ -108,12 +114,26 @@ class DemoPage extends Component {
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
-        <h1>{JSON.stringify(isPinging)}</h1>
-        <InputBox name="firstName" onChange={(e) => this.handleInputChange(e)} {...firstName} type="text"/>
+        <h1 onClick={this.togglePopover}>{JSON.stringify(isPinging)}++{JSON.stringify(this.state.popoverOpen)}</h1>
+        <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
         <br/>
-        <InputBox name="middleName" onChange={(e) => this.handleInputChange(e)} {...middleName} type="text"/>
+        <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
         <br/>
-        <InputBox name="lastName" onChange={(e) => this.handleInputChange(e)} {...lastName} type="text"/>
+        <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
+                  id={this.state.popoverTargetId}/>
+        <br/>
+        <Popover show={this.state.popoverOpen}
+                 target={this.state.popoverTargetId}
+                 toggle={this.togglePopover}
+                 attachment='top center'
+                 reposition={true}
+                 withTriangle={true}
+                 options={{
+                   targetAttachment: 'bottom center',
+                   offset: '-10px 0'
+                 }}>
+          <span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>
+        </Popover>
       </div>
     );
   }

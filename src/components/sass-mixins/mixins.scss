@@ -23,3 +23,38 @@
   }
   @return $pixels / $context * 1rem;
 }
+
+/**
+ *
+ */
+@mixin withTriangle($shadow: 0 2px 16px rgba(0, 0, 0, 0.3), $bg-color: #ffffff, $border-color: #b5b5b5, $transition-duration: 0.3s) {
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    left: 50%;
+    box-sizing: border-box;
+
+    border: 0.5rem solid $border-color;
+
+    transform-origin: 0 0;
+    transform: rotate(135deg);
+    transition: left $transition-duration;
+  }
+
+  &:before {
+    z-index: -1;
+    top: 1px;
+    border-color: transparent transparent $border-color $border-color;
+
+    box-shadow: $shadow;
+  }
+
+  &:after {
+    top: 2px;
+    border-color: transparent transparent $bg-color $bg-color;
+  }
+}

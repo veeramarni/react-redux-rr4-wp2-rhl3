@@ -1,0 +1,29 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'variables';
+
+/**
+ * InputBox variables.
+ */
+
+$popover-default-shadow: 0 2px toRem(16px) rgba(0,0,0,.3);
+$popover-background-color: $white-color;
+$popover-border-color: $dark-color;
+$popover-triangle-transition-time: 0.3s;
+
+.root {
+}
+
+.withTriangle {
+  transition: left $popover-triangle-transition-time;
+  @include withTriangle($popover-default-shadow, $popover-background-color, $popover-border-color, $popover-triangle-transition-time);
+}

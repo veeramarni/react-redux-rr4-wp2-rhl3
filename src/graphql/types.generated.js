@@ -60,7 +60,6 @@ function resolve(state, chain, undefinedValue) {
   while (i < chain.length) {
     // Get the name of the current property.
     let propName = chain[i++];
-    console.log(propName);
     // Get the type of the current property.
     let propType = entityType.fields[propName].type;
     // Get the value of the current property.

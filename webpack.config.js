@@ -46,14 +46,14 @@ module.exports = function (mode) {
   // Reference: https://babeljs.io/docs/usage/polyfill/
   if (buildDevelopment) {
     config.entry = [
-      //'babel-polyfill',
+      'babel-polyfill',
       'react-hot-loader/patch',
       'webpack-hot-middleware/client',
       './src/root.client.js'
     ];
   } else if (buildProduction) {
     config.entry = [
-      //'babel-polyfill',
+      'babel-polyfill',
       './src/root.client.js'
     ];
   }
@@ -228,8 +228,8 @@ module.exports = function (mode) {
         // The loader options to be used by this rule.
         query: {
           presets: [
-            'react',
-            // TODO: investigate why this will break hot reloading: ['latest', {modules: false}], 'react'
+            // TODO: investigate why 'latest' instead of 'es2015' will break hot reloading!
+            ['es2015', {modules: false}], 'react'
           ],
           plugins: [
             'react-hot-loader/babel',
@@ -322,7 +322,8 @@ module.exports = function (mode) {
         // The loader options to be used by this rule.
         query: {
           presets: [
-            ['latest', {modules: false}], 'react'
+            // TODO: investigate why 'latest' instead of 'es2015' will break hot reloading!
+            ['es2015', {modules: false}], 'react'
           ],
           plugins: [
             'transform-object-rest-spread',
