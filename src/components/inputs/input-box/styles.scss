@@ -14,52 +14,80 @@
 /**
  * InputBox variables.
  */
-$input-box-font-size: $form-controls-input-font-size !default;
-$input-box-margin-bottom: $gap-small !default;
-$input-box-color: $form-controls-color !default;
+
+// InputBox
 $input-box-background-color: $form-controls-background-color !default;
-$input-box-border-default-style: $form-controls-border-default-style !default;
+$input-box-border-style: $form-controls-border-style !default;
 $input-box-border-radius: $form-controls-border-radius !default;
 $input-box-border-color-transition: $form-controls-transition !default;
-$input-box-border-default-color: $form-controls-border-default-color !default;
-$input-box-border-active-color: $form-controls-border-active-color !default;
-$input-box-border-active-valid-color: $form-controls-border-active-valid-color !default;
-$input-box-border-active-invalid-color: $form-controls-border-active-invalid-color !default;
-$input-box-border-valid-color: $form-controls-border-valid-color !default;
-$input-box-border-invalid-color: $form-controls-border-invalid-color !default;
-$input-box-label-color: $form-controls-label-color !default;
-$input-box-floating-label-color: $form-controls-floating-label-color !default;
-$input-box-floating-label-font-size: $form-controls-floating-label-font-size !default;
-$input-box-floating-label-margin-top: $gap-small !default;
-$input-box-floating-label-margin-bottom: $gap-tiny !default;
-$input-box-floating-label-transition: $form-controls-transition !default;
+// InputBox : disabled
+$input-box-disabled-opacity: $form-controls-disabled-opacity !default;
+// InputBox : readonly
+$input-box-readonly-border-opacity: $form-controls-readonly-border-opacity !default;
+$input-box-readonly-background-color: $form-controls-readonly-background-color !default;
+// InputBox : unfocused
+$input-box-unfocused-border-color: $form-controls-unfocused-border-color !default;
+$input-box-unfocused-valid-border-color: $form-controls-unfocused-valid-border-color !default;
+$input-box-unfocused-valid-shadow: $form-controls-unfocused-valid-shadow !default;
+$input-box-unfocused-invalid-border-color : $form-controls-unfocused-invalid-border-color !default;
+$input-box-unfocused-invalid-shadow: $form-controls-unfocused-invalid-shadow !default;
+// InputBox : focused
+$input-box-focused-border-color: $form-controls-focused-border-color !default;
+$input-box-focused-shadow: $form-controls-focused-shadow !default;
+$input-box-focused-valid-border-color: $form-controls-focused-valid-border-color !default;
+$input-box-focused-valid-shadow: $form-controls-focused-valid-shadow !default;
+$input-box-focused-invalid-border-color : $form-controls-focused-invalid-border-color !default;
+$input-box-focused-invalid-shadow: $form-controls-focused-invalid-shadow !default;
+// input
+$input-box-input-font-size: $form-controls-input-font-size !default;
+$input-box-input-margin-bottom: $form-controls-input-margin-bottom !default;
+$input-box-input-color: $form-controls-color !default;
+// input placeholder
 $input-box-placeholder-color: $form-controls-placeholder-color !default;
 $input-box-placeholder-transition: $form-controls-transition !default;
+// label
+$input-box-label-color: $form-controls-label-color !default;
+// label floating
+$input-box-label-floating-font-size: $form-controls-label-floating-font-size !default;
+$input-box-label-floating-margin-top: $form-controls-label-floating-margin-top !default;
+$input-box-label-floating-margin-bottom: $form-controls-label-floating-margin-bottom !default;
+$input-box-label-floating-color: $form-controls-label-floating-color !default;
+$input-box-label-floating-transition: $form-controls-transition !default;
 
 /**
  * InputBox styles.
  */
 .root {
-  border: $input-box-border-default-style $input-box-border-default-color;
+  border: $input-box-border-style $input-box-unfocused-border-color;
+  box-shadow: none;
   border-radius: $input-box-border-radius;
   border-spacing: 0;
   background-color: $input-box-background-color;
   &.disabled {
-    opacity: 0.5;
+    opacity: $input-box-disabled-opacity;
+  }
+  &.readonly {
+    border-color: rgba($input-box-unfocused-border-color, $form-controls-readonly-border-opacity);
+    background-color: $input-box-readonly-background-color;
   }
   &.invalid {
-    border-color: $input-box-border-invalid-color;
+    box-shadow: $input-box-unfocused-invalid-shadow;
+    border-color: $input-box-unfocused-invalid-border-color;
   }
   &.valid {
-    border-color: $input-box-border-valid-color;
+    box-shadow: $input-box-unfocused-valid-shadow;
+    border-color: $input-box-unfocused-valid-border-color;
   }
-  &.active {
-    border-color: $input-box-border-active-color;
+  &.focused {
+    box-shadow: $input-box-focused-shadow;
+    border-color: $input-box-focused-border-color;
     &.invalid {
-      border-color: $input-box-border-active-invalid-color;
+      box-shadow: $input-box-focused-invalid-shadow;
+      border-color: $input-box-focused-invalid-border-color;
     }
     &.valid {
-      border-color: $input-box-border-active-valid-color;
+      box-shadow: $input-box-focused-valid-shadow;
+      border-color: $input-box-focused-valid-border-color;
     }
   }
   transition: $input-box-border-color-transition border-color;
@@ -80,7 +108,7 @@ $input-box-placeholder-transition: $form-controls-transition !default;
         }
         div {
           position: relative;
-          height: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom + $input-box-font-size + $input-box-margin-bottom;
+          height: $input-box-label-floating-margin-top + $input-box-label-floating-font-size + $input-box-label-floating-margin-bottom + $input-box-input-font-size + $input-box-input-margin-bottom;
           width: 100%;
           input {
             display: block;
@@ -88,8 +116,8 @@ $input-box-placeholder-transition: $form-controls-transition !default;
             height: 100%;
             padding: 0;
             background-color: transparent;
-            font-size: $input-box-font-size;
-            color: $input-box-color;
+            font-size: $input-box-input-font-size;
+            color: $input-box-input-color;
             //noinspection CssInvalidPseudoSelector
             &::placeholder {
               opacity: 0;
@@ -98,7 +126,7 @@ $input-box-placeholder-transition: $form-controls-transition !default;
             }
             &:focus, &.float {
               position: relative;
-              top: $input-box-floating-label-margin-top + $input-box-floating-label-font-size + $input-box-floating-label-margin-bottom;
+              top: $input-box-label-floating-margin-top + $input-box-label-floating-font-size + $input-box-label-floating-margin-bottom;
               height: auto;
               outline: none;
               //noinspection CssInvalidPseudoSelector
@@ -108,21 +136,21 @@ $input-box-placeholder-transition: $form-controls-transition !default;
             }
           }
           input:focus ~ label, input.float ~ label {
-            top: $input-box-floating-label-margin-top;
+            top: $input-box-label-floating-margin-top;
             margin-top: 0;
             width: 100%;
-            font-size: $input-box-floating-label-font-size;
-            color: $input-box-label-color;
+            font-size: $input-box-label-floating-font-size;
+            color: $input-box-label-floating-color;
           }
           label {
             display: block;
             position: absolute;
             top: 50%;
-            margin-top: -($input-box-font-size / 2);
+            margin-top: -($input-box-input-font-size / 2);
             left: 0;
-            font-size: $input-box-font-size;
-            transition: $input-box-floating-label-transition all;
-            color: $input-box-floating-label-color;
+            font-size: $input-box-input-font-size;
+            transition: $input-box-label-floating-transition all;
+            color: $input-box-label-color;
           }
         }
       }

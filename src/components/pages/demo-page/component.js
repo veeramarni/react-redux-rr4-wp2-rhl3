@@ -36,7 +36,7 @@ class DemoPage extends Component {
     // Initialize the local component state. TODO: better use redux!
     this.state = {
       popoverOpen: false,
-      popoverTargetId: 'xxxxx',// + new Date().getTime() + Math.random(),
+      popoverTargetId: '' + new Date().getTime() + Math.random(),
       inputs: {
         firstName: {
           id: null,
@@ -46,7 +46,7 @@ class DemoPage extends Component {
           leftIcons: [{
             className: 'icon-user'
           }],
-          placeholder: 'Please be honest!',
+          placeholder: 'Type "Bumm" to validate!',
           valid: false,
           value: '',
           readOnly: false,
@@ -70,6 +70,21 @@ class DemoPage extends Component {
           value: 'Horst Walter',
           readOnly: false,
           rightIcons: [],
+          type: 'text',
+        },
+        nickName: {
+          id: null,
+          invalid: false,
+          disabled: false,
+          label: 'Spitzname',
+          leftIcons: [],
+          placeholder: 'Please be honest!',
+          valid: false,
+          value: 'Horst Walter',
+          readOnly: true,
+          rightIcons: [{
+            className: 'icon-user-check'
+          }],
           type: 'text',
         },
         lastName: {
@@ -110,7 +125,7 @@ class DemoPage extends Component {
   render() {
     let {ping, isPinging} = this.props;
     let {inputs} = this.state;
-    let {firstName, middleName, lastName} = inputs;
+    let {firstName, middleName, nickName, lastName} = inputs;
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
@@ -118,6 +133,8 @@ class DemoPage extends Component {
         <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
         <br/>
         <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
+        <br/>
+        <InputBox name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
         <br/>
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
                   id={this.state.popoverTargetId}/>

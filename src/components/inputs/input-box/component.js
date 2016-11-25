@@ -34,7 +34,7 @@ export default class InputBox extends Component {
       // Generate a random id for the input field.
       inputId: new Date().getTime() + Math.random(),
       // Indicate if the input is focused.
-      active: false
+      focused: false
     }
   }
 
@@ -69,10 +69,11 @@ export default class InputBox extends Component {
   // Render the component.
   render() {
     let {invalid, disabled, id, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
-    let {inputId, active} = this.state;
+    let {inputId, focused} = this.state;
     let rootStyles = classNames(styles.root, {
       [`${styles.disabled}`]: disabled,
-      [`${styles.active}`]: active,
+      [`${styles.readonly}`]: readOnly,
+      [`${styles.focused}`]: focused,
       [`${styles.invalid}`]: invalid,
       [`${styles.valid}`]: valid
     });
@@ -85,7 +86,7 @@ export default class InputBox extends Component {
           <td className={styles.center}>
             <div>
               <input className={inputStyles} disabled={disabled} id={inputId} name={name} onChange={onChange}
-                     onFocus={() => this.setState({active: true})} onBlur={() => this.setState({active: false})}
+                     onFocus={() => this.setState({focused: true})} onBlur={() => this.setState({focused: false})}
                      value={value} readOnly={readOnly} type={type} placeholder={placeholder}/>
               {(() => {
                 if (label) return (<label htmlFor={inputId}>{label}</label>);

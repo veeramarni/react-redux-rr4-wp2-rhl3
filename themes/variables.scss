@@ -15,12 +15,13 @@
 /**
  * Base variables.
  */
-$gap-tiny: 5px !default;
-$gap-small: 10px !default;
-$gap-medium: 15px !default;
-$gap-big: 20px !default;
-$gap-huge: 25px !default;
-$gap-gigantic: 30px !default;
+$gap-tiny: 4px !default;
+$gap-small: 8px !default;
+$gap-medium: 12px !default;
+$gap-big: 16px !default;
+$gap-huge: 20px !default;
+$gap-giant: 24px !default;
+$gap-godzilla: 28px !default;
 
 $font-size-tiny: 10px !default;
 $font-size-small: 12px !default;
@@ -28,40 +29,60 @@ $font-size-medium: 14px !default;
 $font-size-big: 16px !default;
 $font-size-huge: 18px !default;
 $font-size-giant: 24px !default;
-$font-size-header: 36px !default;
+$font-size-godzilla: 36px !default;
 
 /**
  * Base colors.
  */
-$brand-color: blue !default;
-$valid-color: green !default;
-$invalid-color: red !default;
-
-$white-color: #ffffff !default;
-$dark-color: #333333 !default;
-$titanium-color: #686868 !default;
-$crimson-color: #a23f3d !default;
-$fresh-rose-color: #eed3d7 !default;
-$faint-rose-color: #f2dede !default;
+$color-white: #ffffff !default;
+$color-dark: rgb(51, 51, 51) !default;
+$color-titanium: rgb(104, 104, 104) !default;
+$color-crimson: rgb(162, 63, 61) !default;
+$color-fresh-rose: rgb(238, 211, 215) !default;
+$color-faint-rose: rgb(242, 222, 222) !default;
+$color-tungsten: rgb(180, 179, 179) !default;
+$color-aluminium: rgb(222, 222, 222) !default;
+$color-emerald: rgba(61, 194, 56, 0.7) !default;
+$color-ruby: rgba(163, 64, 62, 0.7) !default;
+$color-lavender: rgba(67, 133, 240, 0.7) !default;
+$color-spring: rgb(61, 194, 56) !default;
 
 /**
  * Form controls variables.
  */
-$form-controls-input-font-size: $font-size-small !default;
-$form-controls-floating-label-font-size: $font-size-tiny !default;
-$form-controls-color: $dark-color !default;
-$form-controls-background-color: $white-color !default;
-$form-controls-border-default-style: 1px solid !default;
+// controls
+$form-controls-color: $color-dark !default;
+$form-controls-background-color: $color-white !default;
+$form-controls-border-style: 1px solid !default;
 $form-controls-border-radius: 3px !default;
-$form-controls-border-default-color: $titanium-color !default;
-$form-controls-border-active-color: lighten($brand-color, 20) !default;
-$form-controls-border-active-valid-color: lighten($valid-color, 20) !default;
-$form-controls-border-active-invalid-color: lighten($invalid-color, 30) !default;
-$form-controls-border-valid-color: $valid-color !default;
-$form-controls-border-invalid-color: $invalid-color !default;
-$form-controls-label-color: $titanium-color !default;
-$form-controls-floating-label-color: $titanium-color !default;
 $form-controls-transition: .2s ease;
-$form-controls-placeholder-color: $titanium-color !default;
-// placeholder color
-// input text color
+// disabled
+$form-controls-disabled-opacity: 0.5 !default;
+// readonly
+$form-controls-readonly-border-opacity: 0.5 !default;
+$form-controls-readonly-background-color: $color-aluminium !default;
+// unfocused
+$form-controls-unfocused-border-color: $color-titanium !default;
+$form-controls-unfocused-valid-border-color: $color-titanium !default;
+$form-controls-unfocused-valid-shadow: 0 0 5px $color-emerald !default;
+$form-controls-unfocused-invalid-border-color: $color-titanium !default;
+$form-controls-unfocused-invalid-shadow: 0 0 5px $color-ruby !default;
+// focused
+$form-controls-focused-border-color: $color-titanium !default;
+$form-controls-focused-shadow: 0 0 5px $color-lavender !default;
+$form-controls-focused-valid-border-color: $color-spring !default;
+$form-controls-focused-valid-shadow: 0 0 5px $color-emerald !default;
+$form-controls-focused-invalid-border-color: $color-crimson !default;
+$form-controls-focused-invalid-shadow: 0 0 5px $color-ruby !default;
+// input
+$form-controls-input-font-size: $font-size-small !default;
+$form-controls-input-margin-bottom: $gap-small !default;
+// placeholder
+$form-controls-placeholder-color: $color-titanium !default;
+// label
+$form-controls-label-color: $color-titanium !default;
+// label : floating
+$form-controls-label-floating-color: $color-titanium !default;
+$form-controls-label-floating-font-size: $font-size-tiny !default;
+$form-controls-label-floating-margin-top: $gap-small !default;
+$form-controls-label-floating-margin-bottom: $gap-tiny !default;
