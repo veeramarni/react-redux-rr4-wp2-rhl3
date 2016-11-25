@@ -48,6 +48,7 @@ export default class InputBox extends Component {
     leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
+    onFocusChanged: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     valid: React.PropTypes.bool,
     value: React.PropTypes.string.isRequired,
@@ -66,6 +67,19 @@ export default class InputBox extends Component {
     }
   }
 
+  handleFocusChange = (focused) => {
+    this.setState({focused: focused});
+    if (this.props.onFocusChanged) {
+      this.props.onFocusChanged(focused);
+    }
+  };
+
+  handleIconClick = (icon) => {
+    if (icon.onClick) {
+      icon.onClick(icon);
+    }
+  };
+
   // Render the component.
   render() {
     let {invalid, disabled, id, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
@@ -82,18 +96,22 @@ export default class InputBox extends Component {
       <table className={rootStyles} id={id}>
         <tbody>
         <tr>
-          {leftIcons.map((icon, i) => <td key={i} className={styles.left}><i className={icon.className}/></td>)}
+          {leftIcons.map((icon, i) => <td key={i} className={styles.left}><i className={icon.className}
+                                                                             onClick={() => this.handleIconClick(icon)}/>
+          </td>)}
           <td className={styles.center}>
             <div>
               <input className={inputStyles} disabled={disabled} id={inputId} name={name} onChange={onChange}
-                     onFocus={() => this.setState({focused: true})} onBlur={() => this.setState({focused: false})}
+                     onFocus={() => this.handleFocusChange(true)} onBlur={() => this.handleFocusChange(false)}
                      value={value} readOnly={readOnly} type={type} placeholder={placeholder}/>
               {(() => {
                 if (label) return (<label htmlFor={inputId}>{label}</label>);
               })()}
             </div>
           </td>
-          {rightIcons.map((icon, i) => <td key={i} className={styles.right}><i className={icon.className}/></td>)}
+          {rightIcons.map((icon, i) => <td key={i} className={styles.right}><i className={icon.className}
+                                                                               onClick={() => this.handleIconClick(icon)}/>
+          </td>)}
         </tr>
         </tbody>
       </table>

@@ -63,6 +63,7 @@ $form-controls-readonly-border-opacity: 0.5 !default;
 $form-controls-readonly-background-color: $color-aluminium !default;
 // unfocused
 $form-controls-unfocused-border-color: $color-titanium !default;
+$form-controls-unfocused-shadow: 0 0 5px $color-titanium !default;
 $form-controls-unfocused-valid-border-color: $color-titanium !default;
 $form-controls-unfocused-valid-shadow: 0 0 5px $color-emerald !default;
 $form-controls-unfocused-invalid-border-color: $color-titanium !default;

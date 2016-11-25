@@ -1,0 +1,42 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'variables';
+
+/**
+ * SimpleSelectBox variables.
+ */
+
+// SimpleSelectBox
+
+/**
+ * SimpleSelectBox styles.
+ */
+.root {
+}
+
+.options {
+  font-size: $form-controls-input-font-size;
+  color: $form-controls-color;
+  background-color: $color-white;
+  border: 1px solid $color-tungsten;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 3px 6px $color-tungsten;
+  padding-top: $gap-small;
+  padding-bottom: $gap-small;
+}
+
+.option {
+  padding: $gap-small;
+  &:hover {
+    background-color: $color-aluminium;
+  }
+}

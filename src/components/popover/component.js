@@ -36,7 +36,8 @@ export default class extends React.Component {
     options: React.PropTypes.object,
     attachment: React.PropTypes.string,
     withTriangle: React.PropTypes.bool,
-    additionalClass: React.PropTypes.string
+    additionalClass: React.PropTypes.string,
+    alignWidth: React.PropTypes.bool
   };
 
   // Initialize the component.
@@ -98,6 +99,7 @@ export default class extends React.Component {
   }
 
   handleClickDocument = (e) => {
+    console.log('WWWWWWWWWWWWW');
     if (e.target === this.element || !this.element.contains(e.target)) {
       if (this.props.toggle) {
         this.props.toggle();
@@ -111,10 +113,13 @@ export default class extends React.Component {
       [`${styles.withTriangle}`]: this.props.withTriangle,
       [`${this.props.additionalClass}`]: this.props.additionalClass
     });
-
+    let styles = {
+      visibility: this.props.show ? '' : 'hidden',
+      minWidth: this.props.alignWidth && this.target ? this.target.offsetWidth : ''
+    };
     // Use visibility instead of display to avoid position calculation problems with 'center' positioning.
     return (
-      <div className={classes} style={{visibility: this.props.show ? '' : 'hidden'}}>
+      <div className={classes} style={styles}>
         {this.props.children}
       </div>
     );

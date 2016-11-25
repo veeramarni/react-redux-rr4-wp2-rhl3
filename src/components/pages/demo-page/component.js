@@ -19,6 +19,7 @@ import {Match} from 'react-router';
  */
 import {pingCreator} from './actions';
 import InputBox from '../../inputs/input-box/component';
+import SimpleSelectBox from '../../inputs/simple-select-box/component';
 import Popover from '../../popover/component';
 
 /**
@@ -139,6 +140,7 @@ class DemoPage extends Component {
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
                   id={this.state.popoverTargetId}/>
         <br/>
+        <SimpleSelectBox options={['Option 1', 'Option 2', 'Option 3']}/>
         <Popover show={this.state.popoverOpen}
                  target={this.state.popoverTargetId}
                  toggle={this.togglePopover}
@@ -151,6 +153,12 @@ class DemoPage extends Component {
                  }}>
           <span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>
         </Popover>
+        <br/>
+        <select>
+          <option>Option A</option>
+          <option>Option B</option>
+          <option>Option C</option>
+        </select>
       </div>
     );
   }
