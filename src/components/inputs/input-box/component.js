@@ -42,10 +42,11 @@ export default class InputBox extends Component {
 
   // Expected properties.
   static propTypes = {
+    children: React.PropTypes.node,
+    disabled: React.PropTypes.bool,
     id: React.PropTypes.string,
     inputId: React.PropTypes.string,
     invalid: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
     label: React.PropTypes.string,
     leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
@@ -102,7 +103,7 @@ export default class InputBox extends Component {
 
   // Render the component.
   render() {
-    let {invalid, disabled, id, name, label, leftIcons = [], onChange, onKeyDown, placeholder, value, valid, readOnly, rightIcons = [], suppressReadOnlyStyle, type} = this.props;
+    let {children, disabled, invalid, id, name, label, leftIcons = [], onChange, onKeyDown, placeholder, value, valid, readOnly, rightIcons = [], suppressReadOnlyStyle, type} = this.props;
     let {inputId, focused} = this.state;
     let rootStyles = classNames(styles.root, {
       [`${styles.disabled}`]: disabled,
@@ -134,7 +135,12 @@ export default class InputBox extends Component {
                      type={type}
                      placeholder={placeholder}/>
               {(() => {
-                if (label) return (<label id={`${inputId}-label`}>{label}</label>);
+                if (label) {
+                  return (<label id={`${inputId}-label`}>{label}</label>);
+                }
+                else if (children) {
+                  return (<label id={`${inputId}-label`}>{children}</label>);
+                }
               })()}
             </div>
           </td>

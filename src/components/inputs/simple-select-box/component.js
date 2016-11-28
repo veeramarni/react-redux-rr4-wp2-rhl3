@@ -76,10 +76,6 @@ export default class SimpleSelectBox extends Component {
   // If you call setState within this method,
   // render() will see the updated state and will be executed only once despite the state change.
   componentWillMount() {
-    // Update the default props.
-    // if (this.props.inputId) {
-    //   this.setState({inputId: this.props.inputId});
-    // }
   }
 
   // Invoked when a component is receiving new props. This method is not called for the initial render.
@@ -90,13 +86,8 @@ export default class SimpleSelectBox extends Component {
     this.setState({input: {...this.state.input, value: nextProps.value ? nextProps.value : ''}});
   }
 
-  targetIsDescendant = (target, parent) => {
-    let node = target;
-    while (node !== null) {
-      if (node === parent) return true;
-      node = node.parentNode;
-    }
-    return false;
+  getSelectedIndex = () => {
+
   };
 
   showPopover = show => {
@@ -130,12 +121,12 @@ export default class SimpleSelectBox extends Component {
     }
   };
 
-  handleOptionClick = (event, option) => {
+  handleOptionClick = (event, option, index) => {
     event.preventDefault();
     event.stopPropagation();
     this.showPopover(false);
     if (this.props.onSelect) {
-      this.props.onSelect(option);
+      this.props.onSelect(option, index);
     }
   };
 
@@ -164,7 +155,7 @@ export default class SimpleSelectBox extends Component {
         <Popover {...popover} target={input.id}>
           <div className={styles.options}>
             {options.map((option, i) => (
-              <div key={i} className={styles.option} onMouseDown={(e) => this.handleOptionClick(e, option)}
+              <div key={i} className={styles.option} onMouseDown={(e) => this.handleOptionClick(e, option, i)}
                    tabIndex="0">{option}</div>))}
           </div>
         </Popover>

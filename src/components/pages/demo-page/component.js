@@ -92,7 +92,7 @@ class DemoPage extends Component {
           id: null,
           invalid: false,
           disabled: false,
-          label: 'Nachname',
+          label: null,
           valid: false,
           value: 'Windlhammelsbach',
           readOnly: false,
@@ -147,21 +147,29 @@ class DemoPage extends Component {
         <InputBox name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
         <br/>
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
-                  id={this.state.popoverTargetId}/>
+                  id={this.state.popoverTargetId}>
+          <span>Lastname</span>
+          &nbsp;
+          <i style={{color: 'red'}} className="icon-bubble"/>
+          &nbsp;
+          <span>What the</span>
+          &nbsp;
+          <i style={{color: 'green'}} className="icon-users"/>
+        </InputBox>
         <br/>
         <SimpleSelectBox options={inputs.country.options} value={inputs.country.value}
                          onSelect={this.handleSelectionChange}/>
         {/*<Popover show={this.state.popoverOpen}*/}
-                 {/*target={this.state.popoverTargetId}*/}
-                 {/*toggle={this.togglePopover}*/}
-                 {/*attachment='top center'*/}
-                 {/*reposition={true}*/}
-                 {/*withTriangle={true}*/}
-                 {/*options={{*/}
-                   {/*targetAttachment: 'bottom center',*/}
-                   {/*offset: '-10px 0'*/}
-                 {/*}}>*/}
-          {/*<span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>*/}
+        {/*target={this.state.popoverTargetId}*/}
+        {/*toggle={this.togglePopover}*/}
+        {/*attachment='top center'*/}
+        {/*reposition={true}*/}
+        {/*withTriangle={true}*/}
+        {/*options={{*/}
+        {/*targetAttachment: 'bottom center',*/}
+        {/*offset: '-10px 0'*/}
+        {/*}}>*/}
+        {/*<span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>*/}
         {/*</Popover>*/}
         <br/>
         <select>
