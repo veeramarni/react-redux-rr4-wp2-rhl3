@@ -97,6 +97,10 @@ class DemoPage extends Component {
           value: 'Windlhammelsbach',
           readOnly: false,
           type: 'text',
+        },
+        country: {
+          options: ['Germany', 'France', 'New Zealand'],
+          value: null
         }
       }
     }
@@ -122,6 +126,11 @@ class DemoPage extends Component {
     this.setState({popoverOpen: !this.state.popoverOpen});
   };
 
+  handleSelectionChange = (selection) => {
+    console.log(selection);
+    this.setState({inputs: {...this.state.inputs, country: {...this.state.inputs.country, value: selection}}});
+  };
+
   // Render the component.
   render() {
     let {ping, isPinging} = this.props;
@@ -140,25 +149,28 @@ class DemoPage extends Component {
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
                   id={this.state.popoverTargetId}/>
         <br/>
-        <SimpleSelectBox options={['Option 1', 'Option 2', 'Option 3']}/>
-        <Popover show={this.state.popoverOpen}
-                 target={this.state.popoverTargetId}
-                 toggle={this.togglePopover}
-                 attachment='top center'
-                 reposition={true}
-                 withTriangle={true}
-                 options={{
-                   targetAttachment: 'bottom center',
-                   offset: '-10px 0'
-                 }}>
-          <span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>
-        </Popover>
+        <SimpleSelectBox options={inputs.country.options} value={inputs.country.value}
+                         onSelect={this.handleSelectionChange}/>
+        {/*<Popover show={this.state.popoverOpen}*/}
+                 {/*target={this.state.popoverTargetId}*/}
+                 {/*toggle={this.togglePopover}*/}
+                 {/*attachment='top center'*/}
+                 {/*reposition={true}*/}
+                 {/*withTriangle={true}*/}
+                 {/*options={{*/}
+                   {/*targetAttachment: 'bottom center',*/}
+                   {/*offset: '-10px 0'*/}
+                 {/*}}>*/}
+          {/*<span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>*/}
+        {/*</Popover>*/}
         <br/>
         <select>
-          <option>Option A</option>
-          <option>Option B</option>
-          <option>Option C</option>
+          <option>A Option</option>
+          <option>Another Option</option>
+          <option>B Option</option>
         </select>
+        <br/>
+        <button>Bla</button>
       </div>
     );
   }

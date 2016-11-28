@@ -99,7 +99,6 @@ export default class extends React.Component {
   }
 
   handleClickDocument = (e) => {
-    console.log('WWWWWWWWWWWWW');
     if (e.target === this.element || !this.element.contains(e.target)) {
       if (this.props.toggle) {
         this.props.toggle();

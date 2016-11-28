@@ -35,7 +35,9 @@ export default class InputBox extends Component {
       inputId: new Date().getTime() + Math.random(),
       // Indicate if the input is focused.
       focused: false
-    }
+    };
+    // Initialize internal state.
+    this.mouseDown = false;
   }
 
   // Expected properties.
@@ -48,12 +50,15 @@ export default class InputBox extends Component {
     leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
+    onClick: React.PropTypes.func,
     onFocusChanged: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     valid: React.PropTypes.bool,
     value: React.PropTypes.string.isRequired,
     readOnly: React.PropTypes.bool,
     rightIcons: React.PropTypes.array,
+    suppressReadOnlyStyle: React.PropTypes.bool,
     type: React.PropTypes.string.isRequired
   };
 
@@ -67,26 +72,41 @@ export default class InputBox extends Component {
     }
   }
 
-  handleFocusChange = (focused) => {
-    this.setState({focused: focused});
-    if (this.props.onFocusChanged) {
-      this.props.onFocusChanged(focused);
+  handleInputMouseDown = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    let inputElement = document.getElementById(this.state.inputId);
+    if (document.activeElement !== inputElement) {
+      this.mouseDown = true;
+      inputElement.focus();
+    }
+    if (this.props.onClick) {
+      this.props.onClick();
     }
   };
 
-  handleIconClick = (icon) => {
+  handleIconMouseDown = (event, icon) => {
     if (icon.onClick) {
-      icon.onClick(icon);
+      icon.onClick(event, icon);
+    }
+  };
+
+  handleFocusChange = (event, focused) => {
+    let clicked = this.mouseDown;
+    this.mouseDown = false;
+    this.setState({focused: focused});
+    if (this.props.onFocusChanged) {
+      this.props.onFocusChanged(event, focused, clicked);
     }
   };
 
   // Render the component.
   render() {
-    let {invalid, disabled, id, name, label, leftIcons = [], onChange, placeholder, value, valid, readOnly, rightIcons = [], type} = this.props;
+    let {invalid, disabled, id, name, label, leftIcons = [], onChange, onKeyDown, placeholder, value, valid, readOnly, rightIcons = [], suppressReadOnlyStyle, type} = this.props;
     let {inputId, focused} = this.state;
     let rootStyles = classNames(styles.root, {
       [`${styles.disabled}`]: disabled,
-      [`${styles.readonly}`]: readOnly,
+      [`${styles.readonly}`]: readOnly && !suppressReadOnlyStyle,
       [`${styles.focused}`]: focused,
       [`${styles.invalid}`]: invalid,
       [`${styles.valid}`]: valid
@@ -96,21 +116,31 @@ export default class InputBox extends Component {
       <table className={rootStyles} id={id}>
         <tbody>
         <tr>
-          {leftIcons.map((icon, i) => <td key={i} className={styles.left}><i className={icon.className}
-                                                                             onClick={() => this.handleIconClick(icon)}/>
-          </td>)}
+          {leftIcons.map((icon, i) => <td key={i} className={styles.left}
+                                          onMouseDown={e => this.handleIconMouseDown(e, icon)}><i
+            className={icon.className}/></td>)}
           <td className={styles.center}>
-            <div>
-              <input className={inputStyles} disabled={disabled} id={inputId} name={name} onChange={onChange}
-                     onFocus={() => this.handleFocusChange(true)} onBlur={() => this.handleFocusChange(false)}
-                     value={value} readOnly={readOnly} type={type} placeholder={placeholder}/>
+            <div onMouseDown={this.handleInputMouseDown}>
+              <input className={inputStyles}
+                     disabled={disabled}
+                     id={inputId}
+                     name={name}
+                     onChange={onChange}
+                     onKeyDown={onKeyDown}
+                     onFocus={e => this.handleFocusChange(e, true)}
+                     onBlur={e => this.handleFocusChange(e, false)}
+                     value={value}
+                     readOnly={readOnly}
+                     type={type}
+                     placeholder={placeholder}/>
               {(() => {
-                if (label) return (<label htmlFor={inputId}>{label}</label>);
+                if (label) return (<label id={`${inputId}-label`}>{label}</label>);
               })()}
             </div>
           </td>
-          {rightIcons.map((icon, i) => <td key={i} className={styles.right}><i className={icon.className}
-                                                                               onClick={() => this.handleIconClick(icon)}/>
+          {rightIcons.map((icon, i) => <td key={i} className={styles.right}
+                                           onMouseDown={e => this.handleIconMouseDown(e, icon)}><i
+            className={icon.className}/>
           </td>)}
         </tr>
         </tbody>

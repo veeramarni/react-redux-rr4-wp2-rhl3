@@ -107,6 +107,7 @@ $input-box-label-floating-transition: $form-controls-transition !default;
           padding-right: $gap-small;
         }
         div {
+          z-index: 10000;
           position: relative;
           height: $input-box-label-floating-margin-top + $input-box-label-floating-font-size + $input-box-label-floating-margin-bottom + $input-box-input-font-size + $input-box-input-margin-bottom;
           width: 100%;
