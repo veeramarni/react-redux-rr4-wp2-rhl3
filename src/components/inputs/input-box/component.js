@@ -47,7 +47,7 @@ export default class InputBox extends Component {
     id: React.PropTypes.string,
     inputId: React.PropTypes.string,
     invalid: React.PropTypes.bool,
-    label: React.PropTypes.string,
+    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
     leftIcons: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
@@ -137,9 +137,6 @@ export default class InputBox extends Component {
               {(() => {
                 if (label) {
                   return (<label id={`${inputId}-label`}>{label}</label>);
-                }
-                else if (children) {
-                  return (<label id={`${inputId}-label`}>{children}</label>);
                 }
               })()}
             </div>

@@ -18,3 +18,9 @@
   background-color: white;
   padding: 10px;
 }
+
+.bernd {
+  &:hover {
+    color: red;
+  }
+}

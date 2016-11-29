@@ -13,6 +13,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Match} from 'react-router';
+import classNames from 'classnames';
 
 /**
  * Import local dependencies.
@@ -36,7 +37,6 @@ class DemoPage extends Component {
     super(props);
     // Initialize the local component state. TODO: better use redux!
     this.state = {
-      popoverOpen: false,
       popoverTargetId: '' + new Date().getTime() + Math.random(),
       inputs: {
         firstName: {
@@ -52,7 +52,7 @@ class DemoPage extends Component {
           value: '',
           readOnly: false,
           rightIcons: [{
-            className: 'icon-user-plus'
+            className: classNames('icon-user-plus', styles.bernd)
           }, {
             className: 'icon-user-minus'
           }],
@@ -92,7 +92,17 @@ class DemoPage extends Component {
           id: null,
           invalid: false,
           disabled: false,
-          label: null,
+          label: (
+            <div>
+              <span>Lastname</span>
+              &nbsp;
+              <i style={{color: 'red'}} className="icon-bubble"/>
+              &nbsp;
+              <span>What the</span>
+              &nbsp;
+              <i style={{color: 'green'}} className="icon-users"/>
+            </div>
+          ),
           valid: false,
           value: 'Windlhammelsbach',
           readOnly: false,
@@ -122,10 +132,6 @@ class DemoPage extends Component {
     }
   };
 
-  togglePopover = () => {
-    this.setState({popoverOpen: !this.state.popoverOpen});
-  };
-
   handleSelectionChange = (selection) => {
     console.log(selection);
     this.setState({inputs: {...this.state.inputs, country: {...this.state.inputs.country, value: selection}}});
@@ -139,38 +145,17 @@ class DemoPage extends Component {
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
-        <h1 onClick={this.togglePopover}>{JSON.stringify(isPinging)}++{JSON.stringify(this.state.popoverOpen)}</h1>
+        <h1>{JSON.stringify(isPinging)}</h1>
         <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
         <br/>
         <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
         <br/>
         <InputBox name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
         <br/>
-        <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"
-                  id={this.state.popoverTargetId}>
-          <span>Lastname</span>
-          &nbsp;
-          <i style={{color: 'red'}} className="icon-bubble"/>
-          &nbsp;
-          <span>What the</span>
-          &nbsp;
-          <i style={{color: 'green'}} className="icon-users"/>
-        </InputBox>
+        <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
         <br/>
         <SimpleSelectBox options={inputs.country.options} value={inputs.country.value}
                          onSelect={this.handleSelectionChange}/>
-        {/*<Popover show={this.state.popoverOpen}*/}
-        {/*target={this.state.popoverTargetId}*/}
-        {/*toggle={this.togglePopover}*/}
-        {/*attachment='top center'*/}
-        {/*reposition={true}*/}
-        {/*withTriangle={true}*/}
-        {/*options={{*/}
-        {/*targetAttachment: 'bottom center',*/}
-        {/*offset: '-10px 0'*/}
-        {/*}}>*/}
-        {/*<span style={{backgroundColor: "white", border: "1px solid black"}}>Bla Bla Bla</span>*/}
-        {/*</Popover>*/}
         <br/>
         <select>
           <option>A Option</option>
