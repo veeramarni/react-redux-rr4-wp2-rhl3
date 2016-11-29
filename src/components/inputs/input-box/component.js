@@ -48,7 +48,7 @@ export default class InputBox extends Component {
     inputId: React.PropTypes.string,
     invalid: React.PropTypes.bool,
     label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
-    leftIcons: React.PropTypes.array,
+    leftAddOns: React.PropTypes.array,
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onClick: React.PropTypes.func,
@@ -58,7 +58,7 @@ export default class InputBox extends Component {
     valid: React.PropTypes.bool,
     value: React.PropTypes.string.isRequired,
     readOnly: React.PropTypes.bool,
-    rightIcons: React.PropTypes.array,
+    rightAddOns: React.PropTypes.array,
     suppressReadOnlyStyle: React.PropTypes.bool,
     type: React.PropTypes.string.isRequired
   };
@@ -86,12 +86,6 @@ export default class InputBox extends Component {
     }
   };
 
-  handleIconMouseDown = (event, icon) => {
-    if (icon.onClick) {
-      icon.onClick(event, icon);
-    }
-  };
-
   handleFocusChange = (event, focused) => {
     let clicked = this.mouseDown;
     this.mouseDown = false;
@@ -103,7 +97,7 @@ export default class InputBox extends Component {
 
   // Render the component.
   render() {
-    let {children, disabled, invalid, id, name, label, leftIcons = [], onChange, onKeyDown, placeholder, value, valid, readOnly, rightIcons = [], suppressReadOnlyStyle, type} = this.props;
+    let {disabled, invalid, id, name, label, leftAddOns = [], onChange, onKeyDown, placeholder, value, valid, readOnly, rightAddOns = [], suppressReadOnlyStyle, type} = this.props;
     let {inputId, focused} = this.state;
     let rootStyles = classNames(styles.root, {
       [`${styles.disabled}`]: disabled,
@@ -117,9 +111,7 @@ export default class InputBox extends Component {
       <table className={rootStyles} id={id}>
         <tbody>
         <tr>
-          {leftIcons.map((icon, i) => <td key={i} className={styles.left}
-                                          onMouseDown={e => this.handleIconMouseDown(e, icon)}><i
-            className={icon.className}/></td>)}
+          {leftAddOns.map((addOn, i) => <td key={i} className={styles.left}>{addOn}</td>)}
           <td className={styles.center}>
             <div onMouseDown={this.handleInputMouseDown}>
               <input className={inputStyles}
@@ -141,10 +133,7 @@ export default class InputBox extends Component {
               })()}
             </div>
           </td>
-          {rightIcons.map((icon, i) => <td key={i} className={styles.right}
-                                           onMouseDown={e => this.handleIconMouseDown(e, icon)}><i
-            className={icon.className}/>
-          </td>)}
+          {rightAddOns.map((addOn, i) => <td key={i} className={styles.right}>{addOn}</td>)}
         </tr>
         </tbody>
       </table>

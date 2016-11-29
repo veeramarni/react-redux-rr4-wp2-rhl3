@@ -21,7 +21,8 @@ import classNames from 'classnames';
 import {pingCreator} from './actions';
 import InputBox from '../../inputs/input-box/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
-import Popover from '../../popover/component';
+import Button from '../../inputs/button/component';
+import AddOnButton from '../../inputs/add-on-button/component';
 
 /**
  * Import styles.
@@ -44,18 +45,12 @@ class DemoPage extends Component {
           invalid: false,
           disabled: false,
           label: 'Vorname',
-          leftIcons: [{
-            className: 'icon-user'
-          }],
+          leftAddOns: [<i className="icon-user"/>],
           placeholder: 'Type "Bumm" to validate!',
           valid: false,
           value: '',
           readOnly: false,
-          rightIcons: [{
-            className: classNames('icon-user-plus', styles.bernd)
-          }, {
-            className: 'icon-user-minus'
-          }],
+          rightAddOns: [<AddOnButton><i className="icon-user-plus"/></AddOnButton>, <i className="icon-user-minus"/>],
           type: 'text',
         },
         middleName: {
@@ -63,14 +58,12 @@ class DemoPage extends Component {
           invalid: false,
           disabled: true,
           label: 'Mittelnamen',
-          leftIcons: [{
-            className: 'icon-user-tie'
-          }],
+          leftAddOns: [<i className="icon-user-tie"/>],
           placeholder: 'Please be honest!',
           valid: false,
           value: 'Horst Walter',
           readOnly: false,
-          rightIcons: [],
+          rightAddOns: [],
           type: 'text',
         },
         nickName: {
@@ -78,14 +71,12 @@ class DemoPage extends Component {
           invalid: false,
           disabled: false,
           label: 'Spitzname',
-          leftIcons: [],
+          leftAddOns: [],
           placeholder: 'Please be honest!',
           valid: false,
           value: 'Horst Walter',
           readOnly: true,
-          rightIcons: [{
-            className: 'icon-user-check'
-          }],
+          rightAddOns: [<i className="icon-user-check"/>],
           type: 'text',
         },
         lastName: {
@@ -146,21 +137,29 @@ class DemoPage extends Component {
         <button onClick={() => ping()}>Ping</button>
         <h1>{JSON.stringify(isPinging)}</h1>
         <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
+        &nbsp;
+        <Button onClick={() => ping()}>Ping</Button>
+        <br/>
         <br/>
         <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
         <br/>
+        <br/>
         <InputBox name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
+        <br/>
         <br/>
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
         <br/>
+        <br/>
         <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
                          onSelect={this.handleSelectionChange}/>
+        <br/>
         <br/>
         <select>
           <option>A Option</option>
           <option>Another Option</option>
           <option>B Option</option>
         </select>
+        <br/>
         <br/>
         <button>Bla</button>
       </div>

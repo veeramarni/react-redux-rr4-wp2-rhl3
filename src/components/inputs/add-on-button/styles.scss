@@ -1,0 +1,65 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'variables';
+
+/**
+ * AddOnButton variables.
+ */
+
+// AddOnButton
+$add-on-button-background-color: $form-controls-background-color !default;
+$add-on-button-border-style: $form-controls-border-style !default;
+$add-on-button-border-radius: $form-controls-border-radius !default;
+$add-on-button-border-color-transition: $form-controls-transition !default;
+// AddOnButton : disabled
+$add-on-button-disabled-opacity: $form-controls-disabled-opacity !default;
+// AddOnButton : readonly
+$add-on-button-readonly-border-opacity: $form-controls-readonly-border-opacity !default;
+$add-on-button-readonly-background-color: $form-controls-readonly-background-color !default;
+// AddOnButton : unfocused
+$add-on-button-unfocused-border-color: $form-controls-unfocused-border-color !default;
+$add-on-button-unfocused-valid-border-color: $form-controls-unfocused-valid-border-color !default;
+$add-on-button-unfocused-valid-shadow: $form-controls-unfocused-valid-shadow !default;
+$add-on-button-unfocused-invalid-border-color : $form-controls-unfocused-invalid-border-color !default;
+$add-on-button-unfocused-invalid-shadow: $form-controls-unfocused-invalid-shadow !default;
+// AddOnButton : focused
+$add-on-button-focused-border-color: $form-controls-focused-border-color !default;
+$add-on-button-focused-shadow: $form-controls-focused-shadow !default;
+$add-on-button-focused-valid-border-color: $form-controls-focused-valid-border-color !default;
+$add-on-button-focused-valid-shadow: $form-controls-focused-valid-shadow !default;
+$add-on-button-focused-invalid-border-color : $form-controls-focused-invalid-border-color !default;
+$add-on-button-focused-invalid-shadow: $form-controls-focused-invalid-shadow !default;
+// input
+$add-on-button-input-font-size: $form-controls-input-font-size !default;
+$add-on-button-input-margin-bottom: $form-controls-input-margin-bottom !default;
+$add-on-button-input-color: $form-controls-color !default;
+// input placeholder
+$add-on-button-placeholder-color: $form-controls-placeholder-color !default;
+$add-on-button-placeholder-transition: $form-controls-transition !default;
+// label
+$add-on-button-label-color: $form-controls-label-color !default;
+// label floating
+$add-on-button-label-floating-font-size: $form-controls-label-floating-font-size !default;
+$add-on-button-label-floating-margin-top: $form-controls-label-floating-margin-top !default;
+$add-on-button-label-floating-margin-bottom: $form-controls-label-floating-margin-bottom !default;
+$add-on-button-label-floating-color: $form-controls-label-floating-color !default;
+$add-on-button-label-floating-transition: $form-controls-transition !default;
+
+/**
+ * AddOnButton styles.
+ */
+.root {
+  border: none;
+  background-color: $add-on-button-background-color;
+  width: 100%;
+  height: 100%;
+}

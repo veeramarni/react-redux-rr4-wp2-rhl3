@@ -39,15 +39,12 @@ export default class SimpleSelectBox extends Component {
         invalid: false,
         disabled: false,
         label: 'Country',
-        leftIcons: [],
+        leftAddOns: [],
         placeholder: 'Type or select something',
         valid: false,
         value: '',
         readOnly: true,
-        rightIcons: [{
-          className: 'icon-chevron-down',
-          onClick: this.handleIconClick
-        }],
+        rightAddOns: [<i className="icon-chevron-down" onMouseDown={this.handleIconClick}/>],
         suppressReadOnlyStyle: true,
         type: 'text',
       },
@@ -137,15 +134,15 @@ export default class SimpleSelectBox extends Component {
       case 13:
         this.showPopover(false);
         break;
-        // space
+      // space
       case 32:
         this.showPopover(true);
         break;
-        // escape
+      // escape
       case 27:
         this.showPopover(false);
         break;
-        // up
+      // up
       case 38: {
         let nextIndex = this.getSelectedIndex() - 1;
         if (nextIndex < 0 || !this.props.onSelect) {

@@ -53,11 +53,15 @@ $input-box-label-floating-margin-top: $form-controls-label-floating-margin-top !
 $input-box-label-floating-margin-bottom: $form-controls-label-floating-margin-bottom !default;
 $input-box-label-floating-color: $form-controls-label-floating-color !default;
 $input-box-label-floating-transition: $form-controls-transition !default;
+// icon
+$input-box-icon-font-size: $form-controls-icon-font-size !default;
 
 /**
  * InputBox styles.
  */
 .root {
+  vertical-align: middle;
+  display: inline-block;
   border: $input-box-border-style $input-box-unfocused-border-color;
   box-shadow: none;
   border-radius: $input-box-border-radius;
@@ -94,20 +98,21 @@ $input-box-label-floating-transition: $form-controls-transition !default;
   tbody {
     tr {
       td {
-        position: relative;
+        height: $input-box-label-floating-margin-top + $input-box-label-floating-font-size + $input-box-label-floating-margin-bottom + $input-box-input-font-size + $input-box-input-margin-bottom;
         padding: 0;
         &.left {
           padding-left: $gap-small;
+          font-size: $input-box-icon-font-size;
         }
         &.right {
           padding-right: $gap-small;
+          font-size: $input-box-icon-font-size;
         }
         &.center {
           padding-left: $gap-small;
           padding-right: $gap-small;
         }
         div {
-          z-index: 10000;
           position: relative;
           height: $input-box-label-floating-margin-top + $input-box-label-floating-font-size + $input-box-label-floating-margin-bottom + $input-box-input-font-size + $input-box-input-margin-bottom;
           width: 100%;
