@@ -133,7 +133,6 @@ class DemoPage extends Component {
   };
 
   handleSelectionChange = (selection) => {
-    console.log(selection);
     this.setState({inputs: {...this.state.inputs, country: {...this.state.inputs.country, value: selection}}});
   };
 
@@ -154,7 +153,7 @@ class DemoPage extends Component {
         <br/>
         <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
         <br/>
-        <SimpleSelectBox options={inputs.country.options} value={inputs.country.value}
+        <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
                          onSelect={this.handleSelectionChange}/>
         <br/>
         <select>

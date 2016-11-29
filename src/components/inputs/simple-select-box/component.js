@@ -67,9 +67,10 @@ export default class SimpleSelectBox extends Component {
 
   // Expected properties.
   static propTypes = {
+    name: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     options: React.PropTypes.array,
-    selectedOption: React.PropTypes.string
+    value: React.PropTypes.string
   };
 
   // Invoked once, both on the client and server, immediately before the initial rendering occurs.
@@ -87,7 +88,7 @@ export default class SimpleSelectBox extends Component {
   }
 
   getSelectedIndex = () => {
-
+    return this.props.options.indexOf(this.props.value);
   };
 
   showPopover = show => {
@@ -132,12 +133,36 @@ export default class SimpleSelectBox extends Component {
 
   handleInputKeyDown = event => {
     switch (event.keyCode) {
+      // enter
+      case 13:
+        this.showPopover(false);
+        break;
+        // space
       case 32:
         this.showPopover(true);
         break;
+        // escape
       case 27:
         this.showPopover(false);
         break;
+        // up
+      case 38: {
+        let nextIndex = this.getSelectedIndex() - 1;
+        if (nextIndex < 0 || !this.props.onSelect) {
+          break;
+        }
+        this.props.onSelect(this.props.options[nextIndex], nextIndex);
+        break;
+      }
+      // down
+      case 40: {
+        let nextIndex = this.getSelectedIndex() + 1;
+        if (nextIndex >= this.props.options.length || !this.props.onSelect) {
+          break;
+        }
+        this.props.onSelect(this.props.options[nextIndex], nextIndex);
+        break;
+      }
     }
   };
 
@@ -155,7 +180,9 @@ export default class SimpleSelectBox extends Component {
         <Popover {...popover} target={input.id}>
           <div className={styles.options}>
             {options.map((option, i) => (
-              <div key={i} className={styles.option} onMouseDown={(e) => this.handleOptionClick(e, option, i)}
+              <div key={i}
+                   className={classNames(styles.option, {[`${styles.selected}`]: this.getSelectedIndex() === i})}
+                   onMouseDown={(e) => this.handleOptionClick(e, option, i)}
                    tabIndex="0">{option}</div>))}
           </div>
         </Popover>
