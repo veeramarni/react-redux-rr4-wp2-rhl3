@@ -23,6 +23,7 @@ import InputBox from '../../inputs/input-box/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
 import Button from '../../inputs/button/component';
 import AddOnButton from '../../inputs/add-on-button/component';
+import ButtonGroup from '../../inputs/button-group/component';
 
 /**
  * Import styles.
@@ -138,7 +139,11 @@ class DemoPage extends Component {
         <h1>{JSON.stringify(isPinging)}</h1>
         <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
         &nbsp;
-        <Button onClick={() => ping()}>Ping</Button>
+        <ButtonGroup>
+          <Button onClick={() => ping()}>Ping</Button>
+          <Button>Blob</Button>
+          <Button>Blub</Button>
+        </ButtonGroup>
         <br/>
         <br/>
         <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>

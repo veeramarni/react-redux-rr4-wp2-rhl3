@@ -1,0 +1,75 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'variables';
+
+/**
+ * Button variables.
+ */
+
+// Button
+$button-background-color: $form-controls-background-color !default;
+$button-border-style: $form-controls-border-style !default;
+$button-border-radius: $form-controls-border-radius !default;
+$button-border-color-transition: $form-controls-transition !default;
+// Button : disabled
+$button-disabled-opacity: $form-controls-disabled-opacity !default;
+// Button : readonly
+$button-readonly-border-opacity: $form-controls-readonly-border-opacity !default;
+$button-readonly-background-color: $form-controls-readonly-background-color !default;
+// Button : unfocused
+$button-unfocused-border-color: $form-controls-unfocused-border-color !default;
+$button-unfocused-valid-border-color: $form-controls-unfocused-valid-border-color !default;
+$button-unfocused-valid-shadow: $form-controls-unfocused-valid-shadow !default;
+$button-unfocused-invalid-border-color : $form-controls-unfocused-invalid-border-color !default;
+$button-unfocused-invalid-shadow: $form-controls-unfocused-invalid-shadow !default;
+// Button : focused
+$button-focused-border-color: $form-controls-focused-border-color !default;
+$button-focused-shadow: $form-controls-focused-shadow !default;
+$button-focused-valid-border-color: $form-controls-focused-valid-border-color !default;
+$button-focused-valid-shadow: $form-controls-focused-valid-shadow !default;
+$button-focused-invalid-border-color : $form-controls-focused-invalid-border-color !default;
+$button-focused-invalid-shadow: $form-controls-focused-invalid-shadow !default;
+// input
+$button-input-font-size: $form-controls-input-font-size !default;
+$button-input-margin-bottom: $form-controls-input-margin-bottom !default;
+$button-input-color: $form-controls-color !default;
+// input placeholder
+$button-placeholder-color: $form-controls-placeholder-color !default;
+$button-placeholder-transition: $form-controls-transition !default;
+// label
+$button-label-color: $form-controls-label-color !default;
+// label floating
+$button-label-floating-font-size: $form-controls-label-floating-font-size !default;
+$button-label-floating-margin-top: $form-controls-label-floating-margin-top !default;
+$button-label-floating-margin-bottom: $form-controls-label-floating-margin-bottom !default;
+$button-label-floating-color: $form-controls-label-floating-color !default;
+$button-label-floating-transition: $form-controls-transition !default;
+
+/**
+ * Button styles.
+ */
+.root {
+  display: inline-block;
+  button:first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: none !important;
+  }
+  button:not(:first-child):not(:last-child) {
+    border-radius: 0 !important;
+    border-right: none !important;
+  }
+  button:last-child {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}

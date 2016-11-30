@@ -30,15 +30,13 @@ export default class Button extends Component {
   constructor(props) {
     super(props);
     // Initialize the local component state.
-    this.state = {
-    };
+    this.state = {};
   }
 
   // Expected properties.
   static propTypes = {
     children: React.PropTypes.node,
-    className: React.PropTypes.string,
-    onClick: React.PropTypes.func
+    className: React.PropTypes.string
   };
 
   // Invoked once, both on the client and server, immediately before the initial rendering occurs.
@@ -58,7 +56,7 @@ export default class Button extends Component {
   render() {
     let {children, className} = this.props;
     return (
-      <button className={classNames(styles.root, className)} onClick={this.props.onClick}>{children}</button>
+      <div className={classNames(styles.root, className)}>{children}</div>
     );
   }
 }
