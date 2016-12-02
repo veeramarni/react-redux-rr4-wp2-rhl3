@@ -89,3 +89,5 @@ $form-controls-label-floating-margin-top: $gap-small !default;
 $form-controls-label-floating-margin-bottom: $gap-tiny !default;
 // icon
 $form-controls-icon-font-size: $font-size-big !default;
+// computed
+$form-controls-height: $form-controls-label-floating-margin-top + $form-controls-label-floating-font-size + $form-controls-label-floating-margin-bottom + $form-controls-input-font-size + $form-controls-input-margin-bottom !default;

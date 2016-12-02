@@ -1,0 +1,99 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import '../input/variables';
+
+/**
+ * Button styles.
+ */
+.root {
+  vertical-align: middle;
+  display: inline-flex;
+  border: $input-border-style $input-unfocused-border-color;
+  box-shadow: none;
+  border-radius: $input-border-radius;
+  border-spacing: 0;
+  background-color: $input-background-color;
+  &.disabled {
+    opacity: $input-disabled-opacity;
+    & > :global(.Input) {
+      opacity: 1;
+    }
+  }
+  &.readonly {
+    border-color: rgba($input-unfocused-border-color, $form-controls-readonly-border-opacity);
+    background-color: $input-readonly-background-color;
+    & > button {
+      background-color: transparent;
+    }
+  }
+  &.invalid {
+    box-shadow: $input-unfocused-invalid-shadow;
+    border-color: $input-unfocused-invalid-border-color;
+  }
+  &.valid {
+    box-shadow: $input-unfocused-valid-shadow;
+    border-color: $input-unfocused-valid-border-color;
+  }
+  &.focused {
+    box-shadow: $input-focused-shadow;
+    border-color: $input-focused-border-color;
+    &.invalid {
+      box-shadow: $input-focused-invalid-shadow;
+      border-color: $input-focused-invalid-border-color;
+    }
+    &.valid {
+      box-shadow: $input-focused-valid-shadow;
+      border-color: $input-focused-valid-border-color;
+    }
+  }
+  > :global(.Button), :global(.Icon) {
+    box-sizing: border-box !important;
+    border-color: transparent !important;
+    border-radius: $input-border-radius !important;
+    box-shadow: none !important;
+    outline: none !important;
+    }
+  > :global(.Button):focus {
+    box-shadow: $input-focused-shadow !important;
+    z-index: 1000 !important;
+  }
+  > :global(.Input) {
+    flex: 1;
+    border: none !important;
+    border-radius: $input-border-radius !important;
+    box-shadow: none !important;
+  }
+  > :global(.Input) > label {
+    left: $gap-small / 2 !important;
+  }
+  > :first-child {
+    padding-right: $gap-small / 2 !important;
+    label {
+      left: $gap-small !important;
+    }
+  }
+  > :not(:first-child):not(:last-child) {
+    padding-left: $gap-small / 2 !important;
+    padding-right: $gap-small / 2 !important;
+  }
+  > :last-child {
+    padding-left: $gap-small / 2 !important;
+  }
+  // only one child
+  > :first-child:last-child {
+    padding-left: $gap-small !important;
+    padding-right: $gap-small !important;
+    label {
+      left: $gap-small !important;
+    }
+  }
+}

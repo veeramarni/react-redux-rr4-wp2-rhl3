@@ -1,0 +1,60 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+/**
+ * Import the theme variables.
+ */
+@import 'theme';
+
+/**
+ * Input variables.
+ */
+
+// Input
+$input-background-color: $form-controls-background-color !default;
+$input-border-style: $form-controls-border-style !default;
+$input-border-radius: $form-controls-border-radius !default;
+$input-border-color-transition: $form-controls-transition !default;
+// Input : disabled
+$input-disabled-opacity: $form-controls-disabled-opacity !default;
+// Input : readonly
+$input-readonly-border-opacity: $form-controls-readonly-border-opacity !default;
+$input-readonly-background-color: $form-controls-readonly-background-color !default;
+// Input : unfocused
+$input-unfocused-border-color: $form-controls-unfocused-border-color !default;
+$input-unfocused-valid-border-color: $form-controls-unfocused-valid-border-color !default;
+$input-unfocused-valid-shadow: $form-controls-unfocused-valid-shadow !default;
+$input-unfocused-invalid-border-color: $form-controls-unfocused-invalid-border-color !default;
+$input-unfocused-invalid-shadow: $form-controls-unfocused-invalid-shadow !default;
+// Input : focused
+$input-focused-border-color: $form-controls-focused-border-color !default;
+$input-focused-shadow: $form-controls-focused-shadow !default;
+$input-focused-valid-border-color: $form-controls-focused-valid-border-color !default;
+$input-focused-valid-shadow: $form-controls-focused-valid-shadow !default;
+$input-focused-invalid-border-color: $form-controls-focused-invalid-border-color !default;
+$input-focused-invalid-shadow: $form-controls-focused-invalid-shadow !default;
+// input
+$input-input-font-size: $form-controls-input-font-size !default;
+$input-input-margin-bottom: $form-controls-input-margin-bottom !default;
+$input-input-color: $form-controls-color !default;
+// input placeholder
+$input-placeholder-color: $form-controls-placeholder-color !default;
+$input-placeholder-transition: $form-controls-transition !default;
+// label
+$input-label-color: $form-controls-label-color !default;
+// label floating
+$input-label-floating-font-size: $form-controls-label-floating-font-size !default;
+$input-label-floating-margin-top: $form-controls-label-floating-margin-top !default;
+$input-label-floating-margin-bottom: $form-controls-label-floating-margin-bottom !default;
+$input-label-floating-color: $form-controls-label-floating-color !default;
+$input-label-floating-transition: $form-controls-transition !default;
+// icon
+$input-icon-font-size: $form-controls-icon-font-size !default;
+// computed
+$input-height: $form-controls-height !default;

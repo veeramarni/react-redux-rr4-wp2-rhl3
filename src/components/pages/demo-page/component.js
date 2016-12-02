@@ -19,7 +19,9 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
+import Input from '../../inputs/input/component';
 import InputBox from '../../inputs/input-box/component';
+import InputGroup from '../../inputs/input-group/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
 import Button from '../../inputs/button/component';
 import AddOnButton from '../../inputs/add-on-button/component';
@@ -137,7 +139,13 @@ class DemoPage extends Component {
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
         <h1>{JSON.stringify(isPinging)}</h1>
-        <InputBox name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
+        <InputGroup {...firstName} className={styles.bernd}>
+          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
+          <Button><i className="icon-user-plus"/></Button>
+          <Input name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
+          <Button><i className="icon-user-plus"/></Button>
+          <Button><i className="icon-user-plus"/></Button>
+        </InputGroup>
         &nbsp;
         <ButtonGroup>
           <Button onClick={() => ping()}>Ping</Button>
@@ -146,13 +154,21 @@ class DemoPage extends Component {
         </ButtonGroup>
         <br/>
         <br/>
-        <InputBox name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
+        <InputGroup {...middleName}>
+          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
+          <Input name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
+        </InputGroup>
         <br/>
         <br/>
-        <InputBox name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
+        <InputGroup {...nickName}>
+          <Input name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
+          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-check"/></Button>
+        </InputGroup>
         <br/>
         <br/>
-        <InputBox name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
+        <InputGroup {...lastName}>
+          <Input name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
+        </InputGroup>
         <br/>
         <br/>
         <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}

@@ -1,0 +1,33 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+
+/**
+ * Import the theme variables.
+ */
+@import 'theme';
+
+/**
+ * Icon variables.
+ */
+
+// Icon
+$icon-color: $form-controls-color !default;
+$icon-background-color: $form-controls-background-color !default;
+$icon-border-style: $form-controls-border-style !default;
+$icon-border-radius: $form-controls-border-radius !default;
+$icon-border-color-transition: $form-controls-transition !default;
+// Icon : disabled
+$icon-disabled-opacity: $form-controls-disabled-opacity !default;
+// Icon : unfocused
+$icon-unfocused-border-color: $form-controls-unfocused-border-color !default;
+// Icon : focused
+$icon-focused-border-color: $form-controls-focused-border-color !default;
+$icon-focused-shadow: $form-controls-focused-shadow !default;
+// computed
+$icon-height: $form-controls-height !default;

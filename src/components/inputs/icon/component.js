@@ -25,7 +25,7 @@ import styles from './styles.scss';
 /**
  * Export the component.
  */
-export default class ButtonGroup extends Component {
+export default class Icon extends Component {
   // Initialize the component.
   constructor(props) {
     super(props);
@@ -33,15 +33,20 @@ export default class ButtonGroup extends Component {
 
   // Expected properties.
   static propTypes = {
-    children: React.PropTypes.node,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    iconClassName: React.PropTypes.string.isRequired,
+    id: React.PropTypes.string,
+    onClick: React.PropTypes.func
   };
 
   // Render the component.
   render() {
-    let {children, className} = this.props;
+    let {className, iconClassName, id, onClick} = this.props;
+    let rootStyles = classNames('Icon', styles.root, className);
     return (
-      <div className={classNames(styles.root, className)}>{children}</div>
+      <div className={rootStyles}>
+        <i className={iconClassName} id={id} onClick={onClick}/>
+      </div>
     );
   }
 }

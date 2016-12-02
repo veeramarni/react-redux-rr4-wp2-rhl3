@@ -6,21 +6,17 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+
 /**
  * Import the theme variables.
  */
-@import 'variables';
-
-/**
- * SimpleSelectBox variables.
- */
-
-// SimpleSelectBox
+@import './variables';
 
 /**
  * SimpleSelectBox styles.
  */
 .root {
+  display: inline-block;
 }
 
 .options {

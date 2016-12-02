@@ -16,7 +16,9 @@ import classNames from 'classnames';
 /**
  * Import local dependencies.
  */
-import InputBox from '../input-box/component';
+import Icon from '../icon/component';
+import Input from '../input/component';
+import InputGroup from '../input-group/component';
 import Popover from '../../popover/component';
 
 /**
@@ -44,7 +46,7 @@ export default class SimpleSelectBox extends Component {
         valid: false,
         value: '',
         readOnly: true,
-        rightAddOns: [<i className="icon-chevron-down" onMouseDown={this.handleIconClick}/>],
+        rightAddOns: [<i className="icon-chevron-down" onMouseDown={this.handleMouseDown}/>],
         suppressReadOnlyStyle: true,
         type: 'text',
       },
@@ -64,6 +66,7 @@ export default class SimpleSelectBox extends Component {
 
   // Expected properties.
   static propTypes = {
+    className: React.PropTypes.string,
     name: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     options: React.PropTypes.array,
@@ -106,7 +109,7 @@ export default class SimpleSelectBox extends Component {
     this.togglePopover();
   };
 
-  handleIconClick = (event, icon) => {
+  handleMouseDown = (event, icon) => {
     event.preventDefault();
     event.stopPropagation();
     let inputElement = document.getElementById(this.state.input.inputId);
@@ -165,15 +168,20 @@ export default class SimpleSelectBox extends Component {
 
   // Render the component.
   render() {
-    let {options} = this.props;
+    let {className, options} = this.props;
     let {input, popover} = this.state;
+    let rootStyles = classNames('SimpleSelectBox', styles.root, className);
     return (
-      <div className={styles.root}>
-        <InputBox onChange={this.handleInputChange}
-                  onFocusChanged={this.handleInputFocusChange}
-                  onKeyDown={this.handleInputKeyDown}
-                  onClick={this.handleInputClick}
-                  {...input}/>
+      <div className={rootStyles} onMouseDown={this.handleMouseDown}>
+        <InputGroup {...input}>
+          <Input onChange={this.handleInputChange}
+                 onFocusChanged={this.handleInputFocusChange}
+                 onKeyDown={this.handleInputKeyDown}
+                 onClick={this.handleInputClick}
+                 {...input}
+          />
+          <Icon iconClassName="icon-chevron-down"/>
+        </InputGroup>
         <Popover {...popover} target={input.id}>
           <div className={styles.options}>
             {options.map((option, i) => (

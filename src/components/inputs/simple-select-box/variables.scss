@@ -10,15 +10,10 @@
 /**
  * Import the theme variables.
  */
-@import './variables';
+@import 'theme';
 
 /**
- * InputBox styles.
+ * SimpleSelectBox variables.
  */
-.root {
-}
 
-.withTriangle {
-  transition: left $popover-triangle-transition-time;
-  @include withTriangle($popover-default-shadow, $popover-background-color, $popover-border-color, $popover-triangle-transition-time);
-}
+// SimpleSelectBox

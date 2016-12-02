@@ -10,15 +10,13 @@
 /**
  * Import the theme variables.
  */
-@import './variables';
+@import 'theme';
 
 /**
- * InputBox styles.
+ * InputBox variables.
  */
-.root {
-}
 
-.withTriangle {
-  transition: left $popover-triangle-transition-time;
-  @include withTriangle($popover-default-shadow, $popover-background-color, $popover-border-color, $popover-triangle-transition-time);
-}
+$popover-default-shadow: 0 2px toRem(16px) rgba(0,0,0,.3);
+$popover-background-color: $color-white;
+$popover-border-color: $color-dark;
+$popover-triangle-transition-time: 0.3s;

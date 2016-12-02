@@ -30,16 +30,19 @@ export default class Button extends Component {
   constructor(props) {
     super(props);
     // Initialize the local component state.
-    this.state = {
-    };
+    this.state = {};
   }
 
   // Expected properties.
   static propTypes = {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
-    onClick: React.PropTypes.func
+    disabled: React.PropTypes.bool,
+    id: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    suppressDisabledStyle: React.PropTypes.bool
   };
+
 
   // Invoked once, both on the client and server, immediately before the initial rendering occurs.
   // If you call setState within this method,
@@ -56,9 +59,12 @@ export default class Button extends Component {
 
   // Render the component.
   render() {
-    let {children, className} = this.props;
+    let {children, className, disabled, id, onClick, suppressDisabledStyle} = this.props;
+    let rootStyles = classNames('Button', styles.root, className, {
+      [`${styles.disabled}`]: disabled && !suppressDisabledStyle
+    });
     return (
-      <button className={classNames(styles.root, className)} onClick={this.props.onClick}>{children}</button>
+      <button className={rootStyles} disabled={disabled} id={id} onClick={onClick}>{children}</button>
     );
   }
 }
