@@ -18,7 +18,7 @@
   vertical-align: middle;
   display: inline-block;
   font-size: $checkbox-font-size;
-  i {
+  > i {
     font-size: $form-controls-icon-font-size;
     vertical-align: middle;
     display: inline-block;
@@ -33,23 +33,23 @@
     min-height: $checkbox-height;
     min-width: $checkbox-width;
   }
-  span {
+  > span {
     vertical-align: middle;
     margin-left: $gap-tiny;
   }
-  input:disabled ~ i, input:disabled ~ span {
+  > input:disabled ~ i, input:disabled ~ span {
     opacity: $checkbox-disabled-opacity;
   }
-  input:focus ~ i {
+  > input:focus ~ i {
     box-shadow: $checkbox-focused-shadow;
     border-color: $checkbox-focused-border-color;
   }
-  input:not([disabled]) ~ i {
+  > input:not([disabled]) ~ i {
     &:hover {
       background-color: $form-controls-hover-background-color;
     }
   }
-  input {
+  > input {
     opacity: 0;
     width: 0;
   }

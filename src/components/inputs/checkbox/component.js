@@ -49,7 +49,7 @@ export default class Input extends Component {
     indeterminate: React.PropTypes.bool,
     inputId: React.PropTypes.string,
     invalid: React.PropTypes.bool,
-    label: React.PropTypes.string,
+    label: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.element]),
     name: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onClick: React.PropTypes.func,
@@ -132,7 +132,11 @@ export default class Input extends Component {
                value={value}
                type="checkbox"/>
         <i className={iconClassName}/>
-        <span>{label}</span>
+        {(() => {
+          if (label) {
+            return (<span>{label}</span>);
+          }
+        })()}
       </label>
     );
   }

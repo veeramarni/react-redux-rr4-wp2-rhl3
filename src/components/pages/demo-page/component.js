@@ -21,7 +21,6 @@ import classNames from 'classnames';
 import {pingCreator} from './actions';
 import Checkbox from '../../inputs/checkbox/component';
 import Input from '../../inputs/input/component';
-import InputBox from '../../inputs/input-box/component';
 import InputGroup from '../../inputs/input-group/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
 import Button from '../../inputs/button/component';
@@ -111,7 +110,7 @@ class DemoPage extends Component {
           checked: false,
           disabled: false,
           indeterminate: false,
-          label: 'Check me out',
+          label: (<span><span>I have</span><span style={{color: 'red'}}>&nbsp;three&nbsp;</span><span>states</span></span>),
           onChange: () => {
             let {checked, indeterminate} = this.state.inputs.married;
             if (!checked && !indeterminate) {
