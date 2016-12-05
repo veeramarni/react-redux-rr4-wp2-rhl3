@@ -51,8 +51,10 @@ $color-spring: rgb(61, 194, 56) !default;
  * Form controls variables.
  */
 // controls
+$form-controls-font-size: $font-size-medium !default;
 $form-controls-color: $color-dark !default;
 $form-controls-background-color: $color-white !default;
+$form-controls-hover-background-color: $color-aluminium !default;
 $form-controls-border-style: 1px solid !default;
 $form-controls-border-radius: 3px !default;
 $form-controls-transition: .2s ease !default;

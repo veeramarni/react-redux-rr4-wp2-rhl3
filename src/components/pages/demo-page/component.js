@@ -19,6 +19,7 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
+import Checkbox from '../../inputs/checkbox/component';
 import Input from '../../inputs/input/component';
 import InputBox from '../../inputs/input-box/component';
 import InputGroup from '../../inputs/input-group/component';
@@ -105,6 +106,36 @@ class DemoPage extends Component {
         country: {
           options: ['Germany', 'France', 'New Zealand'],
           value: null
+        },
+        married: {
+          checked: false,
+          disabled: false,
+          indeterminate: false,
+          label: 'Check me out',
+          onChange: () => {
+            let {checked, indeterminate} = this.state.inputs.married;
+            if (!checked && !indeterminate) {
+              checked = true;
+            } else if (checked && !indeterminate) {
+              checked = false;
+              indeterminate = true;
+            } else if (!checked && indeterminate) {
+              checked = false;
+              indeterminate = false;
+            }
+            this.setState({
+              inputs: {
+                ...this.state.inputs,
+                married: {...this.state.inputs.married, checked: checked, indeterminate: indeterminate}
+              }
+            })
+          }
+        },
+        happy: {
+          checked: true,
+          disabled: true,
+          indeterminate: false,
+          label: 'Check me out'
         }
       }
     }
@@ -134,7 +165,7 @@ class DemoPage extends Component {
   render() {
     let {ping, isPinging} = this.props;
     let {inputs} = this.state;
-    let {firstName, middleName, nickName, lastName} = inputs;
+    let {firstName, middleName, nickName, lastName, married, happy} = inputs;
     return (
       <div className={styles.root}>
         <button onClick={() => ping()}>Ping</button>
@@ -147,11 +178,15 @@ class DemoPage extends Component {
           <Button><i className="icon-user-plus"/></Button>
         </InputGroup>
         &nbsp;
+        <Checkbox name="happy" {...happy}/>
+        &nbsp;
         <ButtonGroup>
           <Button onClick={() => ping()}>Ping</Button>
-          <Button>Blob</Button>
+          <Button><i className="icon-users"/><span>&nbsp;Blob</span></Button>
           <Button>Blub</Button>
         </ButtonGroup>
+        &nbsp;
+        <Checkbox name="married" {...married}/>
         <br/>
         <br/>
         <InputGroup {...middleName}>

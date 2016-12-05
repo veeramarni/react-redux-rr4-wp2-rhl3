@@ -67,7 +67,7 @@
     z-index: 1000 !important;
   }
   > :global(.Input) {
-    flex: 1;
+    flex: 1 0 auto;
     border: none !important;
     border-radius: $input-border-radius !important;
     box-shadow: none !important;

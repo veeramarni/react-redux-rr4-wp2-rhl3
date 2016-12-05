@@ -1,0 +1,56 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import './variables';
+
+/**
+ * Checkbox styles.
+ */
+.root {
+  vertical-align: middle;
+  display: inline-block;
+  font-size: $checkbox-font-size;
+  i {
+    font-size: $form-controls-icon-font-size;
+    vertical-align: middle;
+    display: inline-block;
+    border: $checkbox-border-style $checkbox-unfocused-border-color;
+    box-shadow: none;
+    border-radius: $checkbox-border-radius;
+    background-color: $checkbox-background-color;
+    padding: $gap-tiny;
+    position: relative;
+    box-sizing: content-box;
+    color: $checkbox-color;
+    min-height: $checkbox-height;
+    min-width: $checkbox-width;
+  }
+  span {
+    vertical-align: middle;
+    margin-left: $gap-tiny;
+  }
+  input:disabled ~ i, input:disabled ~ span {
+    opacity: $checkbox-disabled-opacity;
+  }
+  input:focus ~ i {
+    box-shadow: $checkbox-focused-shadow;
+    border-color: $checkbox-focused-border-color;
+  }
+  input:not([disabled]) ~ i {
+    &:hover {
+      background-color: $form-controls-hover-background-color;
+    }
+  }
+  input {
+    opacity: 0;
+    width: 0;
+  }
+}

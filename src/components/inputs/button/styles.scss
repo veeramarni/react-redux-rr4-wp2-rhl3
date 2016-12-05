@@ -18,6 +18,7 @@
 .root {
   vertical-align: middle;
   display: inline-block;
+  font-size: $button-font-size;
   border: $button-border-style $button-unfocused-border-color;
   box-shadow: none;
   border-radius: $button-border-radius;
@@ -36,10 +37,14 @@
   }
   &:not([disabled]) {
     &:hover {
-      background-color: $color-aluminium;
+      background-color: $form-controls-hover-background-color;
     }
   }
   > i {
+    vertical-align: middle;
+    font-size: $form-controls-icon-font-size;
+  }
+  > span {
     vertical-align: middle;
   }
 }
