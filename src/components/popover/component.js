@@ -57,7 +57,13 @@ export default class extends React.Component {
     this.tether = new Tether(Object.assign({
       element: this.element,
       target: this.target,
-      attachment: this.props.attachment || 'top left'
+      attachment: this.props.attachment || 'top left',
+      constraints: [
+        {
+          to: 'scrollParent',
+          pin: true
+        }
+      ]
     }, this.props.options));
 
     this.handleChangeProps(this.props);
@@ -101,26 +107,42 @@ export default class extends React.Component {
   handleClickDocument = (e) => {
     if (e.target === this.element || !this.element.contains(e.target)) {
       if (this.props.toggle) {
-        this.props.toggle();
+        this.props.toggle(); // todo maybe let the outer component decide?
       }
     }
   };
 
   // Render the component.
   render() {
-    let classes = classnames(styles.root, {
-      [`${styles.withTriangle}`]: this.props.withTriangle,
-      [`${this.props.additionalClass}`]: this.props.additionalClass
-    });
-    let styles = {
-      visibility: this.props.show ? '' : 'hidden',
-      minWidth: this.props.alignWidth && this.target ? this.target.offsetWidth : ''
+    let {alignWidth, className, withTriangle, show} = this.props;
+    let rootStyles = classnames(styles.root, className);
+    let rootCalculatedStyles = {
+      visibility: show ? '' : 'hidden',
+      minWidth: alignWidth && this.target ? this.target.offsetWidth : ''
     };
-    // Use visibility instead of display to avoid position calculation problems with 'center' positioning.
-    return (
-      <div className={classes} style={styles}>
-        {this.props.children}
-      </div>
-    );
+    let left = '50%';
+    let targetBounds = this.target ? this.target.getBoundingClientRect() : null;
+    let elementBounds = this.element ? this.element.getBoundingClientRect() : null;
+    console.log(targetBounds, elementBounds);
+    if (targetBounds && elementBounds) {
+      if (targetBounds.width < elementBounds.width) {
+        left = targetBounds.left - elementBounds.left + targetBounds.width / 2;
+      }
+    }
+    if (withTriangle) {
+      return (
+        <div className={rootStyles} style={rootCalculatedStyles}>
+          <div className={styles.triangle1} style={{left: left}}></div>
+          <div className={styles.triangle2} style={{left: left}}></div>
+          {this.props.children}
+        </div>
+      );
+    } else {
+      return (
+        <div className={rootStyles} style={rootCalculatedStyles}>
+          {this.props.children}
+        </div>
+      );
+    }
   }
 }

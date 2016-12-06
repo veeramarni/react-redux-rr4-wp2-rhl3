@@ -6,7 +6,6 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 /**
  * Import the theme variables.
  */
@@ -16,9 +15,31 @@
  * InputBox styles.
  */
 .root {
-}
+  .triangle1,
+  .triangle2 {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-left: 0.5rem;
+    left: 50%;
+    box-sizing: border-box;
 
-.withTriangle {
-  transition: left $popover-triangle-transition-time;
-  @include withTriangle($popover-default-shadow, $popover-background-color, $popover-border-color, $popover-triangle-transition-time);
+    border: 0.5rem solid $popover-border-color;
+
+    transform-origin: 0 0;
+    transform: rotate(135deg);
+    transition: left $popover-triangle-transition-time;
+  }
+  .triangle1 {
+    z-index: -1;
+    top: 1px;
+    border-color: transparent transparent $popover-border-color $popover-border-color;
+
+    box-shadow: $popover-default-shadow;
+  }
+  .triangle2 {
+    top: 2px;
+    border-color: transparent transparent $popover-background-color $popover-background-color;
+  }
 }

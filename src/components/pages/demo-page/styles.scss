@@ -6,6 +6,10 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+/**
+ * Import the theme variables.
+ */
+@import 'theme';
 
 /**
  * Component styles.
@@ -16,8 +20,20 @@
   height: 100%;
   width: 100%;
   background-color: white;
-  padding: 10px;
+  .filterBar {
+    background-color: $form-controls-background-color;
+    > :global(.ToolBarItem) {
+      border-right: $form-controls-border-style $color-aluminium;
+    }
+  }
+  .toolBar {
+    background-color: $color-aluminium;
+  }
+  .form {
+    padding: 10px;
+  }
 }
+
 .bernd {
   width: 400px;
 }

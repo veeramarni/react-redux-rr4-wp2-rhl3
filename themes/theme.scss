@@ -47,10 +47,18 @@ $color-ruby: rgba(163, 64, 62, 0.7) !default;
 $color-lavender: rgba(67, 133, 240, 0.7) !default;
 $color-spring: rgb(61, 194, 56) !default;
 
+$color-bernd-blue: #006d90 !default;
+
 /**
  * Form controls variables.
  */
-// controls
+// popups
+$popups-border-radius: 3px !default;
+$popups-border-style: 1px solid !default;
+$popups-border-color: $color-tungsten !default;
+$popups-background-border-color: $color-white !default;
+$popups-shadow: 0 2px 8px rgba(0,0,0,.3) !default;
+// form-controls
 $form-controls-font-size: $font-size-medium !default;
 $form-controls-color: $color-dark !default;
 $form-controls-background-color: $color-white !default;
@@ -93,3 +101,11 @@ $form-controls-label-floating-margin-bottom: $gap-tiny !default;
 $form-controls-icon-font-size: $font-size-big !default;
 // computed
 $form-controls-height: $form-controls-label-floating-margin-top + $form-controls-label-floating-font-size + $form-controls-label-floating-margin-bottom + $form-controls-input-font-size + $form-controls-input-margin-bottom !default;
+// buttons
+$button-tiny-height: 16px !default;
+$button-small-height: 20px !default;
+$button-medium-height: 24px !default;
+$button-big-height: 28px !default;
+$button-huge-height: 32px !default;
+$button-giant-height: 40px !default;
+$button-godzilla-height: 48px !default;

@@ -19,13 +19,17 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
+import AddOnButton from '../../inputs/add-on-button/component';
+import Button from '../../inputs/button/component';
+import ButtonGroup from '../../inputs/button-group/component';
+import {buttonBig} from '../../inputs/button/styles.scss';
 import Checkbox from '../../inputs/checkbox/component';
+import DropDown from '../../inputs/drop-down/component';
 import Input from '../../inputs/input/component';
 import InputGroup from '../../inputs/input-group/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
-import Button from '../../inputs/button/component';
-import AddOnButton from '../../inputs/add-on-button/component';
-import ButtonGroup from '../../inputs/button-group/component';
+import ToolBar from '../../inputs/tool-bar/component';
+import ToolBarItem from '../../inputs/tool-bar-item/component';
 
 /**
  * Import styles.
@@ -110,7 +114,8 @@ class DemoPage extends Component {
           checked: false,
           disabled: false,
           indeterminate: false,
-          label: (<span><span>I have</span><span style={{color: 'red'}}>&nbsp;three&nbsp;</span><span>states</span></span>),
+          label: (
+            <span><span>I have</span><span style={{color: 'red'}}>&nbsp;three&nbsp;</span><span>states</span></span>),
           onChange: () => {
             let {checked, indeterminate} = this.state.inputs.married;
             if (!checked && !indeterminate) {
@@ -167,56 +172,80 @@ class DemoPage extends Component {
     let {firstName, middleName, nickName, lastName, married, happy} = inputs;
     return (
       <div className={styles.root}>
-        <button onClick={() => ping()}>Ping</button>
-        <h1>{JSON.stringify(isPinging)}</h1>
-        <InputGroup {...firstName} className={styles.bernd}>
-          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
-          <Button><i className="icon-user-plus"/></Button>
-          <Input name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
-          <Button><i className="icon-user-plus"/></Button>
-          <Button><i className="icon-user-plus"/></Button>
-        </InputGroup>
-        &nbsp;
-        <Checkbox name="happy" {...happy}/>
-        &nbsp;
-        <ButtonGroup>
-          <Button onClick={() => ping()}>Ping</Button>
-          <Button><i className="icon-users"/><span>&nbsp;Blob</span></Button>
-          <Button>Blub</Button>
-        </ButtonGroup>
-        &nbsp;
-        <Checkbox name="married" {...married}/>
-        <br/>
-        <br/>
-        <InputGroup {...middleName}>
-          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
-          <Input name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
-        </InputGroup>
-        <br/>
-        <br/>
-        <InputGroup {...nickName}>
-          <Input name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
-          <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-check"/></Button>
-        </InputGroup>
-        <br/>
-        <br/>
-        <InputGroup {...lastName}>
-          <Input name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
-        </InputGroup>
-        <br/>
-        <br/>
-        <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
-                         onSelect={this.handleSelectionChange}/>
-        <br/>
-        <br/>
-        <select>
-          <option>A Option</option>
-          <option>Another Option</option>
-          <option>B Option</option>
-        </select>
-        <br/>
-        <br/>
-        <button>Bla</button>
+        <ToolBar className={styles.filterBar}>
+          <ToolBarItem>
+            <DropDown>
+              <div><span>My Expenses</span><i className="icon-chevron-down"/></div>
+              <span>Wessels Bim Bessels baba</span>
+            </DropDown>
+          </ToolBarItem>
+          <ToolBarItem flex={1}>
+            <div style={{fontSize: 24}}>Bernd</div>
+          </ToolBarItem>
+          <ToolBarItem>
+            <i className="icon-bubble"></i>
+          </ToolBarItem>
+        </ToolBar>
+        <ToolBar className={styles.toolBar}>
+          <ToolBarItem>
+            <Button className={buttonBig}>Complete</Button>
+          </ToolBarItem>
+          <ToolBarItem>
+            <Button className={buttonBig} disabled={true}>Apply Expense Template</Button>
+          </ToolBarItem>
+        </ToolBar>
+        <div className={styles.form}>
+          <button onClick={() => ping()}>Ping</button>
+          <h1>{JSON.stringify(isPinging)}</h1>
+          <InputGroup {...firstName} className={styles.bernd}>
+            <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
+            <Button><i className="icon-user-plus"/></Button>
+            <Input name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
+            <Button><i className="icon-user-plus"/></Button>
+            <Button><i className="icon-user-plus"/></Button>
+          </InputGroup>
+          &nbsp;
+          <Checkbox name="happy" {...happy}/>
+          &nbsp;
+          <ButtonGroup>
+            <Button onClick={() => ping()}>Ping</Button>
+            <Button><i className="icon-users"/><span>&nbsp;Blob</span></Button>
+            <Button>Blub</Button>
+          </ButtonGroup>
+          &nbsp;
+          <Checkbox name="married" {...married}/>
+          <br/>
+          <br/>
+          <InputGroup {...middleName}>
+            <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
+            <Input name="middleName" onChange={this.handleInputChange} {...middleName} type="text"/>
+          </InputGroup>
+          <br/>
+          <br/>
+          <InputGroup {...nickName}>
+            <Input name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
+            <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-check"/></Button>
+          </InputGroup>
+          <br/>
+          <br/>
+          <InputGroup {...lastName}>
+            <Input name="lastName" onChange={this.handleInputChange} {...lastName} type="text"/>
+          </InputGroup>
+          <br/>
+          <br/>
+          <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
+                           onSelect={this.handleSelectionChange}/>
+          <br/>
+          <br/>
+          <select>
+            <option>A Option</option>
+            <option>Another Option</option>
+            <option>B Option</option>
+          </select>
+          <br/>
+          <br/>
+          <button>Bla</button>
+        </div>
       </div>
     );
   }

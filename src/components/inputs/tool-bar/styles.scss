@@ -6,17 +6,20 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 /**
  * Import the theme variables.
  */
 @import 'theme';
 
 /**
- * Popover variables.
+ * Button styles.
  */
-
-$popover-default-shadow: $popups-shadow;
-$popover-background-color: $popups-background-border-color;
-$popover-border-color: $popups-border-color;
-$popover-triangle-transition-time: 0.3s;
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  > :last-child {
+    border-right: none !important;
+  }
+}

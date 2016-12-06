@@ -19,24 +19,10 @@
   display: inline-block;
 }
 
-.options {
-  font-size: $form-controls-input-font-size;
-  color: $form-controls-color;
+.dropdown {
   background-color: $popups-background-border-color;
   border: $popups-border-style $popups-border-color;
-  border-radius: 0 0 $popups-border-radius $popups-border-radius;
+  border-radius: $popups-border-radius;
   box-shadow: $popups-shadow;
-  padding-top: $gap-small;
-  padding-bottom: $gap-small;
-}
-
-.option {
   padding: $gap-small;
-  &:hover {
-    background-color: $color-aluminium;
-  }
-}
-
-.selected {
-  background-color: $color-lavender;
 }
