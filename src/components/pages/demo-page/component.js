@@ -28,7 +28,6 @@ import DropDown from '../../inputs/drop-down/component';
 import Icon from '../../inputs/icon/component';
 import Input from '../../inputs/input/component';
 import InputGroup from '../../inputs/input-group/component';
-import SimpleSelectBox from '../../inputs/simple-select-box/component';
 import SimpleDropDownList from '../../inputs/simple-drop-down-list/component';
 import ToolBar from '../../inputs/tool-bar/component';
 import ToolBarItem from '../../inputs/tool-bar-item/component';
@@ -108,10 +107,6 @@ class DemoPage extends Component {
           value: 'Windlhammelsbach',
           readOnly: false,
           type: 'text',
-        },
-        country: {
-          options: ['Germany', 'France', 'New Zealand'],
-          value: null
         },
         city: {
           inputId: 'city',
@@ -245,11 +240,7 @@ class DemoPage extends Component {
           </InputGroup>
           <br/>
           <br/>
-          <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
-                           onSelect={this.handleSelectionChange}/>
-          <br/>
-          <br/>
-          <SimpleDropDownList name="country" options={inputs.country.options} value={inputs.country.value}
+          <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
                               onSelect={this.handleSelectionChange}>
             <div tabIndex="0"><span>Your Expenses</span><i className="icon-chevron-down"/></div>
           </SimpleDropDownList>
