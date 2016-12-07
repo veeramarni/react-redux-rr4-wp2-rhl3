@@ -34,18 +34,26 @@ export default class Icon extends Component {
   // Expected properties.
   static propTypes = {
     className: React.PropTypes.string,
+    focusId: React.PropTypes.string,
     iconClassName: React.PropTypes.string.isRequired,
     id: React.PropTypes.string,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
+    onMouseDown: React.PropTypes.func
+  };
+
+  handleMouseDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById(this.props.focusId).focus();
   };
 
   // Render the component.
   render() {
-    let {className, iconClassName, id, onClick} = this.props;
+    let {className, focusId, iconClassName, id, onClick, onMouseDown} = this.props;
     let rootStyles = classNames('Icon', styles.root, className);
     return (
-      <div className={rootStyles}>
-        <i className={iconClassName} id={id} onClick={onClick}/>
+      <div className={rootStyles} onMouseDown={focusId ? this.handleMouseDown : false}>
+        <i className={iconClassName} id={id} onClick={onClick} onMouseDown={onMouseDown}/>
       </div>
     );
   }

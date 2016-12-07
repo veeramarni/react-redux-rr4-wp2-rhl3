@@ -25,9 +25,11 @@ import ButtonGroup from '../../inputs/button-group/component';
 import {buttonBig} from '../../inputs/button/styles.scss';
 import Checkbox from '../../inputs/checkbox/component';
 import DropDown from '../../inputs/drop-down/component';
+import Icon from '../../inputs/icon/component';
 import Input from '../../inputs/input/component';
 import InputGroup from '../../inputs/input-group/component';
 import SimpleSelectBox from '../../inputs/simple-select-box/component';
+import SimpleDropDownList from '../../inputs/simple-drop-down-list/component';
 import ToolBar from '../../inputs/tool-bar/component';
 import ToolBarItem from '../../inputs/tool-bar-item/component';
 
@@ -49,6 +51,7 @@ class DemoPage extends Component {
       inputs: {
         firstName: {
           id: null,
+          inputId: 'firstName',
           invalid: false,
           disabled: false,
           label: 'Vorname',
@@ -110,6 +113,15 @@ class DemoPage extends Component {
           options: ['Germany', 'France', 'New Zealand'],
           value: null
         },
+        city: {
+          inputId: 'city',
+          label: 'City',
+          options: ['Bremen', 'Paris', 'Auckland'],
+          readOnly: true,
+          suppressReadOnlyStyle: true,
+          type: 'text',
+          value: ''
+        },
         married: {
           checked: false,
           disabled: false,
@@ -161,8 +173,8 @@ class DemoPage extends Component {
     }
   };
 
-  handleSelectionChange = (selection) => {
-    this.setState({inputs: {...this.state.inputs, country: {...this.state.inputs.country, value: selection}}});
+  handleSelectionChange = (value, index, name) => {
+    this.setState({inputs: {...this.state.inputs, [`${name}`]: {...this.state.inputs[name], value: value}}});
   };
 
   // Render the component.
@@ -183,7 +195,7 @@ class DemoPage extends Component {
             <div style={{fontSize: 24}}>Bernd</div>
           </ToolBarItem>
           <ToolBarItem>
-            <i className="icon-bubble"></i>
+            <i className="icon-bubble"/>
           </ToolBarItem>
         </ToolBar>
         <ToolBar className={styles.toolBar}>
@@ -198,7 +210,7 @@ class DemoPage extends Component {
           <button onClick={() => ping()}>Ping</button>
           <h1>{JSON.stringify(isPinging)}</h1>
           <InputGroup {...firstName} className={styles.bernd}>
-            <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-tie"/></Button>
+            <Icon iconClassName="icon-user-tie" focusId={firstName.inputId}/>
             <Button><i className="icon-user-plus"/></Button>
             <Input name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
             <Button><i className="icon-user-plus"/></Button>
@@ -235,6 +247,21 @@ class DemoPage extends Component {
           <br/>
           <SimpleSelectBox name="country" options={inputs.country.options} value={inputs.country.value}
                            onSelect={this.handleSelectionChange}/>
+          <br/>
+          <br/>
+          <SimpleDropDownList name="country" options={inputs.country.options} value={inputs.country.value}
+                              onSelect={this.handleSelectionChange}>
+            <div tabIndex="0"><span>Your Expenses</span><i className="icon-chevron-down"/></div>
+          </SimpleDropDownList>
+          <br/>
+          <br/>
+          <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
+                              onSelect={this.handleSelectionChange}>
+            <InputGroup {...inputs.city}>
+              <Input {...inputs.city}/>
+              <Icon iconClassName="icon-chevron-down" focusId={inputs.city.inputId}/>
+            </InputGroup>
+          </SimpleDropDownList>
           <br/>
           <br/>
           <select>

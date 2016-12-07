@@ -127,7 +127,7 @@ export default class SimpleSelectBox extends Component {
     event.stopPropagation();
     this.showPopover(false);
     if (this.props.onSelect) {
-      this.props.onSelect(option, index);
+      this.props.onSelect(option, index, this.props.name);
     }
   };
 
@@ -151,7 +151,7 @@ export default class SimpleSelectBox extends Component {
         if (nextIndex < 0 || !this.props.onSelect) {
           break;
         }
-        this.props.onSelect(this.props.options[nextIndex], nextIndex);
+        this.props.onSelect(this.props.options[nextIndex], nextIndex, this.props.name);
         break;
       }
       // down
@@ -160,7 +160,7 @@ export default class SimpleSelectBox extends Component {
         if (nextIndex >= this.props.options.length || !this.props.onSelect) {
           break;
         }
-        this.props.onSelect(this.props.options[nextIndex], nextIndex);
+        this.props.onSelect(this.props.options[nextIndex], nextIndex, this.props.name);
         break;
       }
     }

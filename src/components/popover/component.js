@@ -107,6 +107,7 @@ export default class extends React.Component {
   handleClickDocument = (e) => {
     if (e.target === this.element || !this.element.contains(e.target)) {
       if (this.props.toggle) {
+        console.log('popover => toggle');
         this.props.toggle(); // todo maybe let the outer component decide?
       }
     }
@@ -123,7 +124,6 @@ export default class extends React.Component {
     let left = '50%';
     let targetBounds = this.target ? this.target.getBoundingClientRect() : null;
     let elementBounds = this.element ? this.element.getBoundingClientRect() : null;
-    console.log(targetBounds, elementBounds);
     if (targetBounds && elementBounds) {
       if (targetBounds.width < elementBounds.width) {
         left = targetBounds.left - elementBounds.left + targetBounds.width / 2;

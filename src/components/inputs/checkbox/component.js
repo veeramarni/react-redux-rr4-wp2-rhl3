@@ -118,7 +118,6 @@ export default class Input extends Component {
       [`${styles.valid}`]: valid
     });
     let iconClassName = checked ? 'icon-checkmark' : indeterminate ? 'icon-minus' : '';
-    console.log(checked, indeterminate);
     return (
       <label className={rootStyles} htmlFor={inputId} id={id} onMouseDown={this.handleInputMouseDown}>
         <input checked={checked}

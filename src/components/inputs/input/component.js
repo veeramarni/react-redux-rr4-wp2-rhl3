@@ -73,16 +73,20 @@ export default class Input extends Component {
   }
 
   handleInputMouseDown = event => {
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
     let inputElement = document.getElementById(this.state.inputId);
     if (document.activeElement !== inputElement) {
+      console.log('input md > focus');
       this.mouseDown = true;
-      inputElement.focus();
+      setTimeout(() => inputElement.focus(), 0);
+    } else {
+      event.preventDefault();
+      event.stopPropagation();
     }
-    if (this.props.onClick) {
-      this.props.onClick();
-    }
+    // if (this.props.onClick) {
+    //   this.props.onClick();
+    // }
   };
 
   handleFocusChange = (event, focused) => {

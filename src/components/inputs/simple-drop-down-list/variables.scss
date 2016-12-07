@@ -10,18 +10,10 @@
 /**
  * Import the theme variables.
  */
-@import './variables';
+@import 'theme';
 
 /**
- * SimpleSelectBox styles.
+ * SimpleSelectBox variables.
  */
-.root {
-  display: inline-block;
-}
 
-.dropdown {
-  background-color: $popups-background-border-color;
-  border: $popups-border-style $popups-border-color;
-  border-radius: $popups-border-radius;
-  box-shadow: $popups-shadow;
-}
+// SimpleSelectBox

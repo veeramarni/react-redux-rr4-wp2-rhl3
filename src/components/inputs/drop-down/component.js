@@ -52,10 +52,11 @@ export default class DropDown extends Component {
   static propTypes = {
     children: React.PropTypes.node,
     className: React.PropTypes.string,
-    name: React.PropTypes.string,
-    onSelect: React.PropTypes.func,
-    options: React.PropTypes.array,
-    value: React.PropTypes.string
+    onBlur: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func,
+    onMouseDown: React.PropTypes.func,
+    show: React.PropTypes.bool
   };
 
   // Invoked once, both on the client and server, immediately before the initial rendering occurs.
@@ -69,18 +70,19 @@ export default class DropDown extends Component {
   // by updating the state using this.setState(). The old props can be accessed via this.props.
   // Calling this.setState() within this function will not trigger an additional render.
   componentWillReceiveProps(nextProps) {
-    this.setState({input: {...this.state.input, value: nextProps.value ? nextProps.value : ''}});
+    if (nextProps.hasOwnProperty('show')) {
+      this.showPopover(nextProps.show);
+    }
   }
 
   showPopover = show => {
     this.setState({popover: {...this.state.popover, show: show}});
   };
 
-  togglePopover = () => {
-    this.showPopover(!this.state.popover.show);
-  };
-
   handleClick = (event) => {
+    if (this.props.hasOwnProperty('show')) {
+      return;
+    }
     event.preventDefault();
     event.stopPropagation();
     this.showPopover(true);
@@ -88,11 +90,12 @@ export default class DropDown extends Component {
 
   // Render the component.
   render() {
-    let {children, className} = this.props;
+    let {children, className, onBlur, onClick, onKeyDown, onMouseDown} = this.props;
     let {id, popover} = this.state;
     let rootStyles = classNames('DropDown', styles.root, className);
     return (
-      <div className={rootStyles} id={id} onClick={this.handleClick}>
+      <div className={rootStyles} id={id} onBlur={onBlur} onKeyDown={onKeyDown} onMouseDown={onMouseDown}
+           onClick={onClick ? onClick : this.handleClick}>
         {children[0]}
         <Popover {...popover} target={id}>
           <div className={styles.dropdown}>
