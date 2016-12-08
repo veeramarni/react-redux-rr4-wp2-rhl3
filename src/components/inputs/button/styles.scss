@@ -30,11 +30,6 @@
     box-shadow: $button-focused-shadow;
     border-color: $button-focused-border-color;
   }
-  &:not([disabled]) {
-    &:hover {
-      background-color: $form-controls-hover-background-color;
-    }
-  }
   > i {
     vertical-align: middle;
     font-size: $form-controls-icon-font-size;
@@ -74,6 +69,9 @@
     border-radius: $button-border-radius;
     color: $button-color;
     background-color: $button-background-color;
+    &:not([disabled]):hover {
+      background-color: $form-controls-hover-background-color;
+    }
     &.primary {
       color: $form-controls-color;
       background-color: yellowgreen;
@@ -91,6 +89,9 @@
     border: none;
     color: $button-color;
     background-color: transparent;
+    &:not([disabled]):hover {
+      background-color: $form-controls-hover-background-color;
+    }
     &.primary {
       color: yellowgreen;
     }
