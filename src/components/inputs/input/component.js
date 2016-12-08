@@ -77,7 +77,6 @@ export default class Input extends Component {
     // event.stopPropagation();
     let inputElement = document.getElementById(this.state.inputId);
     if (document.activeElement !== inputElement) {
-      console.log('input md > focus');
       this.mouseDown = true;
       setTimeout(() => inputElement.focus(), 0);
     } else {

@@ -107,7 +107,6 @@ export default class extends React.Component {
   handleClickDocument = (e) => {
     if (e.target === this.element || !this.element.contains(e.target)) {
       if (this.props.toggle) {
-        console.log('popover => toggle');
         this.props.toggle(); // todo maybe let the outer component decide?
       }
     }

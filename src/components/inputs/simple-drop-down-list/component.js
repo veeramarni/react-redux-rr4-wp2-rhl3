@@ -11,6 +11,7 @@
  * Import dependencies.
  */
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 /**
@@ -50,6 +51,26 @@ export default class SimpleSelectBox extends Component {
   // If you call setState within this method,
   // render() will see the updated state and will be executed only once despite the state change.
   componentWillMount() {
+  }
+
+  // Invoked once, only on the client (not on the server), immediately after the initial rendering occurs.
+  // At this point in the lifecycle, you can access any refs to your children
+  // (e.g., to access the underlying DOM representation).
+  // The componentDidMount() method of child components is invoked before that of parent components.
+  // If you want to integrate with other JavaScript frameworks, set timers using setTimeout or setInterval,
+  // or send AJAX requests, perform those operations in this method.
+  componentDidMount() {
+    this.element = ReactDOM.findDOMNode(this);
+    this.element.addEventListener('keydown', this.handleKeyDown);
+    this.element.addEventListener('keyup', this.handleKeyUp);
+  }
+
+  // Invoked immediately after the component's updates are flushed to the DOM.
+  // This method is not called for the initial render.
+  // Use this as an opportunity to operate on the DOM when the component has been updated.
+  componentWillUnmount() {
+    this.element.removeEventListener('keydown', this.handleKeyDown);
+    this.element.removeEventListener('keyup', this.handleKeyUp);
   }
 
   // Invoked when a component is receiving new props. This method is not called for the initial render.
@@ -102,6 +123,23 @@ export default class SimpleSelectBox extends Component {
     }
   };
 
+  handleKeyUp = event => {
+    switch (event.keyCode) {
+      // enter
+      case 13:
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+        break;
+      // space
+      case 32:
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+        break;
+    }
+  };
+
   handleOptionClick = (event, option, index) => {
     event.preventDefault();
     event.stopPropagation();
@@ -112,12 +150,10 @@ export default class SimpleSelectBox extends Component {
   };
 
   handleClick = e => {
-    console.log('click')
     this.setState({show: true});
   };
 
   handleBlur = e => {
-    console.log('blur')
     this.setState({show: false});
   };
 
@@ -127,8 +163,8 @@ export default class SimpleSelectBox extends Component {
     let {show} = this.state;
     let rootStyles = classNames('SimpleDropDownList', styles.root, className);
     return (
-      <DropDown className={rootStyles} onKeyDown={this.handleKeyDown} onClick={this.handleClick}
-                onBlur={this.handleBlur} show={show}>
+      // keydown and keyup event are attached as native events already to fix firefox behaviour.
+      <DropDown className={rootStyles} onClick={this.handleClick} onBlur={this.handleBlur} show={show}>
         {children}
         <ul className={styles.options}>
           {options.map((option, i) => (
