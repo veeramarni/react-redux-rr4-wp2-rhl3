@@ -10,7 +10,7 @@
 /**
  * Import mixins and functions.
  */
-@import '../../src/components/sass-mixins/mixins'; // TODO: will become '~sass-mixins' later.
+@import './mixins'; // TODO: will become '~sass-mixins' later.
 
 /**
  * Base variables.

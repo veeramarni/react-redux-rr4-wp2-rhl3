@@ -17,7 +17,7 @@ import {Map} from 'immutable';
  * Import local dependencies.
  */
 import {entitiesReducer} from './entities/reducer';
-import {demoPageReducer} from './components/pages/demo-page/reducer';
+import {demoPageReducer} from './containers/demo-page/reducer';
 import {
   LOCATION_CHANGE
 } from './actions';

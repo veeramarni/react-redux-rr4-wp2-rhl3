@@ -27,7 +27,7 @@ import 'rxjs/add/operator/retry';
 /**
  * Import local dependencies.
  */
-import {demoPageEpic} from './components/pages/demo-page/epic';
+import {demoPageEpic} from './containers/demo-page/epic';
 import {
   ROOT_FETCH_GRAPHQL_QUERY,
   fetchGraphQLQuerySucceededCreator,

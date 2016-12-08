@@ -18,7 +18,7 @@ import {connect} from 'react-redux';
  */
 import {setLocationCreator} from './actions';
 import ControlledRouter from './components/controlled-router/component';
-import DemoPage from './components/pages/demo-page/component';
+import DemoPage from './containers/demo-page/component';
 
 /**
  * Import the icomoon icon font.

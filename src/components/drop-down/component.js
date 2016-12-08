@@ -16,7 +16,7 @@ import classNames from 'classnames';
 /**
  * Import local dependencies.
  */
-import Popover from '../../popover/component';
+import Popover from '../popover/component';
 
 /**
  * Import styles.

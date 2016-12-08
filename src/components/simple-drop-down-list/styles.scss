@@ -10,7 +10,7 @@
 /**
  * Import the theme variables.
  */
-@import './variables';
+@import 'variables';
 
 /**
  * SimpleSelectBox styles.
@@ -19,9 +19,21 @@
   display: inline-block;
 }
 
-.dropdown {
+.options {
+  font-size: $form-controls-input-font-size;
+  color: $form-controls-color;
   background-color: $popups-background-border-color;
-  border: $popups-border-style $popups-border-color;
-  border-radius: $popups-border-radius;
-  box-shadow: $popups-shadow;
+  list-style: none;
+  padding-left: 0;
+}
+
+.option {
+  padding: $gap-small;
+  &:hover {
+    background-color: $color-aluminium;
+  }
+}
+
+.selected {
+  background-color: $color-lavender;
 }

@@ -19,16 +19,16 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
-import Button from '../../inputs/button/component';
-import ButtonGroup from '../../inputs/button-group/component';
-import {big as btnBig, primary as btnPrimary, flat as btnFlat, link as btnLink} from '../../inputs/button/styles.scss';
-import Checkbox from '../../inputs/checkbox/component';
-import Icon from '../../inputs/icon/component';
-import Input from '../../inputs/input/component';
-import InputGroup from '../../inputs/input-group/component';
-import SimpleDropDownList from '../../inputs/simple-drop-down-list/component';
-import ToolBar from '../../inputs/tool-bar/component';
-import ToolBarItem from '../../inputs/tool-bar-item/component';
+import Button from '../../components/button/component';
+import ButtonGroup from '../../components/button-group/component';
+import {big as btnBig, primary as btnPrimary, flat as btnFlat, link as btnLink} from '../../components/button/styles.scss';
+import Checkbox from '../../components/checkbox/component';
+import Icon from '../../components/icon/component';
+import Input from '../../components/input/component';
+import InputGroup from '../../components/input-group/component';
+import SimpleDropDownList from '../../components/simple-drop-down-list/component';
+import ToolBar from '../../components/tool-bar/component';
+import ToolBarItem from '../../components/tool-bar-item/component';
 
 /**
  * Import styles.
