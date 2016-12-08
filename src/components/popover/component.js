@@ -121,6 +121,11 @@ export default class extends React.Component {
       visibility: show ? '' : 'hidden',
       minWidth: alignWidth && this.target ? this.target.offsetWidth : ''
     };
+    if(this.tether) {
+      setTimeout(()=>{
+        this.tether.position();
+      });
+    }
     let left = '50%';
     let targetBounds = this.target ? this.target.getBoundingClientRect() : null;
     let elementBounds = this.element ? this.element.getBoundingClientRect() : null;
