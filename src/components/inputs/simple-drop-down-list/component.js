@@ -67,10 +67,14 @@ export default class SimpleSelectBox extends Component {
     switch (event.keyCode) {
       // enter
       case 13:
+        event.preventDefault();
+        event.stopPropagation();
         this.setState({show: false});
         break;
       // space
       case 32:
+        event.preventDefault();
+        event.stopPropagation();
         this.setState({show: true});
         break;
       // escape

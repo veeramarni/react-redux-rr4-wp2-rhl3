@@ -21,7 +21,7 @@
   width: 100%;
   background-color: white;
   .filterBar {
-    background-color: $form-controls-background-color;
+    background-color: rgb(244, 244, 244);
     > :global(.ToolBarItem) {
       border-right: $form-controls-border-style $color-aluminium;
     }
@@ -31,6 +31,16 @@
   }
   .form {
     padding: 10px;
+  }
+}
+
+.link {
+  color: $color-bernd-blue;
+  > * {
+    vertical-align: middle;
+  }
+  > i {
+    padding-left: $gap-medium;
   }
 }
 

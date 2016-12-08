@@ -18,15 +18,11 @@
   vertical-align: middle;
   display: inline-block;
   font-size: $button-font-size;
-  border: $button-border-style $button-unfocused-border-color;
   box-shadow: none;
-  border-radius: $button-border-radius;
-  background-color: $button-background-color;
   padding: 0 $gap-small 0 $gap-small;
   height: $button-height;
   position: relative;
   box-sizing: content-box;
-  color: $button-color;
   &.disabled {
     opacity: $button-disabled-opacity;
   }
@@ -46,33 +42,63 @@
   > span {
     vertical-align: middle;
   }
-}
+  &.tiny {
+    height: $button-tiny-height;
+  }
 
-.buttonTiny {
-  height: $button-tiny-height;
-}
+  &.small {
+    height: $button-small-height;
+  }
 
-.buttonSmall {
-  height: $button-small-height;
-}
+  &.medium {
+    height: $button-medium-height;
+  }
 
-.buttonMedium {
-  height: $button-medium-height;
-}
+  &.big {
+    height: $button-big-height;
+  }
 
-.buttonBig {
-  height: $button-big-height;
-}
+  &.huge {
+    height: $button-huge-height;
+  }
 
-.buttonHuge {
-  height: $button-huge-height;
-}
+  &.giant {
+    height: $button-giant-height;
+  }
 
-.buttonGiant {
-  height: $button-giant-height;
+  &.godzilla {
+    height: $button-godzilla-height;
+  }
+  &:not(.flat) {
+    border: $button-border-style $button-unfocused-border-color;
+    border-radius: $button-border-radius;
+    color: $button-color;
+    background-color: $button-background-color;
+    &.primary {
+      color: $form-controls-color;
+      background-color: yellowgreen;
+    }
+    &.secondary {
+      color: $form-controls-color;
+      background-color: lightcoral;
+    }
+    &.link {
+      color: $form-controls-color;
+      background-color: #006d90;
+    }
+  }
+  &.flat {
+    border: none;
+    color: $button-color;
+    background-color: transparent;
+    &.primary {
+      color: yellowgreen;
+    }
+    &.secondary {
+      color: lightcoral;
+    }
+    &.link {
+      color: #006d90;
+    }
+  }
 }
-
-.buttonGodzilla {
-  height: $button-godzilla-height;
-}
-

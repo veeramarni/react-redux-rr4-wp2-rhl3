@@ -19,12 +19,10 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
-import AddOnButton from '../../inputs/add-on-button/component';
 import Button from '../../inputs/button/component';
 import ButtonGroup from '../../inputs/button-group/component';
-import {buttonBig} from '../../inputs/button/styles.scss';
+import {big as btnBig, primary as btnPrimary, flat as btnFlat, link as btnLink} from '../../inputs/button/styles.scss';
 import Checkbox from '../../inputs/checkbox/component';
-import DropDown from '../../inputs/drop-down/component';
 import Icon from '../../inputs/icon/component';
 import Input from '../../inputs/input/component';
 import InputGroup from '../../inputs/input-group/component';
@@ -54,12 +52,10 @@ class DemoPage extends Component {
           invalid: false,
           disabled: false,
           label: 'Vorname',
-          leftAddOns: [<i className="icon-user"/>],
           placeholder: 'Type "Bumm" to validate!',
           valid: false,
           value: '',
           readOnly: false,
-          rightAddOns: [<AddOnButton><i className="icon-user-plus"/></AddOnButton>, <i className="icon-user-minus"/>],
           type: 'text',
         },
         middleName: {
@@ -67,12 +63,10 @@ class DemoPage extends Component {
           invalid: false,
           disabled: true,
           label: 'Mittelnamen',
-          leftAddOns: [<i className="icon-user-tie"/>],
           placeholder: 'Please be honest!',
           valid: false,
           value: 'Horst Walter',
           readOnly: false,
-          rightAddOns: [],
           type: 'text',
         },
         nickName: {
@@ -80,12 +74,10 @@ class DemoPage extends Component {
           invalid: false,
           disabled: false,
           label: 'Spitzname',
-          leftAddOns: [],
           placeholder: 'Please be honest!',
           valid: false,
           value: 'Horst Walter',
           readOnly: true,
-          rightAddOns: [<i className="icon-user-check"/>],
           type: 'text',
         },
         lastName: {
@@ -112,6 +104,7 @@ class DemoPage extends Component {
           inputId: 'city',
           label: 'City',
           options: ['Bremen', 'Paris', 'Auckland'],
+          placeholder: '',
           readOnly: true,
           suppressReadOnlyStyle: true,
           type: 'text',
@@ -181,13 +174,19 @@ class DemoPage extends Component {
       <div className={styles.root}>
         <ToolBar className={styles.filterBar}>
           <ToolBarItem>
-            <DropDown>
-              <div><span>My Expenses</span><i className="icon-chevron-down"/></div>
-              <span>Wessels Bim Bessels baba</span>
-            </DropDown>
+            <span>Show</span>
+          </ToolBarItem>
+          <ToolBarItem>
+            <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
+                                onSelect={this.handleSelectionChange}>
+              <Button className={classNames(btnBig, btnFlat, btnLink)}>
+                <span>Your Expenses&nbsp;&nbsp;</span>
+                <i className="icon-chevron-down"/>
+              </Button>
+            </SimpleDropDownList>
           </ToolBarItem>
           <ToolBarItem flex={1}>
-            <div style={{fontSize: 24}}>Bernd</div>
+            <div style={{fontSize: 24}}>Welcome</div>
           </ToolBarItem>
           <ToolBarItem>
             <i className="icon-bubble"/>
@@ -195,21 +194,22 @@ class DemoPage extends Component {
         </ToolBar>
         <ToolBar className={styles.toolBar}>
           <ToolBarItem>
-            <Button className={buttonBig}>Complete</Button>
+            <Button className={classNames(btnBig, btnPrimary)}>Complete</Button>
           </ToolBarItem>
           <ToolBarItem>
-            <Button className={buttonBig} disabled={true}>Apply Expense Template</Button>
+            <Button className={btnBig} disabled={true}>Apply Expense Template</Button>
+          </ToolBarItem>
+          <ToolBarItem>
+            <Button className={classNames(btnBig, btnFlat)}>Flattering</Button>
           </ToolBarItem>
         </ToolBar>
         <div className={styles.form}>
-          <button onClick={() => ping()}>Ping</button>
-          <h1>{JSON.stringify(isPinging)}</h1>
           <InputGroup {...firstName} className={styles.bernd}>
             <Icon iconClassName="icon-user-tie" focusId={firstName.inputId}/>
-            <Button><i className="icon-user-plus"/></Button>
+            <Button><i className="icon-user-check"/></Button>
             <Input name="firstName" onChange={this.handleInputChange} {...firstName} type="text"/>
             <Button><i className="icon-user-plus"/></Button>
-            <Button><i className="icon-user-plus"/></Button>
+            <Button><i className="icon-user-minus"/></Button>
           </InputGroup>
           &nbsp;
           <Checkbox name="happy" {...happy}/>
@@ -242,12 +242,6 @@ class DemoPage extends Component {
           <br/>
           <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
                               onSelect={this.handleSelectionChange}>
-            <div tabIndex="0"><span>Your Expenses</span><i className="icon-chevron-down"/></div>
-          </SimpleDropDownList>
-          <br/>
-          <br/>
-          <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
-                              onSelect={this.handleSelectionChange}>
             <InputGroup {...inputs.city}>
               <Input {...inputs.city}/>
               <Icon iconClassName="icon-chevron-down" focusId={inputs.city.inputId}/>
@@ -255,14 +249,13 @@ class DemoPage extends Component {
           </SimpleDropDownList>
           <br/>
           <br/>
-          <select>
-            <option>A Option</option>
-            <option>Another Option</option>
-            <option>B Option</option>
-          </select>
-          <br/>
-          <br/>
-          <button>Bla</button>
+          {(() => {
+            if (isPinging) {
+              return (
+                <h1>I am pinging!</h1>
+              );
+            }
+          })()}
         </div>
       </div>
     );
