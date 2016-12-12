@@ -18,6 +18,7 @@ import {Map} from 'immutable';
  */
 import {entitiesReducer} from './entities/reducer';
 import {demoPageReducer} from './containers/demo-page/reducer';
+import {cardListPageReducer} from './containers/card-list-page/reducer';
 import {
   LOCATION_CHANGE
 } from './actions';
@@ -66,5 +67,6 @@ export const rootReducer = combineReducers({
   router: routerReducer,
   client: clientReducer,
   entities: entitiesReducer,
-  demoPage: demoPageReducer
+  demoPage: demoPageReducer,
+  cardListPage: cardListPageReducer
 });

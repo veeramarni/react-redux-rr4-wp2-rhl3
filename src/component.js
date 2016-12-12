@@ -19,6 +19,7 @@ import {connect} from 'react-redux';
 import {setLocationCreator} from './actions';
 import ControlledRouter from './components/controlled-router/component';
 import DemoPage from './containers/demo-page/component';
+import CardListPage from './containers/card-list-page/component';
 
 /**
  * Import the icomoon icon font.
@@ -47,7 +48,7 @@ class Client extends Component {
     let {router, setLocation} = this.props;
     return (
       <ControlledRouter location={router} setLocation={setLocation}>
-        <DemoPage/>
+        <CardListPage/>
       </ControlledRouter>
     );
   }

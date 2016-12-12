@@ -53,4 +53,32 @@
     opacity: 0;
     width: 0;
   }
+  &.tiny {
+    > i {
+      font-size: $checkbox-tiny-font-size;
+      min-height: $checkbox-tiny-font-size;
+      min-width: $checkbox-tiny-font-size;
+    }
+  }
+  &.small {
+    > i {
+      font-size: $checkbox-small-font-size;
+      min-height: $checkbox-small-font-size;
+      min-width: $checkbox-small-font-size;
+    }
+  }
+  &.medium {
+    > i {
+      font-size: $checkbox-medium-font-size;
+      min-height: $checkbox-medium-font-size;
+      min-width: $checkbox-medium-font-size;
+    }
+  }
+  &.big {
+    > i {
+      font-size: $checkbox-big-font-size;
+      min-height: $checkbox-big-font-size;
+      min-width: $checkbox-big-font-size;
+    }
+  }
 }

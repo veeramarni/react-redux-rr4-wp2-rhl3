@@ -1,0 +1,86 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'theme';
+
+/**
+ * Component styles.
+ */
+.root {
+  .filterBar {
+    border-bottom: $form-controls-border-style $color-aluminium;
+    > :global(.ToolBarItem) {
+      border-right: $form-controls-border-style $color-aluminium;
+    }
+  }
+  .toolBar {
+    border-bottom: $form-controls-border-style $color-aluminium;
+    background-color: #f8f8f8;
+  }
+  table {
+    font-size: $form-controls-font-size;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    thead {
+      tr {
+        border-bottom: 1px solid #e0e0e0;
+        th {
+          color: gray;
+          font-weight: normal;
+          text-align: left;
+          padding: $gap-small $gap-small $gap-small $gap-medium;
+          &:nth-child(4), &:nth-child(5) {
+            text-align: right;
+          }
+        }
+      }
+    }
+    tbody {
+      background-color: #f8f8f8;
+      tr {
+        border-bottom: 1px solid #e0e0e0;
+        vertical-align: bottom;
+        td {
+          text-align: left;
+          &:nth-child(10) {
+            width: 10%;
+          }
+          &:nth-child(1), &:nth-child(2) {
+            vertical-align: middle;
+          }
+          &:nth-child(5), &:nth-child(6) {
+            font-size: 20px;
+            font-weight: lighter;
+            text-align: right;
+          }
+          padding: $gap-medium;
+          > div.circle {
+            position: relative;
+            font-weight: bold;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #006d90;
+            > span {
+              font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translateX(-50%) translateY(-50%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
