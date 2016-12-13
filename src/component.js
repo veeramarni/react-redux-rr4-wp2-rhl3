@@ -12,6 +12,7 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Match from 'react-router/Match';
 
 /**
  * Import local dependencies.
@@ -48,7 +49,10 @@ class Client extends Component {
     let {router, setLocation} = this.props;
     return (
       <ControlledRouter location={router} setLocation={setLocation}>
-        <CardListPage/>
+        <div id="routes">
+          <Match exactly pattern="/" component={CardListPage}/>
+          <Match pattern="/demo" component={DemoPage}/>
+        </div>
       </ControlledRouter>
     );
   }

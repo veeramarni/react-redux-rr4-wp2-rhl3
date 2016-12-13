@@ -16,7 +16,19 @@
  */
 .root {
   .panelHeader {
+    position: relative;
     background-color: mediumorchid;
+    > div.title {
+      color: white;
+      padding: $gap-small;
+      text-align: center;
+    }
+    > div.headerButtons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
     > table {
       font-size: $form-controls-font-size;
       color: white;

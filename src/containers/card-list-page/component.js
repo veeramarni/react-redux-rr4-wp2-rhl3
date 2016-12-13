@@ -12,8 +12,8 @@
  */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Match} from 'react-router';
 import classNames from 'classnames';
+import Link from 'react-router/Link';
 
 /**
  * Import local dependencies.
@@ -82,7 +82,7 @@ class CardListPage extends Component {
       <div className={styles.root}>
         <ToolBar className={styles.filterBar}>
           <ToolBarItem>
-            <span>Show</span>
+            <Link to="/demo">Demo</Link>
           </ToolBarItem>
           <ToolBarItem>
             <SimpleDropDownList name="companies" options={companies.options} value={companies.value}

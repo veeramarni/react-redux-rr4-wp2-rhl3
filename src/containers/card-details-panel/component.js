@@ -73,12 +73,15 @@ class CardListPage extends Component {
     return (
       <div className={classNames(styles.root, this.props.className)}>
         <div className={styles.panelHeader}>
-          <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonUpClick}><i
-            className="icon-chevron-up"/></Button>
-          <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonDownClick}><i
-            className="icon-chevron-down"/></Button>
-          <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonCloseClick}><i
-            className="icon-cross"/></Button>
+          <div className={styles.headerButtons}>
+            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonUpClick}><i
+              className="icon-chevron-up"/></Button>
+            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonDownClick}><i
+              className="icon-chevron-down"/></Button>
+            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonCloseClick}><i
+              className="icon-cross"/></Button>
+          </div>
+          <div className={styles.title}><div>Title</div><div>1234567890</div></div>
           <table>
             <tbody>
             <tr>
