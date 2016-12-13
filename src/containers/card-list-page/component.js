@@ -18,7 +18,7 @@ import classNames from 'classnames';
 /**
  * Import local dependencies.
  */
-import {selectCompanyCreator} from './actions';
+import {changeSelectedCardIndexCreator, selectCompanyCreator} from './actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
 import {
@@ -27,6 +27,7 @@ import {
   flat as btnFlat,
   link as btnLink
 } from '../../components/button/styles.scss';
+import CardDetailsPanel from '../card-details-panel/component';
 import Checkbox from '../../components/checkbox/component';
 import {
   tiny as cbSmall
@@ -60,9 +61,13 @@ class CardListPage extends Component {
     }
   };
 
+  handleClickCard = (index) => {
+    this.props.changeSelectedCardIndex(index);
+  };
+
   // Render the component.
   render() {
-    let {companiesFilter, columns, rows} = this.props;
+    let {companiesFilter, selectedCardIndex, cardList} = this.props;
     let companies = {
       inputId: 'city',
       label: 'City',
@@ -109,50 +114,54 @@ class CardListPage extends Component {
           <thead>
           <tr>
             <th></th>
-            <th colSpan="2">{columns.get(0)}</th>
-            <th>{columns.get(1)}</th>
-            <th>{columns.get(2)}</th>
-            <th>{columns.get(3)}</th>
-            <th>{columns.get(4)}</th>
-            <th>{columns.get(5)}</th>
-            <th>{columns.get(6)}</th>
+            <th colSpan="2">Name & Account No.</th>
+            <th>Company ID</th>
+            <th>Current Spend</th>
+            <th>Credit Limit</th>
+            <th>Issuer</th>
+            <th>Account Type</th>
+            <th>Card Type</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          {rows.map((row, i) =>
-            <tr key={i}>
+          {cardList.map((card, i) =>
+            <tr key={i} className={selectedCardIndex === i ? styles.selected : null} onClick={() => this.handleClickCard(i)}>
               <td><Checkbox className={cbSmall} checked={true} onChange={(e) => console.log(e)}/></td>
               <td>
-                <div className={styles.circle}><span>{row.get('name').charAt(0)}</span></div>
+                <div className={styles.circle}><span>{card.get('name').charAt(0)}</span></div>
               </td>
               <td>
-                <div><b>{row.get('name')}</b></div>
-                <div>{row.get('accountNumber')}</div>
+                <div><b>{card.get('name')}</b></div>
+                <div>{card.get('accountNumber')}</div>
               </td>
               <td>
-                <div>{row.get('company')}</div>
+                <div>{card.get('company')}</div>
               </td>
               <td>
-                <div>{row.get('spend')}</div>
+                <div>{card.get('spend')}</div>
               </td>
               <td>
-                <div>{row.get('limit')}</div>
+                <div>{card.get('limit')}</div>
               </td>
               <td>
-                <div>{row.get('issuer')}</div>
+                <div>{card.get('issuer')}</div>
               </td>
               <td>
-                <div>{row.get('accountType')}</div>
+                <div>{card.get('accountType')}</div>
               </td>
               <td>
-                <div>{row.get('cardType')}</div>
+                <div>{card.get('cardType')}</div>
               </td>
               <td></td>
             </tr>)}
           </tbody>
         </table>
-        <div className={styles.circle}></div>
+        {(() => {
+          if (selectedCardIndex !== -1) {
+            return <CardDetailsPanel className={styles.cardDetailsPanel}/>;
+          }
+        })()}
       </div>
     );
   }
@@ -164,8 +173,8 @@ class CardListPage extends Component {
 const stateToProps = (store) => {
   return {
     companiesFilter: store.getIn(['cardListPage', 'companiesFilter']),
-    columns: store.getIn(['cardListPage', 'columns']),
-    rows: store.getIn(['cardListPage', 'rows'])
+    selectedCardIndex: store.getIn(['cardListPage', 'selectedCardIndex']),
+    cardList: store.getIn(['cardListPage', 'cardList'])
   };
 };
 
@@ -174,7 +183,8 @@ const stateToProps = (store) => {
  */
 const dispatchToProps = (dispatch) => {
   return {
-    selectCompany: (name) => dispatch(selectCompanyCreator(name))
+    selectCompany: (name) => dispatch(selectCompanyCreator(name)),
+    changeSelectedCardIndex: (index) => dispatch(changeSelectedCardIndexCreator(index))
   }
 };
 

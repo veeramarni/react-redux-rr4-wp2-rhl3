@@ -15,17 +15,19 @@
  * Component styles.
  */
 .root {
-  .filterBar {
+  position: relative;
+  height: 100%;
+  > .filterBar {
     border-bottom: $form-controls-border-style $color-aluminium;
     > :global(.ToolBarItem) {
       border-right: $form-controls-border-style $color-aluminium;
     }
   }
-  .toolBar {
+  > .toolBar {
     border-bottom: $form-controls-border-style $color-aluminium;
     background-color: #f8f8f8;
   }
-  table {
+  > table {
     font-size: $form-controls-font-size;
     border-spacing: 0;
     border-collapse: collapse;
@@ -49,6 +51,12 @@
       tr {
         border-bottom: 1px solid #e0e0e0;
         vertical-align: bottom;
+        &:hover {
+          background-color: #dddddd;
+        }
+        &.selected {
+          background-color: lightblue;
+        }
         td {
           text-align: left;
           &:nth-child(10) {
@@ -82,5 +90,15 @@
         }
       }
     }
+  }
+  > .cardDetailsPanel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    z-index: 1;
+    box-shadow: $popups-shadow;
+    background-color: white;
   }
 }

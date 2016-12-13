@@ -1,0 +1,58 @@
+/**
+ * Bernd Wessels (https://github.com/BerndWessels/)
+ *
+ * Copyright © 2016 Bernd Wessels. All rights reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
+ */
+/**
+ * Import the theme variables.
+ */
+@import 'theme';
+
+/**
+ * Component styles.
+ */
+.root {
+  .panelHeader {
+    background-color: mediumorchid;
+    > table {
+      font-size: $form-controls-font-size;
+      color: white;
+      width: 100%;
+      > tbody {
+        > tr {
+          > td {
+            width: 50%;
+            text-align: center;
+            &.active {
+              border-bottom: 1px solid white;
+            }
+          }
+        }
+      }
+    }
+  }
+  > table.summaryTable {
+    width: 100%;
+    padding: $gap-small;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #dddddd;
+    font-size: $font-size-small;
+    > thead {
+      > tr {
+        > th {
+          text-align: left;
+        }
+      }
+    }
+    > tbody {
+      > tr {
+        > td {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

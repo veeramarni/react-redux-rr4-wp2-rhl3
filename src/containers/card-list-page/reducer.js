@@ -10,7 +10,7 @@
 /**
  * Import dependencies.
  */
-import {CARD_LIST_PAGE_SELECT_COMPANY} from './actions';
+import {CARD_LIST_PAGE_CHANGE_SELECTED_CARD_INDEX, CARD_LIST_PAGE_SELECT_COMPANY} from './actions';
 import {Map, List} from 'immutable';
 
 /**
@@ -21,8 +21,8 @@ const cardListPageDefaultState = Map({
     options: List(['Bremen', 'Paris', 'Auckland']),
     value: ''
   }),
-  columns: List(['Name & Account No.', 'Company ID', 'Current Spend', 'Credit Limit', 'Issuer', 'Account Type', 'Card Type']),
-  rows: List([
+  selectedCardIndex: -1,
+  cardList: List([
     Map({
       name: 'Sindhu Ready',
       accountNumber: '12345****67890',
@@ -101,6 +101,8 @@ const cardListPageDefaultState = Map({
  */
 export function cardListPageReducer(state = cardListPageDefaultState, action) {
   switch (action.type) {
+    case CARD_LIST_PAGE_CHANGE_SELECTED_CARD_INDEX:
+      return state.set('selectedCardIndex', action.payload);
     case CARD_LIST_PAGE_SELECT_COMPANY:
       return state.setIn(['companiesFilter', 'value'], action.payload);
     default:

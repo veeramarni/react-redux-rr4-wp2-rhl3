@@ -11,10 +11,8 @@
  * Export action types.
  */
 export const CARD_LIST_PAGE_SELECT_COMPANY = 'CARD_LIST_PAGE_SELECT_COMPANY';
-export const CARD_LIST_PAGE_CHANGE_SELECTED_CARD_INDEX = 'CARD_LIST_PAGE_CHANGE_SELECTED_CARD_INDEX';
 
 /**
  * Export action creators.
  */
 export const selectCompanyCreator = (name) => ({type: CARD_LIST_PAGE_SELECT_COMPANY, payload: name});
-export const changeSelectedCardIndexCreator = (index) => ({type: CARD_LIST_PAGE_CHANGE_SELECTED_CARD_INDEX, payload: index});
