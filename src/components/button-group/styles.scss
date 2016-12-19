@@ -9,13 +9,18 @@
 /**
  * Import the theme variables.
  */
-@import '../button/variables';
+@import 'theme';
 
 /**
  * Button styles.
  */
 .root {
   display: inline-block;
+  &.form {
+    :global(.Button) {
+      height: $form-controls-height;
+    }
+  }
   :global(.Button):not(:focus):first-child {
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;

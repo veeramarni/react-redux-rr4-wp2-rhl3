@@ -40,9 +40,15 @@ export default class Button extends Component {
     disabled: React.PropTypes.bool,
     id: React.PropTypes.string,
     onClick: React.PropTypes.func,
-    suppressDisabledStyle: React.PropTypes.bool
+    suppressDisabledStyle: React.PropTypes.bool,
+    styleFlat: React.PropTypes.bool,
+    styleForm: React.PropTypes.bool,
+    styleLink: React.PropTypes.bool,
+    stylePrimary: React.PropTypes.bool,
+    styleRaised: React.PropTypes.bool,
+    styleSecondary: React.PropTypes.bool,
+    styleInverse: React.PropTypes.bool,
   };
-
 
   // Invoked once, both on the client and server, immediately before the initial rendering occurs.
   // If you call setState within this method,
@@ -59,9 +65,16 @@ export default class Button extends Component {
 
   // Render the component.
   render() {
-    let {children, className, disabled, id, onClick, suppressDisabledStyle} = this.props;
+    let {children, className, disabled, id, onClick, suppressDisabledStyle, styleFlat, styleForm, styleLink, stylePrimary, styleRaised, styleSecondary, styleInverse} = this.props;
     let rootStyles = classNames('Button', styles.root, className, {
-      [`${styles.disabled}`]: disabled && !suppressDisabledStyle
+      [`${styles.disabled}`]: disabled && !suppressDisabledStyle,
+      [`${styles.flat}`]: styleFlat,
+      [`${styles.form}`]: styleForm,
+      [`${styles.primary}`]: stylePrimary,
+      [`${styles.link}`]: styleLink,
+      [`${styles.raised}`]: styleRaised || !styleFlat,
+      [`${styles.secondary}`]: styleSecondary || (!stylePrimary && !styleLink),
+      [`${styles.inverse}`]: styleInverse,
     });
     return (
       <button className={rootStyles} disabled={disabled} id={id} onClick={onClick}>{children}</button>

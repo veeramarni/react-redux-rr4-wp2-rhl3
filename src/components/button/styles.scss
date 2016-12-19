@@ -9,100 +9,137 @@
 /**
  * Import the theme variables.
  */
-@import 'variables';
+@import 'theme';
 
 /**
  * Button styles.
  */
 .root {
-  vertical-align: middle;
   display: inline-block;
-  font-size: $button-font-size;
-  box-shadow: none;
-  padding: 0 $gap-small 0 $gap-small;
-  height: $button-height;
   position: relative;
+  vertical-align: middle;
+  font-size: $button-font-size;
+  line-height: max($button-font-size, $icon-font-size);
+  height: $gap-small + max($button-font-size, $icon-font-size) + $gap-small;
   box-sizing: content-box;
+  padding: 0 $gap-medium;
+  box-shadow: none;
   &.disabled {
     opacity: $button-disabled-opacity;
   }
   &:focus {
+    outline: none;
     box-shadow: $button-focused-shadow;
     border-color: $button-focused-border-color;
   }
-  > i {
-    vertical-align: middle;
-    font-size: $form-controls-icon-font-size;
-  }
-  > span {
-    vertical-align: middle;
-  }
-  &.tiny {
-    height: $button-tiny-height;
-  }
-
-  &.small {
-    height: $button-small-height;
-  }
-
-  &.medium {
-    height: $button-medium-height;
-  }
-
-  &.big {
-    height: $button-big-height;
-  }
-
-  &.huge {
-    height: $button-huge-height;
-  }
-
-  &.giant {
-    height: $button-giant-height;
-  }
-
-  &.godzilla {
-    height: $button-godzilla-height;
-  }
-  &:not(.flat) {
-    border: $button-border-style $button-unfocused-border-color;
-    border-radius: $button-border-radius;
-    color: $button-color;
-    background-color: $button-background-color;
-    &:not([disabled]):hover {
-      background-color: $form-controls-hover-background-color;
+  &.raised {
+    &:not(.inverse) {
+      border: $button-border-style $button-unfocused-border-color;
+      border-radius: $button-border-radius;
+      &:active {
+        box-shadow: $button-active-box-shadow;
+      }
+      &.primary {
+        color: $button-primary-color;
+        background-color: $button-primary-background-color;
+        &:not([disabled]):hover {
+          background-color: $button-primary-hover-background-color;
+        }
+      }
+      &.secondary {
+        color: $button-secondary-color;
+        background-color: $button-secondary-background-color;
+        &:not([disabled]):hover {
+          background-color: $button-secondary-hover-background-color;
+        }
+      }
     }
-    &.primary {
-      color: $form-controls-color;
-      background-color: yellowgreen;
-    }
-    &.secondary {
-      color: $form-controls-color;
-      background-color: lightcoral;
-    }
-    &.link {
-      color: $form-controls-color;
-      background-color: #006d90;
+    &.inverse {
+      border-radius: $button-border-radius;
+      background-color: transparent;
+      &:active {
+        box-shadow: $button-active-box-shadow;
+      }
+      &.primary {
+        border: $button-border-style $button-inverse-primary-color;
+        color: $button-inverse-primary-color;
+        &:not([disabled]):hover {
+          background-color: $button-inverse-primary-hover-background-color;
+        }
+      }
+      &.secondary {
+        border: $button-border-style $button-inverse-secondary-color;
+        color: $button-inverse-secondary-color;
+        &:not([disabled]):hover {
+          background-color: $button-inverse-secondary-hover-background-color;
+        }
+      }
     }
   }
   &.flat {
-    border: none;
-    color: $button-color;
-    background-color: transparent;
-    &:not([disabled]):hover {
-      background-color: $form-controls-hover-background-color;
-    }
-    &.primary {
-      color: yellowgreen;
-    }
-    &.secondary {
-      color: lightcoral;
-    }
-    &.link {
-      color: #006d90;
+    &:not(.inverse) {
+      border: none;
+      &:active {
+      }
+      &.primary {
+        color: $button-flat-primary-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          background-color: $button-flat-primary-hover-background-color;
+        }
+      }
+      &.secondary {
+        color: $button-flat-secondary-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          background-color: $button-flat-secondary-hover-background-color;
+        }
+      }
+      &.link {
+        color: $button-flat-link-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          text-decoration: underline;
+        }
+      }
     }
     &.inverse {
-      color: white;
+      border: none;
+      &:active {
+        box-shadow: $button-active-box-shadow;
+      }
+      &.primary {
+        color: $button-flat-inverse-primary-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          background-color: $button-flat-inverse-primary-hover-background-color;
+        }
+      }
+      &.secondary {
+        color: $button-flat-inverse-secondary-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          background-color: $button-flat-inverse-secondary-hover-background-color;
+        }
+      }
+      &.link {
+        color: $button-flat-inverse-link-color;
+        background-color: transparent;
+        &:not([disabled]):hover {
+          text-decoration: underline;
+        }
+      }
     }
+  }
+  &.form {
+    height: $form-controls-height;
+  }
+  > i {
+    font-size: $icon-font-size;
+    line-height: max($button-font-size, $icon-font-size);
+    vertical-align: middle;
+  }
+  > span {
+    vertical-align: middle;
   }
 }

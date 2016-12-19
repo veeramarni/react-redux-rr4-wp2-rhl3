@@ -21,13 +21,6 @@ import classNames from 'classnames';
 import {changeSelectedCardIndexCreator} from '../card-list-page/actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
-import {
-  big as btnBig,
-  primary as btnPrimary,
-  flat as btnFlat,
-  link as btnLink,
-  inverse as btnInverse
-} from '../../components/button/styles.scss';
 import Checkbox from '../../components/checkbox/component';
 import {
   tiny as cbSmall
@@ -74,14 +67,20 @@ class CardListPage extends Component {
       <div className={classNames(styles.root, this.props.className)}>
         <div className={styles.panelHeader}>
           <div className={styles.headerButtons}>
-            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonUpClick}><i
-              className="icon-chevron-up"/></Button>
-            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonDownClick}><i
-              className="icon-chevron-down"/></Button>
-            <Button className={classNames(btnBig, btnFlat, btnInverse)} onClick={this.handleButtonCloseClick}><i
-              className="icon-cross"/></Button>
+            <Button styleFlat styleInverse onClick={this.handleButtonUpClick}>
+              <i className="icon-chevron-up"/>
+            </Button>
+            <Button styleFlat styleInverse onClick={this.handleButtonDownClick}>
+              <i className="icon-chevron-down"/>
+            </Button>
+            <Button styleFlat styleInverse onClick={this.handleButtonCloseClick}>
+              <i className="icon-cross"/>
+            </Button>
           </div>
-          <div className={styles.title}><div>Title</div><div>1234567890</div></div>
+          <div className={styles.title}>
+            <div>Title</div>
+            <div>1234567890</div>
+          </div>
           <table>
             <tbody>
             <tr>

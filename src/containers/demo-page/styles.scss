@@ -32,6 +32,21 @@
   .form {
     padding: 10px;
   }
+
+  > table.buttonTable {
+    width: 100%;
+    background-color: #f8f8f8;
+    border-spacing: 0;
+    tr {
+      td {
+        padding: 8px;
+      }
+      td:nth-last-child(1), td:nth-last-child(2) {
+        background-color: darkslategray;
+      }
+    }
+  }
+
 }
 
 .link {

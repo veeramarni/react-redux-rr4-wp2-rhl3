@@ -21,12 +21,6 @@ import Link from 'react-router/Link';
 import {changeSelectedCardIndexCreator, selectCompanyCreator} from './actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
-import {
-  big as btnBig,
-  primary as btnPrimary,
-  flat as btnFlat,
-  link as btnLink
-} from '../../components/button/styles.scss';
 import CardDetailsPanel from '../card-details-panel/component';
 import Checkbox from '../../components/checkbox/component';
 import {
@@ -87,7 +81,7 @@ class CardListPage extends Component {
           <ToolBarItem>
             <SimpleDropDownList name="companies" options={companies.options} value={companies.value}
                                 onSelect={this.handleSelectionChange}>
-              <Button className={classNames(btnBig, btnFlat, btnLink)}>
+              <Button styleFlat>
                 <span>{companies.display()}&nbsp;&nbsp;</span>
                 <i className="icon-chevron-down"/>
               </Button>
@@ -104,10 +98,10 @@ class CardListPage extends Component {
             <Checkbox className={cbSmall}/>
           </ToolBarItem>
           <ToolBarItem>
-            <Button className={classNames(btnBig, btnPrimary)}>Complete</Button>
+            <Button stylePrimary>Complete</Button>
           </ToolBarItem>
           <ToolBarItem>
-            <Button className={btnBig} disabled={true}>Apply Expense Template</Button>
+            <Button disabled>Apply Expense Template</Button>
           </ToolBarItem>
         </ToolBar>
         <table className={styles.table}>

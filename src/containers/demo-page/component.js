@@ -21,7 +21,6 @@ import classNames from 'classnames';
 import {pingCreator} from './actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
-import {big as btnBig, primary as btnPrimary, flat as btnFlat, link as btnLink} from '../../components/button/styles.scss';
 import Checkbox from '../../components/checkbox/component';
 import Icon from '../../components/icon/component';
 import Input from '../../components/input/component';
@@ -65,7 +64,7 @@ class DemoPage extends Component {
           label: 'Mittelnamen',
           placeholder: 'Please be honest!',
           valid: false,
-          value: 'Horst Walter',
+          value: 'Horst Hintern',
           readOnly: false,
           type: 'text',
         },
@@ -179,7 +178,7 @@ class DemoPage extends Component {
           <ToolBarItem>
             <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
                                 onSelect={this.handleSelectionChange}>
-              <Button className={classNames(btnBig, btnFlat, btnLink)}>
+              <Button styleFlat>
                 <span>Your Expenses&nbsp;&nbsp;</span>
                 <i className="icon-chevron-down"/>
               </Button>
@@ -194,13 +193,13 @@ class DemoPage extends Component {
         </ToolBar>
         <ToolBar className={styles.toolBar}>
           <ToolBarItem>
-            <Button className={classNames(btnBig, btnPrimary)}>Complete</Button>
+            <Button stylePrimary>Complete</Button>
           </ToolBarItem>
           <ToolBarItem>
-            <Button className={btnBig} disabled={true}>Apply Expense Template</Button>
+            <Button styleSecondary disabled>Apply Expense Template</Button>
           </ToolBarItem>
           <ToolBarItem>
-            <Button className={classNames(btnBig, btnFlat)}>Flattering</Button>
+            <Button styleFlat>Flattering</Button>
           </ToolBarItem>
         </ToolBar>
         <div className={styles.form}>
@@ -214,10 +213,10 @@ class DemoPage extends Component {
           &nbsp;
           <Checkbox name="happy" {...happy}/>
           &nbsp;
-          <ButtonGroup>
-            <Button onClick={() => ping()}>Ping</Button>
+          <ButtonGroup styleForm>
+            <Button onClick={() => ping()}><span>Ping</span></Button>
             <Button><i className="icon-users"/><span>&nbsp;Blob</span></Button>
-            <Button>Blub</Button>
+            <Button><span>Blub</span></Button>
           </ButtonGroup>
           &nbsp;
           <Checkbox name="married" {...married}/>
@@ -231,7 +230,7 @@ class DemoPage extends Component {
           <br/>
           <InputGroup {...nickName}>
             <Input name="nickName" onChange={this.handleInputChange} {...nickName} type="text"/>
-            <Button disabled={true} suppressDisabledStyle={true}><i className="icon-user-check"/></Button>
+            <Button><i className="icon-user-check"/></Button>
           </InputGroup>
           <br/>
           <br/>
@@ -257,6 +256,80 @@ class DemoPage extends Component {
             }
           })()}
         </div>
+        <table className={styles.buttonTable}>
+          <tr>
+            <td>Raised</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><Button stylePrimary><span>Primary</span></Button></td>
+            <td><Button styleSecondary><span>Secondary</span></Button></td>
+            <td><Button stylePrimary styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button styleSecondary styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td><Button disabled stylePrimary><span>Primary</span></Button></td>
+            <td><Button disabled styleSecondary><span>Secondary</span></Button></td>
+            <td><Button disabled stylePrimary styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button disabled styleSecondary styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td>Raised Form</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><Button styleForm stylePrimary><span>Primary</span></Button></td>
+            <td><Button styleForm styleSecondary><span>Secondary</span></Button></td>
+            <td><Button styleForm styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button styleForm styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td><Button disabled styleForm stylePrimary><span>Primary</span></Button></td>
+            <td><Button disabled styleForm styleSecondary><span>Secondary</span></Button></td>
+            <td><Button disabled styleForm stylePrimary styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button disabled styleForm styleSecondary styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td>Flat</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><Button styleFlat stylePrimary><span>PRIMARY</span></Button></td>
+            <td><Button styleFlat styleSecondary><span>SECONDARY</span></Button></td>
+            <td><Button styleFlat stylePrimary styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button styleFlat styleSecondary styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td><Button disabled styleFlat stylePrimary><span>PRIMARY</span></Button></td>
+            <td><Button disabled styleFlat styleSecondary><span>SECONDARY</span></Button></td>
+            <td><Button disabled styleFlat stylePrimary styleInverse><span>PRIMARY</span></Button></td>
+            <td><Button disabled styleFlat styleSecondary styleInverse><span>SECONDARY</span></Button></td>
+          </tr>
+          <tr>
+            <td>Flat Link</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><Button styleFlat styleLink><span>Link</span></Button></td>
+            <td></td>
+            <td><Button styleFlat styleLink styleInverse><span>Link</span></Button></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><Button disabled styleFlat styleLink><span>Link</span></Button></td>
+            <td></td>
+            <td><Button disabled styleFlat styleLink styleInverse><span>Link</span></Button></td>
+            <td></td>
+          </tr>
+        </table>
       </div>
     );
   }

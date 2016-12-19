@@ -34,14 +34,16 @@ export default class ButtonGroup extends Component {
   // Expected properties.
   static propTypes = {
     children: React.PropTypes.node,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
+    styleForm: React.PropTypes.bool
   };
 
   // Render the component.
   render() {
-    let {children, className} = this.props;
+    let {children, className, styleForm} = this.props;
+    let rootStyles = classNames('ButtonGroup', styles.root, className, {[`${styles.form}`]: styleForm});
     return (
-      <div className={classNames(styles.root, className)}>{children}</div>
+      <div className={rootStyles}>{children}</div>
     );
   }
 }
