@@ -9,7 +9,7 @@
 /**
  * Import the theme variables.
  */
-@import '../input/variables';
+@import 'theme';
 
 /**
  * Button styles.
@@ -29,7 +29,7 @@
     }
   }
   &.readonly {
-    border-color: rgba($input-unfocused-border-color, $form-controls-readonly-border-opacity);
+    border-color: rgba($input-unfocused-border-color, $custom-control-readonly-border-opacity);
     background-color: $input-readonly-background-color;
     & > button {
       background-color: transparent;
@@ -56,7 +56,7 @@
     }
   }
   > :global(.Button), :global(.Icon) {
-    height: $form-controls-height;
+    height: $input-height;
     box-sizing: border-box !important;
     border-color: transparent !important;
     border-radius: $input-border-radius !important;

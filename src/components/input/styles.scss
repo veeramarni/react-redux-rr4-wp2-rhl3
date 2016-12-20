@@ -10,7 +10,7 @@
 /**
  * Import the theme variables.
  */
-@import 'variables';
+@import 'theme';
 
 /**
  * Input styles.
@@ -30,7 +30,7 @@
     opacity: $input-disabled-opacity;
   }
   &.readonly {
-    border-color: rgba($input-unfocused-border-color, $form-controls-readonly-border-opacity);
+    border-color: rgba($input-unfocused-border-color, $custom-control-readonly-border-opacity);
     background-color: $input-readonly-background-color;
   }
   &.invalid {

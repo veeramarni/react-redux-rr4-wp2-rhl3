@@ -23,7 +23,7 @@
   .filterBar {
     background-color: rgb(244, 244, 244);
     > :global(.ToolBarItem) {
-      border-right: $form-controls-border-style $color-aluminium;
+      border-right: $custom-control-border-style $color-aluminium;
     }
   }
   .toolBar {
@@ -50,7 +50,7 @@
 }
 
 .link {
-  color: $color-bernd-blue;
+  color: $color-lavender;
   > * {
     vertical-align: middle;
   }

@@ -43,6 +43,7 @@
         color: $button-primary-color;
         background-color: $button-primary-background-color;
         &:not([disabled]):hover {
+          color: $button-primary-hover-color;
           background-color: $button-primary-hover-background-color;
         }
       }
@@ -50,6 +51,7 @@
         color: $button-secondary-color;
         background-color: $button-secondary-background-color;
         &:not([disabled]):hover {
+          color: $button-secondary-hover-color;
           background-color: $button-secondary-hover-background-color;
         }
       }
@@ -64,6 +66,7 @@
         border: $button-border-style $button-inverse-primary-color;
         color: $button-inverse-primary-color;
         &:not([disabled]):hover {
+          color: $button-inverse-primary-hover-color;
           background-color: $button-inverse-primary-hover-background-color;
         }
       }
@@ -71,6 +74,7 @@
         border: $button-border-style $button-inverse-secondary-color;
         color: $button-inverse-secondary-color;
         &:not([disabled]):hover {
+          color: $button-inverse-secondary-hover-color;
           background-color: $button-inverse-secondary-hover-background-color;
         }
       }
@@ -79,12 +83,14 @@
   &.flat {
     &:not(.inverse) {
       border: none;
+      border-radius: $button-border-radius;
       &:active {
       }
       &.primary {
         color: $button-flat-primary-color;
         background-color: transparent;
         &:not([disabled]):hover {
+          color: $button-flat-primary-hover-color;
           background-color: $button-flat-primary-hover-background-color;
         }
       }
@@ -92,6 +98,7 @@
         color: $button-flat-secondary-color;
         background-color: transparent;
         &:not([disabled]):hover {
+          color: $button-flat-secondary-hover-color;
           background-color: $button-flat-secondary-hover-background-color;
         }
       }
@@ -105,6 +112,7 @@
     }
     &.inverse {
       border: none;
+      border-radius: $button-border-radius;
       &:active {
         box-shadow: $button-active-box-shadow;
       }
@@ -112,6 +120,7 @@
         color: $button-flat-inverse-primary-color;
         background-color: transparent;
         &:not([disabled]):hover {
+          color: $button-flat-inverse-primary-hover-color;
           background-color: $button-flat-inverse-primary-hover-background-color;
         }
       }
@@ -119,6 +128,7 @@
         color: $button-flat-inverse-secondary-color;
         background-color: transparent;
         &:not([disabled]):hover {
+          color: $button-flat-inverse-secondary-hover-color;
           background-color: $button-flat-inverse-secondary-hover-background-color;
         }
       }
@@ -132,7 +142,7 @@
     }
   }
   &.form {
-    height: $form-controls-height;
+    height: $input-height;
   }
   > i {
     font-size: $icon-font-size;

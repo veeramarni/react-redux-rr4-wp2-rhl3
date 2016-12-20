@@ -10,7 +10,7 @@
 /**
  * Import the theme variables.
  */
-@import 'variables';
+@import 'theme';
 
 /**
  * SimpleSelectBox styles.
@@ -20,9 +20,9 @@
 }
 
 .options {
-  font-size: $form-controls-input-font-size;
-  color: $form-controls-color;
-  background-color: $popups-background-border-color;
+  font-size: $input-input-font-size;
+  color: $custom-control-color;
+  background-color: $custom-control-popup-background-color;
   list-style: none;
   padding-left: 0;
 }

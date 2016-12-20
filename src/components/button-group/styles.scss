@@ -18,7 +18,7 @@
   display: inline-block;
   &.form {
     :global(.Button) {
-      height: $form-controls-height;
+      height: $input-height;
     }
   }
   :global(.Button):not(:focus):first-child {

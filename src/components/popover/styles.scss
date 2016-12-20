@@ -9,7 +9,7 @@
 /**
  * Import the theme variables.
  */
-@import './variables';
+@import 'theme';
 
 /**
  * InputBox styles.
@@ -25,21 +25,21 @@
     left: 50%;
     box-sizing: border-box;
 
-    border: 0.5rem solid $popover-border-color;
+    border: 0.5rem solid $custom-control-popup-border-color;
 
     transform-origin: 0 0;
     transform: rotate(135deg);
-    transition: left $popover-triangle-transition-time;
+    transition: left 0.2s;
   }
   .triangle1 {
     z-index: -1;
     top: 1px;
-    border-color: transparent transparent $popover-border-color $popover-border-color;
+    border-color: transparent transparent $custom-control-popup-border-color $custom-control-popup-border-color;
 
-    box-shadow: $popover-default-shadow;
+    box-shadow: $custom-control-popup-shadow;
   }
   .triangle2 {
     top: 2px;
-    border-color: transparent transparent $popover-background-color $popover-background-color;
+    border-color: transparent transparent $custom-control-popup-background-color $custom-control-popup-background-color;
   }
 }

@@ -9,7 +9,7 @@
 /**
  * Import the theme variables.
  */
-@import 'variables';
+@import 'theme';
 
 /**
  * Checkbox styles.
@@ -19,7 +19,7 @@
   display: inline-block;
   font-size: $checkbox-font-size;
   > i {
-    font-size: $form-controls-icon-font-size;
+    font-size: $custom-control-icon-font-size;
     vertical-align: middle;
     display: inline-block;
     border: $checkbox-border-style $checkbox-unfocused-border-color;
@@ -46,7 +46,7 @@
   }
   > input:not([disabled]) ~ i {
     &:hover {
-      background-color: $form-controls-hover-background-color;
+      background-color: $custom-control-hover-background-color;
     }
   }
   > input {
@@ -55,30 +55,30 @@
   }
   &.tiny {
     > i {
-      font-size: $checkbox-tiny-font-size;
-      min-height: $checkbox-tiny-font-size;
-      min-width: $checkbox-tiny-font-size;
+      font-size: $font-size-tiny;
+      min-height: $font-size-tiny;
+      min-width: $font-size-tiny;
     }
   }
   &.small {
     > i {
-      font-size: $checkbox-small-font-size;
-      min-height: $checkbox-small-font-size;
-      min-width: $checkbox-small-font-size;
+      font-size: $font-size-small;
+      min-height: $font-size-small;
+      min-width: $font-size-small;
     }
   }
   &.medium {
     > i {
-      font-size: $checkbox-medium-font-size;
-      min-height: $checkbox-medium-font-size;
-      min-width: $checkbox-medium-font-size;
+      font-size: $font-size-medium;
+      min-height: $font-size-medium;
+      min-width: $font-size-medium;
     }
   }
   &.big {
     > i {
-      font-size: $checkbox-big-font-size;
-      min-height: $checkbox-big-font-size;
-      min-width: $checkbox-big-font-size;
+      font-size: $font-size-big;
+      min-height: $font-size-big;
+      min-width: $font-size-big;
     }
   }
 }

@@ -257,11 +257,12 @@ class DemoPage extends Component {
           })()}
         </div>
         <table className={styles.buttonTable}>
+          <tbody>
           <tr>
             <td>Raised</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td/>
+            <td/>
+            <td/>
           </tr>
           <tr>
             <td><Button stylePrimary><span>Primary</span></Button></td>
@@ -277,9 +278,9 @@ class DemoPage extends Component {
           </tr>
           <tr>
             <td>Raised Form</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td/>
+            <td/>
+            <td/>
           </tr>
           <tr>
             <td><Button styleForm stylePrimary><span>Primary</span></Button></td>
@@ -295,9 +296,9 @@ class DemoPage extends Component {
           </tr>
           <tr>
             <td>Flat</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td/>
+            <td/>
+            <td/>
           </tr>
           <tr>
             <td><Button styleFlat stylePrimary><span>PRIMARY</span></Button></td>
@@ -313,22 +314,23 @@ class DemoPage extends Component {
           </tr>
           <tr>
             <td>Flat Link</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td/>
+            <td/>
+            <td/>
           </tr>
           <tr>
             <td><Button styleFlat styleLink><span>Link</span></Button></td>
-            <td></td>
+            <td/>
             <td><Button styleFlat styleLink styleInverse><span>Link</span></Button></td>
-            <td></td>
+            <td/>
           </tr>
           <tr>
             <td><Button disabled styleFlat styleLink><span>Link</span></Button></td>
-            <td></td>
+            <td/>
             <td><Button disabled styleFlat styleLink styleInverse><span>Link</span></Button></td>
-            <td></td>
+            <td/>
           </tr>
+          </tbody>
         </table>
       </div>
     );

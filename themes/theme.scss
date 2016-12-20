@@ -6,7 +6,6 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 /**
  * Import mixins and functions.
  */
@@ -14,6 +13,7 @@
 
 /**
  * Base variables.
+ * Put only very basic building blocks here.
  */
 $gap-tiny: 4px !default;
 $gap-small: 8px !default;
@@ -33,6 +33,7 @@ $font-size-godzilla: 36px !default;
 
 /**
  * Base colors.
+ * Put all possible actual colors here.
  */
 $color-clouds: rgb(255, 255, 255) !default;
 $color-smoke: rgba(51, 51, 51, 0.15) !default;
@@ -47,141 +48,214 @@ $color-emerald: rgba(61, 194, 56, 0.7) !default;
 $color-ruby: rgba(163, 64, 62, 0.7) !default;
 $color-lavender: rgba(67, 133, 240, 0.7) !default;
 $color-spring: rgb(61, 194, 56) !default;
-
-$color-lime: rgb(185, 198, 0) !default;
-$color-fizzle: rgb(233, 249, 0) !default;
-
-$color-bernd-blue: #006d90 !default;
+$color-lime: rgb(207, 222, 0) !default;
+$color-fennel: rgb(183, 197, 0) !default;
+$color-fizzle: rgb(231, 248, 0) !default;
 
 /**
- * Form controls variables.
+ * Theme colors.
+ * Put colors that are important to themes here.
  */
-// popups
-$popups-border-radius: 3px !default;
-$popups-border-style: 1px solid !default;
-$popups-border-color: $color-tungsten !default;
-$popups-background-border-color: $color-clouds !default;
-$popups-shadow: 0 2px 8px rgba(0,0,0,.3) !default;
-// form-controls
-$form-controls-font-size: $font-size-medium !default;
-$form-controls-color: $color-dark !default;
-$form-controls-background-color: $color-clouds !default;
-$form-controls-hover-background-color: $color-aluminium !default;
-$form-controls-border-style: 1px solid !default;
-$form-controls-border-radius: 3px !default;
-$form-controls-transition: 1s ease !default;
+$color-brand-primary: $color-lime !default;
+$color-brand-primary-darker: $color-fennel !default;
+$color-brand-primary-lighter: $color-fizzle !default;
+
+/**
+ * Custom control variables.
+ * Put re-usable generic variables here.
+ * These should not be too specific but rather generic and re-usable across different controls.
+ */
+$custom-control-font-size: $font-size-medium !default;
+$custom-control-color: $color-dark !default;
+$custom-control-background-color: $color-clouds !default;
+$custom-control-hover-background-color: $color-aluminium !default;
+$custom-control-border-style: 1px solid !default;
+$custom-control-border-radius: 3px !default;
+$custom-control-transition: .2s ease !default;
 // disabled
-$form-controls-disabled-opacity: 0.5 !default;
+$custom-control-disabled-opacity: 0.5 !default;
 // readonly
-$form-controls-readonly-border-opacity: 0.5 !default;
-$form-controls-readonly-background-color: $color-aluminium !default;
+$custom-control-readonly-border-opacity: 0.5 !default;
+$custom-control-readonly-background-color: $color-aluminium !default;
 // unfocused
-$form-controls-unfocused-border-color: $color-tungsten !default;
-$form-controls-unfocused-shadow: 0 0 5px $color-titanium !default;
-$form-controls-unfocused-valid-border-color: $color-titanium !default;
-$form-controls-unfocused-valid-shadow: 0 0 5px $color-emerald !default;
-$form-controls-unfocused-invalid-border-color: $color-titanium !default;
-$form-controls-unfocused-invalid-shadow: 0 0 5px $color-ruby !default;
+$custom-control-unfocused-border-color: $color-tungsten !default;
+$custom-control-unfocused-shadow: 0 0 5px $color-titanium !default;
+$custom-control-unfocused-valid-border-color: $color-titanium !default;
+$custom-control-unfocused-valid-shadow: 0 0 5px $color-emerald !default;
+$custom-control-unfocused-invalid-border-color: $color-titanium !default;
+$custom-control-unfocused-invalid-shadow: 0 0 5px $color-ruby !default;
 // focused
-$form-controls-focused-border-color: $color-tungsten !default;
-$form-controls-focused-shadow: 0 0 5px $color-lavender !default;
-$form-controls-focused-valid-border-color: $color-spring !default;
-$form-controls-focused-valid-shadow: 0 0 5px $color-emerald !default;
-$form-controls-focused-invalid-border-color: $color-crimson !default;
-$form-controls-focused-invalid-shadow: 0 0 5px $color-ruby !default;
-// input
-$form-controls-input-font-size: $font-size-small !default;
-$form-controls-input-margin-bottom: $gap-small !default;
+$custom-control-focused-border-color: $color-tungsten !default;
+$custom-control-focused-shadow: 0 0 5px $color-lavender !default;
+$custom-control-focused-valid-border-color: $color-spring !default;
+$custom-control-focused-valid-shadow: 0 0 5px $color-emerald !default;
+$custom-control-focused-invalid-border-color: $color-crimson !default;
+$custom-control-focused-invalid-shadow: 0 0 5px $color-ruby !default;
 // placeholder
-$form-controls-placeholder-color: $color-titanium !default;
+$custom-control-placeholder-color: $color-titanium !default;
 // label
-$form-controls-label-color: $color-titanium !default;
-// label : floating
-$form-controls-label-floating-color: $color-titanium !default;
-$form-controls-label-floating-font-size: $font-size-tiny !default;
-$form-controls-label-floating-margin-top: $gap-small !default;
-$form-controls-label-floating-margin-bottom: $gap-tiny !default;
+$custom-control-label-color: $color-titanium !default;
 // icon
-$form-controls-icon-font-size: $font-size-big !default;
-// computed
-$form-controls-height: $form-controls-label-floating-margin-top + $form-controls-label-floating-font-size + $form-controls-label-floating-margin-bottom + $form-controls-input-font-size + $form-controls-input-margin-bottom !default;
-// checkboxs
-$checkbox-tiny-font-size: 10px !default;
-$checkbox-small-font-size: 12px !default;
-$checkbox-medium-font-size: 14px !default;
-$checkbox-big-font-size: 16px !default;
-
-
-/**
- * Icon variables.
- */
-
-// Icon
-$icon-font-size: 16px !default;
-$icon-color: $form-controls-color !default;
-$icon-background-color: $form-controls-background-color !default;
-$icon-border-style: $form-controls-border-style !default;
-$icon-border-radius: $form-controls-border-radius !default;
-$icon-border-color-transition: $form-controls-transition !default;
-// Icon : disabled
-$icon-disabled-opacity: $form-controls-disabled-opacity !default;
-// Icon : unfocused
-$icon-unfocused-border-color: $form-controls-unfocused-border-color !default;
-// Icon : focused
-$icon-focused-border-color: $form-controls-focused-border-color !default;
-$icon-focused-shadow: $form-controls-focused-shadow !default;
-// computed
-$icon-height: $form-controls-height !default;
-
+$custom-control-icon-font-size: $font-size-big !default;
+// popup
+$custom-control-popup-border-radius: 3px !default;
+$custom-control-popup-border-style: 1px solid !default;
+$custom-control-popup-border-color: $color-tungsten !default;
+$custom-control-popup-background-color: $color-clouds !default;
+$custom-control-popup-shadow: 0 2px 8px rgba(0, 0, 0, .3) !default;
 
 /**
  * Button variables.
+ * Put button specific variables here.
+ * Try to assign custom-control variables rather than very specific values if possible.
  */
 
 // Button
 $button-font-size: $font-size-small !default;
-$button-border-style: $form-controls-border-style !default;
-$button-border-radius: $form-controls-border-radius !default;
+$button-border-style: $custom-control-border-style !default;
+$button-border-radius: $custom-control-border-radius !default;
 // active ~ pressed
-$button-active-box-shadow: inset 2px 0 3px 0 rgba(51,51,51,.15) !default;
+$button-active-box-shadow: inset 2px 0 3px 0 rgba(51, 51, 51, .15) !default;
 // disabled
-$button-disabled-opacity: $form-controls-disabled-opacity !default;
+$button-disabled-opacity: $custom-control-disabled-opacity !default;
 // unfocused
-$button-unfocused-border-color: $form-controls-unfocused-border-color !default;
+$button-unfocused-border-color: $custom-control-unfocused-border-color !default;
 // focused
-$button-focused-border-color: $form-controls-focused-border-color !default;
-$button-focused-shadow: $form-controls-focused-shadow !default;
+$button-focused-border-color: $custom-control-focused-border-color !default;
+$button-focused-shadow: $custom-control-focused-shadow !default;
 // raised : primary
-$button-primary-color: $form-controls-color !default;
-$button-primary-background-color: $color-lime !default;
-$button-primary-hover-background-color: $color-fizzle !default;
+$button-primary-color: $custom-control-color !default;
+$button-primary-background-color: $color-brand-primary !default;
+$button-primary-hover-color: $custom-control-color !default;
+$button-primary-hover-background-color: $color-brand-primary-lighter !default;
 // raised : secondary
-$button-secondary-color: $form-controls-color !default;
+$button-secondary-color: $custom-control-color !default;
 $button-secondary-background-color: $color-clouds !default;
+$button-secondary-hover-color: $custom-control-color !default;
 $button-secondary-hover-background-color: $color-smoke !default;
 // raised : inverse : primary
-$button-inverse-primary-color: $color-lime !default;
-$button-inverse-primary-hover-background-color: $color-fizzle !default;
-$button-inverse-primary-border-style: $form-controls-border-style !default;
+$button-inverse-primary-color: $color-brand-primary !default;
+$button-inverse-primary-hover-color: $color-dark !default;
+$button-inverse-primary-hover-background-color: $color-brand-primary-darker !default;
+$button-inverse-primary-border-style: $custom-control-border-style !default;
 $button-inverse-primary-unfocused-border-color: $color-clouds !default;
 // raised : inverse : secondary
 $button-inverse-secondary-color: $color-clouds !default;
-$button-inverse-secondary-hover-background-color: $color-titanium !default;
-$button-inverse-secondary-border-style: $form-controls-border-style !default;
+$button-inverse-secondary-hover-color: $color-clouds !default;
+$button-inverse-secondary-hover-background-color: $color-tungsten !default;
+$button-inverse-secondary-border-style: $custom-control-border-style !default;
 $button-inverse-secondary-unfocused-border-color: $color-clouds !default;
 // flat : primary
-$button-flat-primary-color: $color-lime !default;
-$button-flat-primary-hover-background-color: $color-fizzle !default;
+$button-flat-primary-color: $color-brand-primary-darker !default;
+$button-flat-primary-hover-color: $color-dark !default;
+$button-flat-primary-hover-background-color: $color-brand-primary-lighter !default;
 // flat : secondary
-$button-flat-secondary-color: $form-controls-color !default;
+$button-flat-secondary-color: $custom-control-color !default;
+$button-flat-secondary-hover-color: $custom-control-color !default;
 $button-flat-secondary-hover-background-color: $color-smoke !default;
 // flat : link
-$button-flat-link-color: $form-controls-color !default;
+$button-flat-link-color: $custom-control-color !default;
 // flat : inverse : primary
-$button-flat-inverse-primary-color: $color-lime !default;
-$button-flat-inverse-primary-hover-background-color: $color-fizzle !default;
+$button-flat-inverse-primary-color: $color-brand-primary !default;
+$button-flat-inverse-primary-hover-color: $color-dark !default;
+$button-flat-inverse-primary-hover-background-color: $color-brand-primary-lighter !default;
 // flat : inverse : secondary
 $button-flat-inverse-secondary-color: $color-clouds !default;
-$button-flat-inverse-secondary-hover-background-color: $color-smoke !default;
+$button-flat-inverse-secondary-hover-color: $color-dark !default;
+$button-flat-inverse-secondary-hover-background-color: $color-clouds !default;
 // flat : inverse : link
 $button-flat-inverse-link-color: $color-clouds !default;
+
+/**
+ * Checkbox variables.
+ * Put checkbox specific variables here.
+ * Try to assign custom-control variables rather than very specific values if possible.
+ */
+
+// Checkbox
+$checkbox-font-size: $custom-control-font-size !default;
+$checkbox-color: $custom-control-color !default;
+$checkbox-background-color: $custom-control-background-color !default;
+$checkbox-border-style: $custom-control-border-style !default;
+$checkbox-border-radius: $custom-control-border-radius !default;
+$checkbox-border-color-transition: $custom-control-transition !default;
+// Checkbox : disabled
+$checkbox-disabled-opacity: $custom-control-disabled-opacity !default;
+// Checkbox : unfocused
+$checkbox-unfocused-border-color: $custom-control-unfocused-border-color !default;
+// Checkbox : focused
+$checkbox-focused-border-color: $custom-control-focused-border-color !default;
+$checkbox-focused-shadow: $custom-control-focused-shadow !default;
+// computed
+$checkbox-height: $custom-control-icon-font-size !default;
+$checkbox-width: $custom-control-icon-font-size !default;
+
+/**
+ * Icon variables.
+ * Put icon specific variables here.
+ * Try to assign custom-control variables rather than very specific values if possible.
+*/
+
+// Icon
+$icon-font-size: 16px !default;
+$icon-color: $custom-control-color !default;
+$icon-background-color: $custom-control-background-color !default;
+$icon-border-style: $custom-control-border-style !default;
+$icon-border-radius: $custom-control-border-radius !default;
+$icon-border-color-transition: $custom-control-transition !default;
+// Icon : disabled
+$icon-disabled-opacity: $custom-control-disabled-opacity !default;
+// Icon : unfocused
+$icon-unfocused-border-color: $custom-control-unfocused-border-color !default;
+// Icon : focused
+$icon-focused-border-color: $custom-control-focused-border-color !default;
+$icon-focused-shadow: $custom-control-focused-shadow !default;
+
+/**
+ * Input variables.
+ * Put input specific variables here.
+ * Try to assign custom-control variables rather than very specific values if possible.
+ */
+
+// Input
+$input-background-color: $custom-control-background-color !default;
+$input-border-style: $custom-control-border-style !default;
+$input-border-radius: $custom-control-border-radius !default;
+$input-border-color-transition: $custom-control-transition !default;
+// Input : disabled
+$input-disabled-opacity: $custom-control-disabled-opacity !default;
+// Input : readonly
+$input-readonly-border-opacity: $custom-control-readonly-border-opacity !default;
+$input-readonly-background-color: $custom-control-readonly-background-color !default;
+// Input : unfocused
+$input-unfocused-border-color: $custom-control-unfocused-border-color !default;
+$input-unfocused-valid-border-color: $custom-control-unfocused-valid-border-color !default;
+$input-unfocused-valid-shadow: $custom-control-unfocused-valid-shadow !default;
+$input-unfocused-invalid-border-color: $custom-control-unfocused-invalid-border-color !default;
+$input-unfocused-invalid-shadow: $custom-control-unfocused-invalid-shadow !default;
+// Input : focused
+$input-focused-border-color: $custom-control-focused-border-color !default;
+$input-focused-shadow: $custom-control-focused-shadow !default;
+$input-focused-valid-border-color: $custom-control-focused-valid-border-color !default;
+$input-focused-valid-shadow: $custom-control-focused-valid-shadow !default;
+$input-focused-invalid-border-color: $custom-control-focused-invalid-border-color !default;
+$input-focused-invalid-shadow: $custom-control-focused-invalid-shadow !default;
+// input
+$input-input-font-size: $font-size-small !default;
+$input-input-margin-bottom: $gap-small !default;
+$input-input-color: $custom-control-color !default;
+// input placeholder
+$input-placeholder-color: $custom-control-placeholder-color !default;
+$input-placeholder-transition: $custom-control-transition !default;
+// label
+$input-label-color: $custom-control-label-color !default;
+// label floating
+$input-label-floating-font-size: $font-size-tiny !default;
+$input-label-floating-margin-top: $gap-small !default;
+$input-label-floating-margin-bottom: $gap-tiny !default;
+$input-label-floating-color: $color-titanium !default;
+$input-label-floating-transition: $custom-control-transition !default;
+// icon
+$input-icon-font-size: $custom-control-icon-font-size !default;
+// computed
+$input-height: $input-label-floating-margin-top + $input-label-floating-font-size + $input-label-floating-margin-bottom + $input-input-font-size + $input-input-margin-bottom !default;

@@ -18,22 +18,22 @@
   position: relative;
   height: 100%;
   > .filterBar {
-    border-bottom: $form-controls-border-style $color-aluminium;
+    border-bottom: $custom-control-border-style $color-aluminium;
     > :global(.ToolBarItem) {
-      border-right: $form-controls-border-style $color-aluminium;
+      border-right: $custom-control-border-style $color-aluminium;
     }
     a {
-      font-size: $form-controls-font-size;
+      font-size: $custom-control-font-size;
       text-decoration: none;
       color: #006d90;
     }
   }
   > .toolBar {
-    border-bottom: $form-controls-border-style $color-aluminium;
+    border-bottom: $custom-control-border-style $color-aluminium;
     background-color: #f8f8f8;
   }
   > table {
-    font-size: $form-controls-font-size;
+    font-size: $custom-control-font-size;
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
@@ -103,7 +103,7 @@
     width: 80%;
     height: 100%;
     z-index: 1;
-    box-shadow: $popups-shadow;
+    box-shadow: $custom-control-popup-shadow;
     background-color: white;
   }
 }

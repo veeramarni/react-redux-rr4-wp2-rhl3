@@ -10,7 +10,7 @@
 /**
  * Import the theme variables.
  */
-@import 'variables';
+@import 'theme';
 
 /**
  * SimpleSelectBox styles.
@@ -20,8 +20,8 @@
 }
 
 .dropdown {
-  background-color: $popups-background-border-color;
-  border: $popups-border-style $popups-border-color;
-  border-radius: $popups-border-radius;
-  box-shadow: $popups-shadow;
+  background-color: $custom-control-popup-background-color;
+  border: $custom-control-popup-border-style $custom-control-popup-border-color;
+  border-radius: $custom-control-popup-border-radius;
+  box-shadow: $custom-control-popup-shadow;
 }
