@@ -78,7 +78,7 @@ class CardListPage extends Component {
             </Button>
           </div>
           <div className={styles.title}>
-            <div>Title Bla</div>
+            <div>Title</div>
             <div>1234567890</div>
           </div>
           <table>
