@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 4.3.0
+dependencies:
+  override:
+    - npm install
+compile:
+  override:
+    - npm run build
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync dist s3://fraedom-components/ --delete
