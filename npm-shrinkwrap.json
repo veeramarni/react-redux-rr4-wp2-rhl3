@@ -3829,7 +3829,8 @@
       },
       "peerDependencies": {
         "webpack": {
-          "version": "^2.2.0-rc"
+          "version": "^2.2.0-rc.1",
+          "from": "webpack@^2"
         }
       }
     },
