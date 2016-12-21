@@ -77,7 +77,7 @@ export default class ControlledRouter extends Component {
     const {location, setLocation, children} = this.props;
     return (
       <BrowserHistory>
-        {({history, action, location: historyLocation}) => {
+        {({action, block, location: historyLocation, push, replace}) => {
           const historyPathname = historyLocation.pathname;
           const controlledPathname = location.pathname;
           const pathChanged = historyPathname !== controlledPathname;
@@ -91,9 +91,9 @@ export default class ControlledRouter extends Component {
             <RouterWrapper setLocation={setLocation} historyLocation={historyLocation} update={shouldUpdateState}>
               <StaticRouter action={action}
                             location={historyLocation}
-                            onPush={history.push}
-                            onReplace={history.replace}
-                            blockTransitions={history.block}>
+                            onPush={push}
+                            onReplace={replace}
+                            blockTransitions={block}>
                 { shouldUpdateHistory ? <Push path={location.pathname}/> : children }
               </StaticRouter>
             </RouterWrapper>

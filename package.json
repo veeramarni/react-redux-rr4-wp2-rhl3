@@ -16,7 +16,7 @@
     "normalize.css": "^5.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "react-history": "^0.15.0",
+    "react-history": "^0.18.0",
     "react-redux": "^5.0.0",
     "react-router": "^4.0.0-alpha.6",
     "redux": "^3.0.0",

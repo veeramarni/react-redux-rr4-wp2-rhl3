@@ -133,9 +133,21 @@
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.4.1.tgz"
     },
     "react-history": {
-      "version": "0.15.1",
-      "from": "react-history@>=0.15.0 <0.16.0",
-      "resolved": "https://registry.npmjs.org/react-history/-/react-history-0.15.1.tgz"
+      "version": "0.18.1",
+      "from": "react-history@0.18.1",
+      "resolved": "https://registry.npmjs.org/react-history/-/react-history-0.18.1.tgz",
+      "dependencies": {
+        "history": {
+          "version": "4.5.0",
+          "from": "history@>=4.5.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/history/-/history-4.5.0.tgz"
+        },
+        "value-equal": {
+          "version": "0.2.0",
+          "from": "value-equal@>=0.2.0 <0.3.0",
+          "resolved": "https://registry.npmjs.org/value-equal/-/value-equal-0.2.0.tgz"
+        }
+      }
     },
     "react-redux": {
       "version": "5.0.1",
