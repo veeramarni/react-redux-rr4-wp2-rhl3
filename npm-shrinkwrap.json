@@ -339,7 +339,9 @@
       "resolved": "https://registry.npmjs.org/babel-loader/-/babel-loader-6.2.10.tgz",
       "dev": true,
       "peerDependencies": {
-        "webpack": "^2.2.0-rc"
+        "webpack": {
+          "version": "^2.2.0-rc"
+        }
       }
     },
     "babel-messages": {
@@ -1631,7 +1633,9 @@
       "resolved": "https://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-2.0.0-beta.4.tgz",
       "dev": true,
       "peerDependencies": {
-        "webpack": "^2.2.0-rc"
+        "webpack": {
+          "version": "^2.2.0-rc"
+        }
       }
     },
     "extsprintf": {
@@ -2013,7 +2017,9 @@
         }
       },
       "peerDependencies": {
-        "webpack": "^2.2.0-rc"
+        "webpack": {
+          "version": "^2.2.0-rc"
+        }
       }
     },
     "htmlparser2": {
@@ -3822,7 +3828,9 @@
         }
       },
       "peerDependencies": {
-        "webpack": "^2.2.0-rc"
+        "webpack": {
+          "version": "^2.2.0-rc"
+        }
       }
     },
     "sax": {
@@ -4456,7 +4464,9 @@
         }
       },
       "peerDependencies": {
-        "webpack": "^2.2.0-rc"
+        "webpack": {
+          "version": "^2.2.0-rc"
+        }
       }
     },
     "webpack-hot-middleware": {
