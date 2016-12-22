@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node server.dev",
     "build": "webpack --config webpack.config.prod.js -p --progress --colors",
-    "graphql": "node ./tools/graphql"
+    "graphql": "node ./tools/graphql",
+    "test": "node -v"
   },
   "dependencies": {
     "classnames": "^2.0.0",
