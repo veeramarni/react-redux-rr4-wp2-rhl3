@@ -10,14 +10,25 @@ with a great development experience and best practices.
 This starter kit gives you all the goodness of
 
 - react v15
+- react-router v4
 - redux v3
 - immutable.js v3
 - rxjs v5
-- react-router v4
 - webpack v2
 - react-hot-loader v3
 
 and GraphQL
+
+### UX Components and Themes
+
+It comes with a growing set of UX components that are build from the ground up with
+a common theme structure.
+This allows you to start right away without worrying about finding and integrating
+another UX Framework.
+
+Goal is to provide a comprehensive set of UX components that support multiple themes
+and can be used independently. Once this is achieved these components will be moved
+out of this repo into their own UX components repo and npm package.
 
 ### Project layout
 
@@ -60,3 +71,14 @@ To fix this, first make sure the newer version is actually still compatible with
 and your app is still working.
 Then manually change the peer dependencies of the packages that complain to the newer version.
 Now you should be able to run `npm shrinkwrap --also=dev`.
+
+### What's next
+
+- We will grow the UX components until we find that they are ready to go into their own repo.
+- We will add another build script that will build multiple themes at once.
+- We will improve the GraphQL usage example.
+- We will implement the server side rendering feature.
+
+### Contribution
+
+You are very welcome. Please fork, make PRs and report issues and become a contributor.
