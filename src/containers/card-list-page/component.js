@@ -19,6 +19,7 @@ import Link from 'react-router/Link';
  * Import local dependencies.
  */
 import {changeSelectedCardIndexCreator, selectCompanyCreator} from './actions';
+import {fetchGraphQLQueryCreator} from '../../actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
 import CardDetailsPanel from '../card-details-panel/component';
@@ -46,6 +47,35 @@ class CardListPage extends Component {
   constructor(props) {
     super(props);
   }
+
+  fetchStuffExample = () => {
+    fetchGraphQLQueryCreator({
+      query: `{
+                explorer(id:"0") {
+                   id
+                   dimensions {
+                     key
+                   }
+                   chart {
+                    __typename
+                    ... on DonutChart {
+                      dataSet {
+                        columns {
+                          id
+                          key
+                        }
+                      }
+                    }
+                  }
+                }
+              }`
+    });
+  };
+
+  entityAccessExample = () => {
+    console.log('Bla', entities(state).Explorer('0').chart('DonutChart').dataSet.columns().__type());
+    console.log('Blu', entities(state).Explorer('0').chart('DonutChart').dataSet.columns().key.__value(/*Immutable.Map()*/));
+  };
 
   handleSelectionChange = (value, index, name) => {
     switch (name) {
@@ -120,7 +150,8 @@ class CardListPage extends Component {
           </thead>
           <tbody>
           {cardList.map((card, i) =>
-            <tr key={i} className={selectedCardIndex === i ? styles.selected : null} onClick={() => this.handleClickCard(i)}>
+            <tr key={i} className={selectedCardIndex === i ? styles.selected : null}
+                onClick={() => this.handleClickCard(i)}>
               <td><Checkbox className={cbSmall} checked={true} onChange={(e) => console.log(e)}/></td>
               <td>
                 <div className={styles.circle}><span>{card.get('name').charAt(0)}</span></div>

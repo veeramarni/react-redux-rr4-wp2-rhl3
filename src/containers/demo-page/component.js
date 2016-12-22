@@ -19,6 +19,7 @@ import classNames from 'classnames';
  * Import local dependencies.
  */
 import {pingCreator} from './actions';
+import {setLocationCreator} from '../../actions';
 import Button from '../../components/button/component';
 import ButtonGroup from '../../components/button-group/component';
 import Checkbox from '../../components/checkbox/component';
@@ -166,14 +167,14 @@ class DemoPage extends Component {
 
   // Render the component.
   render() {
-    let {ping, isPinging} = this.props;
+    let {goHome, ping, isPinging} = this.props;
     let {inputs} = this.state;
     let {firstName, middleName, nickName, lastName, married, happy} = inputs;
     return (
       <div className={styles.root}>
         <ToolBar className={styles.filterBar}>
           <ToolBarItem>
-            <span>Show</span>
+            <a href="javascript:;" onClick={goHome}>Back</a>
           </ToolBarItem>
           <ToolBarItem>
             <SimpleDropDownList name="city" options={inputs.city.options} value={inputs.city.value}
@@ -351,8 +352,9 @@ const stateToProps = (store) => {
  */
 const dispatchToProps = (dispatch) => {
   return {
-    ping: () => dispatch(pingCreator())
-  }
+    ping: () => dispatch(pingCreator()),
+    goHome: () => dispatch(setLocationCreator({pathname: '/'}))
+  };
 };
 
 /**

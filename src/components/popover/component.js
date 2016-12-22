@@ -77,7 +77,7 @@ export default class extends React.Component {
     this.tether.destroy(); // TODO make sure that works!
     document.removeEventListener('click', this.handleClickDocument);
     // Remove visible element.
-    document.body.removeChild(this.element);
+    this.element.parentNode.removeChild(this.element);
   }
 
   // Invoked immediately after the component's updates are flushed to the DOM.
