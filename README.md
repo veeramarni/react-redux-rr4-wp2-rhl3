@@ -1,5 +1,7 @@
 # react-redux-rr4-wp2-rhl3
 
+[![CircleCI](https://circleci.com/gh/BerndWessels/react-redux-rr4-wp2-rhl3.svg?style=svg)](https://circleci.com/gh/BerndWessels/react-redux-rr4-wp2-rhl3)
+
 ## Overview
 
 This is a starter kit that lets you build modern web SPAs and microsites
